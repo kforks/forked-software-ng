@@ -1,27 +1,44 @@
-# ForkedSoftware
+# ForkedSoftware - Personal Portfolio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+Welcome to **ForkedSoftware**, my personal portfolio website showcasing my journey, skills, and projects as a Software Engineer. This site was built using Angular and serves as a platform to demonstrate my expertise in full-stack development, problem-solving, and creating impactful applications.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Setup and Development](#setup-and-development)
+  - [Development Server](#development-server)
+  - [Code Scaffolding](#code-scaffolding)
+  - [Build](#build)
+  - [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Future Enhancements](#future-enhancements)
+- [Contact](#contact)
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- **Portfolio Showcase**: Highlight of key projects and contributions.
+- **Responsive Design**: Optimized for viewing across devices.
+- **Interactive UI**: Smooth navigation and dynamic content.
+- **Contact Form**: Direct communication through a built-in form.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Technologies Used
 
-## Running unit tests
+- **Frontend**: Angular 18
+- **Styling**: SCSS, Angular Material
+- **Testing**: Karma, Jasmine
+- **Build Tool**: Angular CLI
+- **Deployment**: AWS S3
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Setup and Development
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Development Server
 
-## Further help
+Run the following command to start a local development server:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng serve
