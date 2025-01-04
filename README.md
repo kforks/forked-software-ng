@@ -1,6 +1,6 @@
 # ForkedSoftware - Personal Portfolio
 
-Welcome to **ForkedSoftware**, my personal portfolio website showcasing my journey, skills, and projects as a Software Engineer. This site was built using Angular and serves as a platform to demonstrate my expertise in full-stack development, problem-solving, and creating impactful applications.
+Welcome to **ForkedSoftware**, my personal portfolio website showcasing my journey, skills, and projects as a Software Engineer. This site was built using Angular and serves as a platform to demonstrate my expertise in full-stack development, problem-solving, and creating impactful applications!
 
 ## Table of Contents
 
