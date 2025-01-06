@@ -2,13 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NavComponent} from '../nav/nav.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    NavComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    imports: [
+        NavComponent
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   constructor(

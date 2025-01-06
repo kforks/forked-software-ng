@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [HomeComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [HomeComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    standalone: true
 })
 export class AppComponent implements OnDestroy {
   title = 'kaitlyn-forks';
