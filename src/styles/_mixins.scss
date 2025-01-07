@@ -1,0 +1,27 @@
+// For reusable mixins like flexbox, shadows, etc.
+// Flexbox utilities
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Center elements
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Text truncation
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Box shadow
+@mixin box-shadow($elevation: 1) {
+  box-shadow: 0 $elevation * 1px $elevation * 3px rgba(0, 0, 0, 0.2);
+}

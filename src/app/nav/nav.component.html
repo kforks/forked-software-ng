@@ -1,13 +1,23 @@
-<mat-toolbar>
+<mat-toolbar class="kf-toolbar">
+  <!-- Menu Button -->
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Kaitlyn Forks</span>
+
+  <!-- Title -->
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+  <fa-icon [icon]="faMicrochip"></fa-icon>
+  <span>Kaitlyn Forks</span>
+  <fa-icon [icon]="faCodeFork"></fa-icon>
+  <span class="example-spacer"></span>
+
+  <!-- Share Button -->
+  <button mat-icon-button aria-label="share" (click)="copyUrlToClipboard()">
+    <mat-icon>share</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>facebook</mat-icon>
+
+  <!-- LinkedIn Button -->
+  <button mat-icon-button aria-label="linkedin" (click)="openLinkedIn()">
+    <fa-icon [icon]="faLinkedin"></fa-icon>
   </button>
 </mat-toolbar>

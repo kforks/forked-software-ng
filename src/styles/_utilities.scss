@@ -1,0 +1,23 @@
+@use './variables' as v;
+
+// For utility classes (e.g., text-center, mt-sm).
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.mt-sm {
+  margin-top: v.$spacing-sm;
+}
+
+.pt-md {
+  padding-top: v.$spacing-md;
+}

@@ -1,0 +1,34 @@
+.theme-light {
+  --primary-color: #77ACA2;
+  --primary-light: #9DBEBB;
+  --primary-dark: #468189;
+  --secondary-color: #031926;
+  --accent-color: #F4E9CD;
+  --text-color: black;
+  --background-color: #f9f9f9;
+}
+
+.theme-dark {
+  --primary-color: #468189;
+  --primary-light: #77ACA2;
+  --primary-dark: #031926;
+  --secondary-color: #031926;
+  --accent-color: #F4E9CD;
+  --text-color: #f9f9f9;
+  --background-color: #031926;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+header {
+  background-color: var(--primary-dark);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+

@@ -1,0 +1,28 @@
+@use './variables' as v;
+
+// For global styles like body, html, and common resets.
+// Reset styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Global body styles
+body {
+  font-family: v.$font-family-base;
+  font-size: v.$font-size-base;
+  color: v.$text-color;
+  background-color: v.$background-color;
+  line-height: 1.5;
+}
+
+// Anchor styles
+a {
+  color: v.$primary-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

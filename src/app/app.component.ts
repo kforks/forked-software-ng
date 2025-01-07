@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -9,7 +8,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     imports: [HomeComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    standalone: true
+    standalone: true,
 })
 export class AppComponent implements OnDestroy {
   title = 'kaitlyn-forks';
