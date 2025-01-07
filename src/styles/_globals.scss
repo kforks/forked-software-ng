@@ -1,6 +1,7 @@
 @use './variables' as v;
 
 // For global styles like body, html, and common resets.
+
 // Reset styles
 * {
   margin: 0;
@@ -26,3 +27,25 @@ a {
     text-decoration: underline;
   }
 }
+
+
+// Spacing Variables for Margin Mixin
+$spacing: (
+  xs: v.$spacing-xs,
+  sm: v.$spacing-sm,
+  md: v.$spacing-md,
+  lg: v.$spacing-lg,
+  xl: v.$spacing-xl
+);
+
+// Generate Margin Classes with a Mixin - ex: "margin-left-xl"
+@mixin generate-margins {
+  @each $key, $value in $spacing {
+    @each $direction in ('left', 'right', 'top', 'bottom') {
+      .margin-#{$direction}-#{$key} {
+        margin-#{$direction}: #{$value};
+      }
+    }
+  }
+}
+@include generate-margins;

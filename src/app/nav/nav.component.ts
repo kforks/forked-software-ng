@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
-import {MatToolbar} from '@angular/material/toolbar';
+import {Component} from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconButton} from '@angular/material/button';
 import {faCodeFork, faMicrochip} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-nav',
   imports: [
-    MatIcon,
-    MatToolbar,
+    MatIconModule,
+    MatToolbarModule,
     MatIconButton,
     FaIconComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTooltip
   ],
     templateUrl: './nav.component.html',
     styleUrl: './nav.component.scss'

@@ -1,23 +1,33 @@
-<mat-toolbar class="kf-toolbar">
-  <!-- Menu Button -->
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
+<mat-toolbar>
 
-  <!-- Title -->
-  <span class="example-spacer"></span>
-  <fa-icon [icon]="faMicrochip"></fa-icon>
-  <span>Kaitlyn Forks</span>
-  <fa-icon [icon]="faCodeFork"></fa-icon>
-  <span class="example-spacer"></span>
+  <!-- Main Nav Row -->
+  <mat-toolbar-row class="nav-toolbar">
+  <div class="margin-left-lg">
+    <span>Kaitlyn Forks</span>
+  </div>
 
-  <!-- Share Button -->
-  <button mat-icon-button aria-label="share" (click)="copyUrlToClipboard()">
-    <mat-icon>share</mat-icon>
-  </button>
+  <div class="nav-links">
+    <span class="margin-left-lg"> Dev Projects</span>
+    <span class="margin-left-lg"> About </span>
+  </div>
 
-  <!-- LinkedIn Button -->
-  <button mat-icon-button aria-label="linkedin" (click)="openLinkedIn()">
-    <fa-icon [icon]="faLinkedin"></fa-icon>
-  </button>
+  <div class="nav-icons">
+    <!-- LinkedIn Button -->
+    <button mat-icon-button aria-label="linkedin" (click)="openLinkedIn()" [matTooltip]="'LinkedIn'">
+      <fa-icon [icon]="faLinkedin"></fa-icon>
+    </button>
+    <!-- Share Button -->
+    <button mat-icon-button aria-label="share" (click)="copyUrlToClipboard()" [matTooltip]="'Share'">
+      <mat-icon>share</mat-icon>
+    </button>
+  </div>
+  </mat-toolbar-row>
+
+
+  <!-- Projects Row -->
+  <mat-toolbar-row class="nav-toolbar">
+    <div>
+      Second tool bar row
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
