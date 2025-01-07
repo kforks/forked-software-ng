@@ -1,4 +1,6 @@
-.nav-toolbar {
+@use '../../styles/variables.scss' as m;
+
+.primary-nav {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -6,15 +8,44 @@
   width: 100%;
 }
 
-.nav-icons {
+.secondary-nav {
+  padding: 0.5rem 1rem;
   display: flex;
   flex:auto;
-  justify-content: end;
-  vertical-align: middle;
+  justify-content: center;
+
+  span {
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  span:hover {
+    color: #3f51b5;
+  }
 }
+
 
 .nav-links {
   display: flex;
   flex:auto;
   justify-content: center;
+
+  span {
+    cursor: pointer;
+    padding: 1.5rem;
+  }
+
+  span:hover {
+    color: black;
+    background-color: m.$primary-dark;
+  }
+}
+
+
+.nav-icons {
+  display: flex;
+  flex:auto;
+  justify-content: end;
+  vertical-align: middle;
 }
