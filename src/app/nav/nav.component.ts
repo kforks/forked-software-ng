@@ -6,6 +6,7 @@ import {faCodeFork, faMicrochip} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import {MatTooltip} from '@angular/material/tooltip';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
     selector: 'app-nav',
@@ -15,7 +16,8 @@ import {MatTooltip} from '@angular/material/tooltip';
     MatIconButton,
     FaIconComponent,
     FontAwesomeModule,
-    MatTooltip
+    MatTooltip,
+    NgOptimizedImage
   ],
     templateUrl: './nav.component.html',
     styleUrl: './nav.component.scss'
