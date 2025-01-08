@@ -1,5 +1,4 @@
 <mat-toolbar>
-
   <!-- Main Nav Row -->
   <mat-toolbar-row class="primary-nav">
     <div class="margin-left-lg">
@@ -7,23 +6,26 @@
       <span>Kaitlyn Forks</span>
     </div>
 
-    <div class="nav-links">
+    <div
+      class="nav-links-wrapper nav-links margin-left-xl"
+      (mouseenter)="setPrimaryLink(activePrimaryLink)"
+      (mouseleave)="delayedClearPrimaryLink()">
       <span
         class="margin-left-lg"
-        (mouseenter)="setActiveLink('About')"
-        (mouseleave)="setActiveLink(null)">
+        [class.active]="activePrimaryLink === 'About'"
+        (mouseenter)="setPrimaryLink('About')">
         About
       </span>
       <span
         class="margin-left-lg"
-        (mouseenter)="setActiveLink('Portfolio')"
-        (mouseleave)="setActiveLink(null)">
+        [class.active]="activePrimaryLink === 'Portfolio'"
+        (mouseenter)="setPrimaryLink('Portfolio')">
         Portfolio
       </span>
       <span
         class="margin-left-lg"
-        (mouseenter)="setActiveLink('Resume')"
-        (mouseleave)="setActiveLink(null)">
+        [class.active]="activePrimaryLink === 'Resume'"
+        (mouseenter)="setPrimaryLink('Resume')">
         Resume
       </span>
     </div>
@@ -41,8 +43,12 @@
   </mat-toolbar-row>
 
   <!-- Secondary Nav Row -->
-  <mat-toolbar-row *ngIf="activeLink" class="secondary-nav">
-    <ng-container [ngSwitch]="activeLink">
+  <mat-toolbar-row
+    *ngIf="activePrimaryLink"
+    class="secondary-nav nav-links padding-right-xl"
+    (mouseenter)="setSecondaryLink(activePrimaryLink)"
+    (mouseleave)="clearSecondaryLink()">
+    <ng-container [ngSwitch]="activeSecondaryLink">
       <div *ngSwitchCase="'About'">
         <span>About Us</span>
         <span>Our Team</span>

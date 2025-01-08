@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
@@ -6,7 +6,7 @@ import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawe
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { MatTooltip } from '@angular/material/tooltip';
-import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from '@angular/common';
+import { NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -24,12 +24,14 @@ import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from '@angular/common';
     NgOptimizedImage,
   ],
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
   protected readonly faLinkedin = faLinkedin;
   protected readonly faShare = faShare;
-  activeLink: string | null = null; // Keeps track of the hovered link
+  private hoverTimeout: any;
+  activePrimaryLink: string | null = null; // Tracks active primary nav link
+  activeSecondaryLink: string | null = null; // Tracks secondary nav activity
 
   constructor() {}
 
@@ -49,7 +51,26 @@ export class NavComponent {
     window.open('https://www.linkedin.com/in/kaitlyn-forks/', '_blank');
   }
 
-  setActiveLink(link: string | null): void {
-    this.activeLink = link;
+  setPrimaryLink(link: string | null): void {
+    if (this.hoverTimeout) {
+      clearTimeout(this.hoverTimeout);
+    }
+    this.activePrimaryLink = link;
+    this.activeSecondaryLink = link;
+  }
+
+  delayedClearPrimaryLink(): void {
+    this.hoverTimeout = setTimeout(() => {
+      this.activePrimaryLink = null;
+      this.activeSecondaryLink = null; // Reset both states after delay
+    }, 600); // Adjust delay as needed
+  }
+
+  setSecondaryLink(link: string): void {
+    this.activeSecondaryLink = link;
+  }
+
+  clearSecondaryLink(): void {
+    this.activeSecondaryLink = this.activePrimaryLink; // Fallback to primary link
   }
 }
