@@ -1,3 +1,5 @@
+@use './variables' as v;
+
 .theme-light {
   --primary-color: #77ACA2;
   --primary-light: #9DBEBB;
@@ -25,10 +27,15 @@ button {
 
 header {
   background-color: var(--primary-dark);
+  font-family: v.$font-family-base;
+  letter-spacing: 1px;
+  line-height: 1.5;
 }
 
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  font-family: v.$font-family-base;
+  letter-spacing: 1px;
+  line-height: 1.5;
 }
-

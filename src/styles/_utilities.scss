@@ -2,6 +2,7 @@
 
 // For utility classes (e.g., text-center, mt-sm).
 // Utility classes
+
 .text-center {
   text-align: center;
 }
@@ -21,3 +22,15 @@
 .pt-md {
   padding-top: v.$spacing-md;
 }
+
+.container {
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
