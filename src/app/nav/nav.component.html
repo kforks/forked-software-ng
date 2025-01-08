@@ -39,22 +39,41 @@
       </span>
     </div>
 
-    <div class="padding-right-lg">
+    <div class="padding-right-md">
+      <!-- LinkedIn Button -->
+      <button class="margin-left-md"
+              mat-icon-button
+              aria-label="linkedin"
+              (click)="openLinkedIn()"
+              [matTooltip]="'LinkedIn'">
+        <fa-icon [icon]="faLinkedin"></fa-icon>
+      </button>
+
+      <!-- Theme Button with Dropdown -->
+      <button class="margin-left-md"
+        mat-icon-button
+        [matMenuTriggerFor]="themeMenu"
+        aria-label="Theme"
+        [matTooltip]="'Change Theme'">
+        <fa-icon [icon]="faPaintRoller"></fa-icon>
+      </button>
+
+      <mat-menu #themeMenu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let theme of themes"
+          (click)="selectTheme(theme.class)">
+          {{ theme.name }}
+        </button>
+      </mat-menu>
+
       <!-- Share Button -->
-      <button
+      <button class="margin-left-md"
         mat-icon-button
         aria-label="share"
         (click)="copyUrlToClipboard()"
         [matTooltip]="'Share'">
         <fa-icon [icon]="faShare"></fa-icon>
-      </button>
-      <!-- LinkedIn Button -->
-      <button class="margin-left-md"
-        mat-icon-button
-        aria-label="linkedin"
-        (click)="openLinkedIn()"
-        [matTooltip]="'LinkedIn'">
-        <fa-icon [icon]="faLinkedin"></fa-icon>
       </button>
     </div>
   </mat-toolbar-row>

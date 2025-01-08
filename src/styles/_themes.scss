@@ -1,41 +1,59 @@
 @use './variables' as v;
 
+// Define shared CSS variables in :root using SCSS variables
+:root {
+  --font-family-base: #{v.$font-family-base}; // Interpolates the SCSS variable
+  --line-height: 1.5;
+  --letter-spacing: 1px;
+}
+
+// Theme-specific variables
 .theme-light {
   --primary-color: #77ACA2;
   --primary-light: #9DBEBB;
   --primary-dark: #468189;
   --secondary-color: #031926;
   --accent-color: #F4E9CD;
-  --text-color: white;
+  --text-color: #FFFFFF;
   --background-color: #468189;
 }
 
 .theme-dark {
   --primary-color: #468189;
   --primary-light: #77ACA2;
-  --primary-dark: #468189;
+  --primary-dark: #031926;
   --secondary-color: #031926;
   --accent-color: #F4E9CD;
-  --text-color: #f9f9f9;
+  --text-color: #F9F9F9;
   --background-color: #031926;
 }
 
-button {
-  background-color: var(--primary-color);
+// Base styles
+body {
+  font-family: var(--font-family-base),serif; // Uses the CSS variable
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
 header {
   background-color: var(--primary-dark);
-  font-family: v.$font-family-base;
-  letter-spacing: 1px;
-  line-height: 1.5;
+  font-family: var(--font-family-base),serif;
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
 }
 
-body {
-  background-color: var(--background-color);
+button {
+  background-color: var(--primary-color);
   color: var(--text-color);
-  font-family: v.$font-family-base;
-  letter-spacing: 1px;
-  line-height: 1.5;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--primary-light);
+  }
 }

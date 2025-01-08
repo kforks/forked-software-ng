@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
-import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import {MatMenuModule} from '@angular/material/menu';
+import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faShare, faPaintRoller} from '@fortawesome/free-solid-svg-icons';
+import {faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import { MatTooltip } from '@angular/material/tooltip';
-import { NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase } from '@angular/common';
+import {NgForOf, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -22,20 +23,66 @@ import { NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase } from '@angular/common'
     NgSwitchCase,
     NgIf,
     NgOptimizedImage,
+    MatMenuModule,
+    NgForOf,
   ],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
   protected readonly faLinkedin = faLinkedin;
   protected readonly faShare = faShare;
+  protected readonly faPaintRoller = faPaintRoller;
   private hoverTimeout: any;
   activePrimaryLink: string | null = null;
   activeSecondaryLink: string | null = null;
   isHovering = false;
   showSecondaryNav = false; // hiding secondary nav until needed
+  fullThemesList: Array<{ name: string; class: string }> = [];
+  themes: Array<{ name: string; class: string }> = [];
 
-  constructor() {}
+  constructor(
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.loadThemes();
+
+    // Apply the saved theme
+    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-dark';
+    document.body.classList.add(savedTheme);
+
+    // Filter the themes dropdown to exclude the current theme
+    this.themes = this.fullThemesList.filter(theme => theme.class !== savedTheme);
+  }
+
+  async loadThemes(): Promise<void> {
+    try {
+      const response = await fetch('assets/files/themes.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      this.fullThemesList = data.themes;
+    } catch (error) {
+      console.error('Error loading themes:', error);
+    }
+  }
+
+  selectTheme(themeClass: string): void {
+    const body = document.body;
+
+    // Remove existing theme classes
+    body.classList.remove(...this.fullThemesList.map(theme => theme.class));
+
+    // Add the selected theme
+    body.classList.add(themeClass);
+
+    // Save the selected theme to localStorage
+    localStorage.setItem('selectedTheme', themeClass);
+
+    // Update the themes dropdown to exclude the current theme
+    this.themes = this.fullThemesList.filter(theme => theme.class !== themeClass);
+  }
 
   copyUrlToClipboard(): void {
     const url = window.location.href;
@@ -81,4 +128,5 @@ export class NavComponent {
     this.isHovering = false;
     this.delayedClearPrimaryLink();
   }
+
 }

@@ -16,11 +16,11 @@
       border-radius: 25px;
       &.active {
         color: white;
-        background-color: black;
+        background-color: v.$primary-light;
       }
       &:hover {
         color: white;
-        background-color: black
+        background-color: v.$primary-light
       }
     }
   }
