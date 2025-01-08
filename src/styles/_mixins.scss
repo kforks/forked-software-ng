@@ -49,3 +49,15 @@ $spacing: (
   }
 }
 @include generate-margins;
+
+// Generate Padding Classes with a Mixin - ex: "padding-left-xl"
+@mixin generate-paddings {
+  @each $key, $value in $spacing {
+    @each $direction in ('left', 'right', 'top', 'bottom') {
+      .padding-#{$direction}-#{$key} {
+        padding-#{$direction}: #{$value};
+      }
+    }
+  }
+}
+@include generate-paddings;

@@ -30,8 +30,10 @@ export class NavComponent {
   protected readonly faLinkedin = faLinkedin;
   protected readonly faShare = faShare;
   private hoverTimeout: any;
-  activePrimaryLink: string | null = null; // Tracks active primary nav link
-  activeSecondaryLink: string | null = null; // Tracks secondary nav activity
+  activePrimaryLink: string | null = null;
+  activeSecondaryLink: string | null = null;
+  isHovering = false;
+  showSecondaryNav = false; // hiding secondary nav until needed
 
   constructor() {}
 
@@ -61,16 +63,22 @@ export class NavComponent {
 
   delayedClearPrimaryLink(): void {
     this.hoverTimeout = setTimeout(() => {
-      this.activePrimaryLink = null;
-      this.activeSecondaryLink = null; // Reset both states after delay
-    }, 600); // Adjust delay as needed
+      if (!this.isHovering) {
+        this.activePrimaryLink = null;
+        this.activeSecondaryLink = null;
+      }
+    }, 300);
   }
 
-  setSecondaryLink(link: string): void {
-    this.activeSecondaryLink = link;
+  enterNav(): void {
+    this.isHovering = true;
+    if (this.hoverTimeout) {
+      clearTimeout(this.hoverTimeout);
+    }
   }
 
-  clearSecondaryLink(): void {
-    this.activeSecondaryLink = this.activePrimaryLink; // Fallback to primary link
+  leaveNav(): void {
+    this.isHovering = false;
+    this.delayedClearPrimaryLink();
   }
 }

@@ -2,10 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {NavComponent} from './nav/nav.component';
 
 @Component({
     selector: 'app-root',
-    imports: [HomeComponent],
+  imports: [HomeComponent, NavComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     standalone: true,

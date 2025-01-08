@@ -1,15 +1,24 @@
 <mat-toolbar>
   <!-- Main Nav Row -->
-  <mat-toolbar-row class="primary-nav">
+  <mat-toolbar-row
+    class="primary-nav"
+    (mouseenter)="enterNav()"
+    (mouseleave)="leaveNav()">
     <div class="margin-left-lg">
-      <img style="vertical-align: middle" ngSrc="assets/wt-logo.svg" alt="Logo" height="30" width="30" class="margin-right-sm">
-      <span>Kaitlyn Forks</span>
+      <img
+        style="vertical-align: middle"
+        ngSrc="assets/wt-logo.svg"
+        alt="Logo"
+        height="30"
+        width="30"
+        class="margin-right-xl">
+      <span>Kaitlyn Forks - Full Stack Software Engineer</span>
     </div>
 
     <div
-      class="nav-links-wrapper nav-links margin-left-xl"
-      (mouseenter)="setPrimaryLink(activePrimaryLink)"
-      (mouseleave)="delayedClearPrimaryLink()">
+      class="nav-links-wrapper nav-links"
+      (mouseenter)="enterNav()"
+      (mouseleave)="leaveNav()">
       <span
         class="margin-left-lg"
         [class.active]="activePrimaryLink === 'About'"
@@ -30,13 +39,21 @@
       </span>
     </div>
 
-    <div class="nav-icons">
+    <div class="padding-right-lg">
       <!-- Share Button -->
-      <button mat-icon-button aria-label="share" (click)="copyUrlToClipboard()" [matTooltip]="'Share'">
+      <button
+        mat-icon-button
+        aria-label="share"
+        (click)="copyUrlToClipboard()"
+        [matTooltip]="'Share'">
         <fa-icon [icon]="faShare"></fa-icon>
       </button>
       <!-- LinkedIn Button -->
-      <button mat-icon-button aria-label="linkedin" (click)="openLinkedIn()" [matTooltip]="'LinkedIn'">
+      <button class="margin-left-md"
+        mat-icon-button
+        aria-label="linkedin"
+        (click)="openLinkedIn()"
+        [matTooltip]="'LinkedIn'">
         <fa-icon [icon]="faLinkedin"></fa-icon>
       </button>
     </div>
@@ -44,25 +61,23 @@
 
   <!-- Secondary Nav Row -->
   <mat-toolbar-row
-    *ngIf="activePrimaryLink"
-    class="secondary-nav nav-links padding-right-xl"
-    (mouseenter)="setSecondaryLink(activePrimaryLink)"
-    (mouseleave)="clearSecondaryLink()">
+    *ngIf="activePrimaryLink && showSecondaryNav"
+    class="secondary-nav"
+    (mouseenter)="enterNav()"
+    (mouseleave)="leaveNav()">
     <ng-container [ngSwitch]="activeSecondaryLink">
       <div *ngSwitchCase="'About'">
-        <span>About Us</span>
-        <span>Our Team</span>
-        <span>History</span>
+        <span>About The Dev</span>
+        <span>Career Journey</span>
       </div>
       <div *ngSwitchCase="'Portfolio'">
         <span>Projects</span>
         <span>Gallery</span>
-        <span>Case Studies</span>
+        <span>Awards and Recognitions</span>
       </div>
       <div *ngSwitchCase="'Resume'">
-        <span>Experience</span>
-        <span>Education</span>
-        <span>Skills</span>
+        <span>View</span>
+        <span>Download</span>
       </div>
     </ng-container>
   </mat-toolbar-row>

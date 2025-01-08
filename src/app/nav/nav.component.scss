@@ -1,3 +1,5 @@
+@use '../../styles/variables' as v;
+
 .primary-nav {
   display: flex;
   flex-direction: row;
@@ -7,38 +9,38 @@
 
   .nav-links-wrapper {
     display: flex;
-
     span {
       cursor: pointer;
-      padding: 1.5rem;
+      padding: 1.25rem;
       transition: color 0.3s, background-color 0.3s;
-
+      border-radius: 25px;
       &.active {
         color: white;
-        background-color: #315C63; // Active link background
+        background-color: black;
       }
-
       &:hover {
         color: white;
-        background-color: #315C63; // Match active style
+        background-color: black
       }
     }
   }
 }
 
 .secondary-nav {
-  padding: 0.5rem 1rem;
+  background-color: black;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   span {
+    padding: 1.25rem;
     margin-right: 1rem;
     cursor: pointer;
     transition: color 0.3s, transform 0.2s;
 
     &:hover {
-      color: #315C63;
+      background-color: v.$secondary;
       transform: scale(1.05); // Slight scaling for feedback
     }
   }

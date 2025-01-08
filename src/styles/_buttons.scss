@@ -21,5 +21,5 @@
 }
 
 .btn-secondary {
-  @include button(v.$secondary-color, $text-color: #000);
+  @include button(v.$secondary, $text-color: #000);
 }
