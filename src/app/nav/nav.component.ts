@@ -1,13 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
-import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faShare, faPaintRoller} from '@fortawesome/free-solid-svg-icons';
-import {faLinkedin} from '@fortawesome/free-brands-svg-icons';
+import { MatMenuModule } from '@angular/material/menu';
+import {
+  FaIconComponent,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { faShare, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { MatTooltip } from '@angular/material/tooltip';
-import {NgForOf, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from '@angular/common';
+import {
+  NgForOf,
+  NgIf,
+  NgOptimizedImage,
+  NgSwitch,
+  NgSwitchCase,
+} from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -41,13 +50,14 @@ export class NavComponent implements OnInit {
   fullThemesList: Array<{ name: string; class: string }> = [];
   themes: Array<{ name: string; class: string }> = [];
 
-  constructor(
-  ) {}
+  constructor() {}
 
   async ngOnInit(): Promise<void> {
     await this.loadThemes();
     const savedTheme = localStorage.getItem('selectedTheme') || 'theme-dark';
-    this.themes = this.fullThemesList.filter(theme => theme.class !== savedTheme);
+    this.themes = this.fullThemesList.filter(
+      (theme) => theme.class !== savedTheme,
+    );
   }
 
   async loadThemes(): Promise<void> {
@@ -65,18 +75,12 @@ export class NavComponent implements OnInit {
 
   selectTheme(themeClass: string): void {
     const body = document.body;
-
-    // Remove existing theme classes
-    body.classList.remove(...this.fullThemesList.map(theme => theme.class));
-
-    // Add the selected theme
+    body.classList.remove(...this.fullThemesList.map((theme) => theme.class));
     body.classList.add(themeClass);
-
-    // Save the selected theme to localStorage
     localStorage.setItem('selectedTheme', themeClass);
-
-    // Update the themes dropdown to exclude the current theme
-    this.themes = this.fullThemesList.filter(theme => theme.class !== themeClass);
+    this.themes = this.fullThemesList.filter(
+      (theme) => theme.class !== themeClass,
+    );
   }
 
   copyUrlToClipboard(): void {
@@ -87,7 +91,7 @@ export class NavComponent implements OnInit {
       },
       (err) => {
         console.error('Failed to copy URL: ', err);
-      }
+      },
     );
   }
 
@@ -123,5 +127,4 @@ export class NavComponent implements OnInit {
     this.isHovering = false;
     this.delayedClearPrimaryLink();
   }
-
 }
