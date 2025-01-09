@@ -11,6 +11,7 @@
 
 // Global body styles
 body {
+  transition: background-color 0.3s ease, color 0.3s ease; // for theme switching
   font-family: v.$font-family-base;
   font-size: v.$font-size-base;
   color: v.$text-color;

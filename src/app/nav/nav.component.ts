@@ -46,12 +46,7 @@ export class NavComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadThemes();
-
-    // Apply the saved theme
     const savedTheme = localStorage.getItem('selectedTheme') || 'theme-dark';
-    document.body.classList.add(savedTheme);
-
-    // Filter the themes dropdown to exclude the current theme
     this.themes = this.fullThemesList.filter(theme => theme.class !== savedTheme);
   }
 

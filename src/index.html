@@ -8,7 +8,12 @@
   <link rel="icon" type="image/x-icon" href="assets/wt-logo.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="theme-dark">
-  <app-root></app-root>
+<body>
+<script>
+  // Retrieve the saved theme from localStorage or use a default theme
+  const savedTheme = localStorage.getItem('selectedTheme') || 'theme-dark';
+  document.body.classList.add(savedTheme);
+</script>
+<app-root></app-root>
 </body>
 </html>
