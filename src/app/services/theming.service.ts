@@ -6,8 +6,8 @@ export class ThemeService {
 
   // Define available themes
   private themes = [
-    { name: 'Light Theme', class: 'theme-light' },
-    { name: 'Dark Theme', class: 'theme-dark' },
+    { name: 'Light Mode', class: 'theme-light' },
+    { name: 'Dark Mode', class: 'theme-dark' },
   ];
 
   constructor() {
