@@ -1,4 +1,4 @@
-@use './variables' as v;
+@use "./variables" as v;
 
 // For utility classes (e.g., text-center, mt-sm).
 // Utility classes
@@ -24,13 +24,30 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  padding: v.$spacing-xl;
   max-height: 90vh;
-  max-width: 90vw;
 }
 
-.space-between {
+.space-between-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: v.$spacing-sm;
+  gap: v.$spacing-xl;
 }
 
+.flex-row-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.flex-row-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

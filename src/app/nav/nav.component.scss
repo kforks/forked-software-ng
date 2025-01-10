@@ -1,4 +1,4 @@
-@use '../../styles/variables' as v;
+@use "../../styles/variables" as v;
 
 .primary-nav {
   display: flex;
@@ -12,15 +12,17 @@
     span {
       cursor: pointer;
       padding: 1.25rem;
-      transition: color 0.3s, background-color 0.3s;
+      transition:
+        color 0.3s,
+        background-color 0.3s;
       border-radius: 25px;
       &.active {
         color: white;
-        background-color: v.$primary-light;
+        background-color: v.$primary-color;
       }
       &:hover {
         color: white;
-        background-color: v.$primary-light
+        background-color: v.$primary-color;
       }
     }
   }
@@ -37,7 +39,9 @@
     padding: 1.25rem;
     margin-right: 1rem;
     cursor: pointer;
-    transition: color 0.3s, transform 0.2s;
+    transition:
+      color 0.3s,
+      transform 0.2s;
 
     &:hover {
       background-color: v.$secondary;

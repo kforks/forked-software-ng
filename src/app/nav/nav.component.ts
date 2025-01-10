@@ -17,6 +17,7 @@ import {
   NgSwitch,
   NgSwitchCase,
 } from '@angular/common';
+import { ThemeService } from '../services/theming.service';
 
 @Component({
   selector: 'app-nav',
@@ -47,40 +48,25 @@ export class NavComponent implements OnInit {
   activeSecondaryLink: string | null = null;
   isHovering = false;
   showSecondaryNav = false; // hiding secondary nav until needed
-  fullThemesList: Array<{ name: string; class: string }> = [];
   themes: Array<{ name: string; class: string }> = [];
+  currentTheme: string;
 
-  constructor() {}
-
-  async ngOnInit(): Promise<void> {
-    await this.loadThemes();
-    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-dark';
-    this.themes = this.fullThemesList.filter(
-      (theme) => theme.class !== savedTheme,
-    );
+  constructor(private themeService: ThemeService) {
+    this.currentTheme = this.themeService.getActiveTheme();
   }
 
-  async loadThemes(): Promise<void> {
-    try {
-      const response = await fetch('assets/files/themes.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      this.fullThemesList = data.themes;
-    } catch (error) {
-      console.error('Error loading themes:', error);
-    }
+  ngOnInit(): void {
+    this.updateThemeList();
   }
 
   selectTheme(themeClass: string): void {
-    const body = document.body;
-    body.classList.remove(...this.fullThemesList.map((theme) => theme.class));
-    body.classList.add(themeClass);
-    localStorage.setItem('selectedTheme', themeClass);
-    this.themes = this.fullThemesList.filter(
-      (theme) => theme.class !== themeClass,
-    );
+    this.themeService.setTheme(themeClass);
+    this.currentTheme = themeClass;
+    this.updateThemeList();
+  }
+
+  private updateThemeList(): void {
+    this.themes = this.themeService.getAvailableThemes();
   }
 
   copyUrlToClipboard(): void {

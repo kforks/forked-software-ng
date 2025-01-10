@@ -1,60 +1,71 @@
-<mat-toolbar>
+<mat-toolbar style="margin-bottom: 32px">
   <!-- Main Nav Row -->
   <mat-toolbar-row
     class="primary-nav"
     (mouseenter)="enterNav()"
-    (mouseleave)="leaveNav()">
+    (mouseleave)="leaveNav()"
+  >
     <div class="margin-left-lg">
       <img
         style="vertical-align: middle"
-        ngSrc="assets/wt-logo.svg" priority
+        ngSrc="assets/wt-logo.svg"
+        priority
         alt="Logo"
         height="30"
         width="30"
-        class="margin-right-sm">
+        class="margin-right-sm"
+      />
       <span>Kaitlyn Forks - Full Stack Software Engineer</span>
     </div>
 
     <div
       class="nav-links-wrapper nav-links"
       (mouseenter)="enterNav()"
-      (mouseleave)="leaveNav()">
+      (mouseleave)="leaveNav()"
+    >
       <span
         class="margin-left-lg"
         [class.active]="activePrimaryLink === 'About'"
-        (mouseenter)="setPrimaryLink('About')">
+        (mouseenter)="setPrimaryLink('About')"
+      >
         About
       </span>
       <span
         class="margin-left-lg"
         [class.active]="activePrimaryLink === 'Portfolio'"
-        (mouseenter)="setPrimaryLink('Portfolio')">
+        (mouseenter)="setPrimaryLink('Portfolio')"
+      >
         Portfolio
       </span>
       <span
         class="margin-left-lg"
         [class.active]="activePrimaryLink === 'Resume'"
-        (mouseenter)="setPrimaryLink('Resume')">
+        (mouseenter)="setPrimaryLink('Resume')"
+      >
         Resume
       </span>
     </div>
 
     <div class="padding-right-md">
       <!-- LinkedIn Button -->
-      <button class="margin-left-md"
-              mat-icon-button
-              aria-label="linkedin"
-              (click)="openLinkedIn()"
-              [matTooltip]="'LinkedIn'">
+      <button
+        class="margin-left-md"
+        mat-icon-button
+        aria-label="linkedin"
+        (click)="openLinkedIn()"
+        [matTooltip]="'LinkedIn'"
+      >
         <fa-icon [icon]="faLinkedin"></fa-icon>
       </button>
 
       <!-- Theme Button with Dropdown -->
-      <button class="margin-left-md"
+      <button
+        class="margin-left-md"
         mat-icon-button
         [matMenuTriggerFor]="themeMenu"
         aria-label="Theme"
-        [matTooltip]="'Change Theme'">
+        [matTooltip]="'Change Theme'"
+      >
         <fa-icon [icon]="faPaintRoller"></fa-icon>
       </button>
 
@@ -62,17 +73,20 @@
         <button
           mat-menu-item
           *ngFor="let theme of themes"
-          (click)="selectTheme(theme.class)">
+          (click)="selectTheme(theme.class)"
+        >
           {{ theme.name }}
         </button>
       </mat-menu>
 
       <!-- Share Button -->
-      <button class="margin-left-md"
+      <button
+        class="margin-left-md"
         mat-icon-button
         aria-label="share"
         (click)="copyUrlToClipboard()"
-        [matTooltip]="'Share'">
+        [matTooltip]="'Share'"
+      >
         <fa-icon [icon]="faShare"></fa-icon>
       </button>
     </div>
@@ -83,7 +97,8 @@
     *ngIf="activePrimaryLink && showSecondaryNav"
     class="secondary-nav"
     (mouseenter)="enterNav()"
-    (mouseleave)="leaveNav()">
+    (mouseleave)="leaveNav()"
+  >
     <ng-container [ngSwitch]="activeSecondaryLink">
       <div *ngSwitchCase="'About'">
         <span>About The Dev</span>
