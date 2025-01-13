@@ -1,4 +1,4 @@
-@use './variables' as v;
+@use "./variables" as v;
 
 // For global styles like body, html, and common resets.
 
@@ -11,7 +11,9 @@
 
 // Global body styles
 body {
-  transition: background-color 0.3s ease, color 0.3s ease; // for theme switching
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; // for theme switching
   font-family: v.$font-family-base;
   font-size: v.$font-size-base;
   color: v.$text-color;
@@ -21,7 +23,7 @@ body {
 
 // Anchor styles
 a {
-  color: v.$primary-color;
+  color: v.$text-color;
   text-decoration: none;
 
   &:hover {

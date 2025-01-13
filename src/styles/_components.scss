@@ -26,10 +26,10 @@
 
 .mat-mdc-button,
 button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+  background-color: var(--primary-color) !important;
+  color: var(--text-color) !important;
   font-family: var(--font-family-base), serif;
-  border-radius: 4px;
+  border-radius: 25px !important;
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing);
@@ -54,19 +54,11 @@ button {
       background-color: var(--secondary-color) !important;
     }
   }
-
-  //&.mat-mdc-button-warn {
-  //  background-color: var(--warn-color);
-  //  &:hover {
-  //    background-color: darken(var(--warn-color), 10%);
-  //  }
-  //}
 }
 
 .mat-mdc-menu-panel {
   background-color: var(--primary-color) !important;
   color: var(--text-color);
-  //border: 1px solid var(--primary-dark) !important;
   border-radius: 4px !important;
 
   .mat-mdc-menu-item {

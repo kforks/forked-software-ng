@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { NgForOf } from '@angular/common';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-strengths-carousel',
   templateUrl: './strengths-carousel.component.html',
   styleUrls: ['./strengths-carousel.component.scss'],
-  imports: [MatIcon, NgForOf],
+  imports: [MatIcon, NgForOf, MatCard],
 })
 export class StrengthsCarouselComponent implements OnInit {
   strengths = [

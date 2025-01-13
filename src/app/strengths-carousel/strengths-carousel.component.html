@@ -16,9 +16,11 @@
       [style.transform]="'translateX(-' + currentTranslateX + '%)'"
     >
       <div class="carousel-content" *ngFor="let strength of visibleStrengths">
-        <mat-icon class="strength-icon">{{ strength.icon }}</mat-icon>
-        <h2>{{ strength.title }}</h2>
-        <p>{{ strength.description }}</p>
+        <mat-card class="flex-column">
+          <mat-icon class="strength-icon">{{ strength.icon }}</mat-icon>
+          <h2>{{ strength.title }}</h2>
+          <p>{{ strength.description }}</p>
+        </mat-card>
       </div>
     </div>
   </div>
