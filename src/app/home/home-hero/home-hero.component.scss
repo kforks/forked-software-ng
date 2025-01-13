@@ -1,11 +1,18 @@
 .hero-container {
-  max-height: 100vh;
+  height: 85vh;
   width: 100vw;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 .hero-text {
-  margin-top: 5vh;
-  max-width: 500px;
+  margin-top: 10vh;
+  max-width: 450px;
 }
 
 .hero-title {
@@ -20,7 +27,6 @@
 }
 
 .hero-image-container {
-  height: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
