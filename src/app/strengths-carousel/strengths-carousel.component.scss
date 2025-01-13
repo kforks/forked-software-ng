@@ -1,0 +1,52 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 90vw;
+  margin: 0 auto;
+
+  .nav-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: lightgrey;
+    }
+  }
+
+  .carousel-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+
+    .carousel-content {
+      flex: 0 0 33.33%; // Show 3 items
+      text-align: center;
+      padding: 1rem;
+      box-sizing: border-box;
+
+      .strength-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}

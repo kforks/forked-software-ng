@@ -1,0 +1,26 @@
+<div class="carousel-title flex-column">
+  <h1>Strengths That Drive Success</h1>
+  <div class="carousel-description text-center">
+    Kaitlyn completed Gallup's CliftonStrengths assessment, a trusted resource
+    used by organizations worldwide to identify top talents. Backed by decades
+    of research, it provides lasting insights into how she excels in work,
+    collaboration, and problem-solving.
+  </div>
+</div>
+
+<div class="carousel-container">
+  <button (click)="prevSlide()" class="nav-button">❮</button>
+  <div class="carousel-wrapper">
+    <div
+      class="carousel-slide"
+      [style.transform]="'translateX(-' + currentTranslateX + '%)'"
+    >
+      <div class="carousel-content" *ngFor="let strength of visibleStrengths">
+        <mat-icon class="strength-icon">{{ strength.icon }}</mat-icon>
+        <h2>{{ strength.title }}</h2>
+        <p>{{ strength.description }}</p>
+      </div>
+    </div>
+  </div>
+  <button (click)="nextSlide()" class="nav-button">❯</button>
+</div>
