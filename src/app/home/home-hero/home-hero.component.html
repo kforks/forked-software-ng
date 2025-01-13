@@ -1,4 +1,4 @@
-<div class="hero-container flex-center-row">
+<div *ngIf="!isMobile; else mobileView" class="hero-container flex-center-row">
   <div class="hero-content">
     <div class="hero-image-container">
       <img
@@ -27,3 +27,33 @@
     </div>
   </div>
 </div>
+
+<ng-template #mobileView>
+  <div class="hero-container-mobile flex-center-column">
+    <div class="hero-image-container-mobile">
+      <img
+        class="hero-image"
+        ngSrc="assets/images/headshot.webp"
+        width="1137"
+        height="1707"
+        alt="Headshot of Kaitlyn Forks"
+        priority
+      />
+    </div>
+    <div class="hero-text-mobile">
+      <h1 class="hero-title-mobile">I'm Kaitlyn Forks</h1>
+      <p class="hero-description-mobile">
+        I specialize in scalable, light-weight applications built with Angular,
+        Node.js & AWS Cloud Services
+      </p>
+      <button mat-flat-button>
+        <a
+          href="assets/files/2025.ForksKaitlyn.Resume.pdf"
+          download="Kaitlyn_Forks_Resume.pdf"
+        >
+          Download my resume
+        </a>
+      </button>
+    </div>
+  </div>
+</ng-template>
