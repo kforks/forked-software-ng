@@ -41,14 +41,11 @@
 /* Mobile Styles */
 .hero-container-mobile {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  padding: 16px;
 }
-
 .hero-image-mobile {
-  height: 90vh;
+  max-height: 650px;
   width: auto;
   object-fit: contain;
 }

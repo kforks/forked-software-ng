@@ -1,6 +1,6 @@
 <footer class="footer-container">
-  <div class="footer-content">
-    <div class="footer-links">
+  <div class="footer-content" [ngClass]="{ 'mobile-footer': isMobile }">
+    <div class="footer-links" [ngClass]="{ 'mobile-links': isMobile }">
       <a
         href="https://www.linkedin.com/in/kaitlyn-forks/"
         target="_blank"
