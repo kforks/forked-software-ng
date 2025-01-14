@@ -3,12 +3,12 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [FaIconComponent, NgClass],
+  imports: [FaIconComponent, NgClass, NgIf],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })

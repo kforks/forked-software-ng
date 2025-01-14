@@ -11,12 +11,14 @@ import { faShare, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
+  NgClass,
   NgForOf,
   NgIf,
   NgOptimizedImage,
   NgSwitch,
   NgSwitchCase,
 } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ThemeService } from '../services/theming.service';
 
 @Component({
@@ -35,6 +37,7 @@ import { ThemeService } from '../services/theming.service';
     NgOptimizedImage,
     MatMenuModule,
     NgForOf,
+    NgClass,
   ],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
@@ -50,9 +53,18 @@ export class NavComponent implements OnInit {
   showSecondaryNav = false; // hiding secondary nav until needed
   themes: Array<{ name: string; class: string }> = [];
   currentTheme: string;
+  isMobile: boolean = false;
 
-  constructor(private themeService: ThemeService) {
+  constructor(
+    private themeService: ThemeService,
+    private readonly breakpointObserver: BreakpointObserver,
+  ) {
     this.currentTheme = this.themeService.getActiveTheme();
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .subscribe({
+        next: (result) => (this.isMobile = result.matches),
+      });
   }
 
   ngOnInit(): void {

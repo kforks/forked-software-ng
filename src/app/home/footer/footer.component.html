@@ -2,6 +2,7 @@
   <div class="footer-content" [ngClass]="{ 'mobile-footer': isMobile }">
     <div class="footer-links" [ngClass]="{ 'mobile-links': isMobile }">
       <a
+        *ngIf="!isMobile"
         href="https://www.linkedin.com/in/kaitlyn-forks/"
         target="_blank"
         class="footer-icon"
@@ -10,6 +11,7 @@
         <fa-icon [icon]="faLinkedin"></fa-icon> LinkedIn
       </a>
       <a
+        *ngIf="!isMobile"
         href="https://github.com/kforks"
         target="_blank"
         class="footer-icon"

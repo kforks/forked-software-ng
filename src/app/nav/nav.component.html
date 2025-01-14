@@ -5,7 +5,7 @@
     (mouseenter)="enterNav()"
     (mouseleave)="leaveNav()"
   >
-    <div class="margin-left-lg">
+    <div class="margin-left-lg" [ngClass]="{ 'margin-left-xs': isMobile }">
       <img
         style="vertical-align: middle"
         ngSrc="assets/wt-logo.svg"
@@ -15,36 +15,11 @@
         width="30"
         class="margin-right-sm"
       />
-      <span>Kaitlyn Forks - Full Stack Software Engineer</span>
+      <span *ngIf="!isMobile"
+        >Kaitlyn Forks - Full Stack Software Engineer</span
+      >
+      <span *ngIf="isMobile">Kaitlyn Forks</span>
     </div>
-
-    <!--    <div-->
-    <!--      class="nav-links-wrapper nav-links"-->
-    <!--      (mouseenter)="enterNav()"-->
-    <!--      (mouseleave)="leaveNav()"-->
-    <!--    >-->
-    <!--      <span-->
-    <!--        class="margin-left-lg"-->
-    <!--        [class.active]="activePrimaryLink === 'About'"-->
-    <!--        (mouseenter)="setPrimaryLink('About')"-->
-    <!--      >-->
-    <!--        About-->
-    <!--      </span>-->
-    <!--      <span-->
-    <!--        class="margin-left-lg"-->
-    <!--        [class.active]="activePrimaryLink === 'Portfolio'"-->
-    <!--        (mouseenter)="setPrimaryLink('Portfolio')"-->
-    <!--      >-->
-    <!--        Portfolio-->
-    <!--      </span>-->
-    <!--      <span-->
-    <!--        class="margin-left-lg"-->
-    <!--        [class.active]="activePrimaryLink === 'Resume'"-->
-    <!--        (mouseenter)="setPrimaryLink('Resume')"-->
-    <!--      >-->
-    <!--        Resume-->
-    <!--      </span>-->
-    <!--    </div>-->
 
     <div class="padding-right-md">
       <!-- LinkedIn Button -->
