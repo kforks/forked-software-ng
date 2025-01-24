@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HomeComponent } from './home/home.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './home/footer/footer.component';
 
