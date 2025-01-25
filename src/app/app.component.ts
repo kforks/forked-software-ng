@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './home/footer/footer.component';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './pages/home/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

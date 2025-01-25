@@ -18,7 +18,7 @@ import {
   NgTemplateOutlet,
 } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ThemeService } from '../services/theming.service';
+import { ThemeService } from '../../services/theming.service';
 import {
   ActivatedRoute,
   NavigationEnd,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { ScreenSizeService } from '../../services/screen-size.service';
+import { ScreenSizeService } from '../../../services/screen-size.service';
 
 @Component({
   selector: 'app-home-hero',
