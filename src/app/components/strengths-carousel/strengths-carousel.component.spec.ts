@@ -1,17 +1,17 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 //
-// import { FooterComponent } from './footer.component';
+// import { StrengthsCarouselComponent } from './strengths-carousel.component';
 //
-// describe('FooterComponent', () => {
-//   let component: FooterComponent;
-//   let fixture: ComponentFixture<FooterComponent>;
+// describe('StrengthsCarouselComponent', () => {
+//   let component: StrengthsCarouselComponent;
+//   let fixture: ComponentFixture<StrengthsCarouselComponent>;
 //
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [FooterComponent],
+//       imports: [StrengthsCarouselComponent],
 //     }).compileComponents();
 //
-//     fixture = TestBed.createComponent(FooterComponent);
+//     fixture = TestBed.createComponent(StrengthsCarouselComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

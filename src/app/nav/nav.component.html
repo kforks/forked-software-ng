@@ -1,11 +1,13 @@
-<mat-toolbar style="margin-bottom: 32px">
-  <!-- Main Nav Row -->
-  <mat-toolbar-row
-    class="primary-nav"
-    (mouseenter)="enterNav()"
-    (mouseleave)="leaveNav()"
-  >
-    <div class="margin-left-lg" [ngClass]="{ 'margin-left-xs': isMobile }">
+<mat-toolbar
+  class="margin-bottom-md"
+  [ngClass]="{ 'margin-bottom-xs': isMobile }"
+>
+  <mat-toolbar-row class="primary-nav">
+    <!-- Corner Logo-->
+    <div
+      class="margin-left-sm flex-row-start"
+      [ngClass]="{ 'margin-left-xs': isMobile }"
+    >
       <img
         style="vertical-align: middle"
         ngSrc="assets/wt-logo.svg"
@@ -15,13 +17,26 @@
         width="30"
         class="margin-right-sm"
       />
-      <span *ngIf="!isMobile"
-        >Kaitlyn Forks - Full Stack Software Engineer</span
-      >
-      <span *ngIf="isMobile">Kaitlyn Forks</span>
+
+      <div>
+        <span *ngIf="onHomePage">
+          {{
+            isMobile
+              ? "Kaitlyn Forks"
+              : "Kaitlyn Forks - Full Stack Software Engineer"
+          }}
+        </span>
+        <ng-container *ngIf="!onHomePage">
+          <ng-container *ngTemplateOutlet="breadcrumbTemplate"></ng-container>
+        </ng-container>
+      </div>
     </div>
 
-    <div class="padding-right-md">
+    <ng-container *ngIf="onHomePage && !isMobile">
+      <ng-container *ngTemplateOutlet="navlinks"></ng-container>
+    </ng-container>
+
+    <div class="padding-right-sm">
       <!-- LinkedIn Button -->
       <button
         class="margin-left-md"
@@ -44,7 +59,7 @@
         <fa-icon [icon]="faPaintRoller"></fa-icon>
       </button>
 
-      <mat-menu #themeMenu="matMenu">
+      <mat-menu #themeMenu="matMenu" class="margin-right-sm">
         <button
           mat-menu-item
           *ngFor="let theme of themes"
@@ -67,27 +82,42 @@
     </div>
   </mat-toolbar-row>
 
-  <!-- Secondary Nav Row -->
-  <mat-toolbar-row
-    *ngIf="activePrimaryLink && showSecondaryNav"
-    class="secondary-nav"
-    (mouseenter)="enterNav()"
-    (mouseleave)="leaveNav()"
-  >
-    <ng-container [ngSwitch]="activeSecondaryLink">
-      <div *ngSwitchCase="'About'">
-        <span>About The Dev</span>
-        <span>Career Journey</span>
-      </div>
-      <div *ngSwitchCase="'Portfolio'">
-        <span>Projects</span>
-        <span>Gallery</span>
-        <span>Awards and Recognitions</span>
-      </div>
-      <div *ngSwitchCase="'Resume'">
-        <span>View</span>
-        <span>Download</span>
-      </div>
-    </ng-container>
+  <!-- Mobile Secondary Nav -->
+  <mat-toolbar-row *ngIf="isMobile" class="flex-center-row">
+    <ng-container *ngTemplateOutlet="navlinks"></ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<!-- Nav LinksTemplate -->
+<ng-template #navlinks>
+  <nav>
+    <button
+      class="margin-left-md"
+      *ngFor="let link of navLinks"
+      [routerLink]="link.url"
+      routerLinkActive="active"
+      [class.active]="link.url === activeLink"
+      [ngClass]="{ hidden: link.url === activeLink }"
+    >
+      {{ link.label }}
+    </button>
+  </nav>
+</ng-template>
+
+<!-- Breadcrumb Template -->
+<ng-template #breadcrumbTemplate>
+  <nav>
+    <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
+      <a
+        class="breadcrumb"
+        *ngIf="!last"
+        [routerLink]="breadcrumb.url"
+        routerLinkActive="active"
+      >
+        {{ breadcrumb.label }}
+      </a>
+      <span *ngIf="last" class="breadcrumb-last">{{ breadcrumb.label }}</span>
+      <span *ngIf="!last"> > </span>
+    </span>
+  </nav>
+</ng-template>
