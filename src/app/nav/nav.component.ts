@@ -55,7 +55,7 @@ export class NavComponent implements OnInit {
   protected readonly faPaintRoller = faPaintRoller;
   navLinks: Array<{ label: string; url: string }> = [
     { label: 'Portfolio', url: '/portfolio' },
-    { label: 'About', url: '/portfolio' },
+    { label: 'About', url: '/about' },
   ];
   themes: Array<{ name: string; class: string }> = [];
   breadcrumbs: Array<{ label: string; url: string }> = [];

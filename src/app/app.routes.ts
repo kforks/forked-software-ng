@@ -6,5 +6,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'portfolio', component: PortfolioComponent },
+  { path: 'about', component: PortfolioComponent },
   { path: '**', redirectTo: 'home' }, // Wildcard fallback will override, always goes on bottom
 ];
