@@ -15,11 +15,17 @@ import {
   NgForOf,
   NgIf,
   NgOptimizedImage,
-  NgSwitch,
-  NgSwitchCase,
+  NgTemplateOutlet,
 } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ThemeService } from '../services/theming.service';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -31,13 +37,14 @@ import { ThemeService } from '../services/theming.service';
     FaIconComponent,
     FontAwesomeModule,
     MatTooltip,
-    NgSwitch,
-    NgSwitchCase,
     NgIf,
     NgOptimizedImage,
     MatMenuModule,
     NgForOf,
     NgClass,
+    RouterLink,
+    RouterLinkActive,
+    NgTemplateOutlet,
   ],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
@@ -46,18 +53,22 @@ export class NavComponent implements OnInit {
   protected readonly faLinkedin = faLinkedin;
   protected readonly faShare = faShare;
   protected readonly faPaintRoller = faPaintRoller;
-  private hoverTimeout: any;
-  activePrimaryLink: string | null = null;
-  activeSecondaryLink: string | null = null;
-  isHovering = false;
-  showSecondaryNav = false; // hiding secondary nav until needed
+  navLinks: Array<{ label: string; url: string }> = [
+    { label: 'Portfolio', url: '/portfolio' },
+    { label: 'About', url: '/about' },
+  ];
   themes: Array<{ name: string; class: string }> = [];
+  breadcrumbs: Array<{ label: string; url: string }> = [];
   currentTheme: string;
   isMobile: boolean = false;
+  onHomePage: boolean = true;
+  activeLink: string = '';
 
   constructor(
     private themeService: ThemeService,
     private readonly breakpointObserver: BreakpointObserver,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     this.currentTheme = this.themeService.getActiveTheme();
     this.breakpointObserver
@@ -65,10 +76,18 @@ export class NavComponent implements OnInit {
       .subscribe({
         next: (result) => (this.isMobile = result.matches),
       });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeLink = this.router.url;
+        this.updateBreadcrumbs();
+      }
+    });
   }
 
   ngOnInit(): void {
     this.updateThemeList();
+    this.updateBreadcrumbs();
   }
 
   selectTheme(themeClass: string): void {
@@ -79,6 +98,32 @@ export class NavComponent implements OnInit {
 
   private updateThemeList(): void {
     this.themes = this.themeService.getAvailableThemes();
+  }
+
+  private updateBreadcrumbs(): void {
+    const root = this.activatedRoute.root;
+    const breadcrumbs: Array<{ label: string; url: string }> = [];
+    let url = '';
+
+    this.onHomePage = this.router.url === '/home' || this.router.url === '/';
+
+    // Always add the "Home" breadcrumb
+    breadcrumbs.push({ label: 'Home', url: '/home' });
+
+    // Loop through child routes to build the breadcrumb trail
+    root.children.forEach((route) => {
+      const routeConfig = route.routeConfig;
+      if (routeConfig && routeConfig.path) {
+        url += `/${routeConfig.path}`;
+        breadcrumbs.push({ label: this.capitalize(routeConfig.path), url });
+      }
+    });
+
+    this.breadcrumbs = breadcrumbs;
+  }
+
+  private capitalize(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   copyUrlToClipboard(): void {
@@ -95,34 +140,5 @@ export class NavComponent implements OnInit {
 
   openLinkedIn(): void {
     window.open('https://www.linkedin.com/in/kaitlyn-forks/', '_blank');
-  }
-
-  setPrimaryLink(link: string | null): void {
-    if (this.hoverTimeout) {
-      clearTimeout(this.hoverTimeout);
-    }
-    this.activePrimaryLink = link;
-    this.activeSecondaryLink = link;
-  }
-
-  delayedClearPrimaryLink(): void {
-    this.hoverTimeout = setTimeout(() => {
-      if (!this.isHovering) {
-        this.activePrimaryLink = null;
-        this.activeSecondaryLink = null;
-      }
-    }, 300);
-  }
-
-  enterNav(): void {
-    this.isHovering = true;
-    if (this.hoverTimeout) {
-      clearTimeout(this.hoverTimeout);
-    }
-  }
-
-  leaveNav(): void {
-    this.isHovering = false;
-    this.delayedClearPrimaryLink();
   }
 }

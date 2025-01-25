@@ -11,47 +11,12 @@
   @media (max-width: 768px) {
     font-size: 1rem; // Adjust font size for mobile
   }
-
-  .nav-links-wrapper {
-    font-size: 1rem;
-    display: flex;
-    span {
-      cursor: pointer;
-      padding: 1.25rem;
-      transition:
-        color 0.3s,
-        background-color 0.3s;
-      border-radius: 25px;
-      &.active {
-        color: white;
-        background-color: v.$primary-color;
-      }
-      &:hover {
-        color: white;
-        background-color: v.$primary-color;
-      }
-    }
-  }
 }
 
-.secondary-nav {
-  background-color: black;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.breadcrumb {
+  text-decoration: none;
+}
 
-  span {
-    padding: 1.25rem;
-    margin-right: 1rem;
-    cursor: pointer;
-    transition:
-      color 0.3s,
-      transform 0.2s;
-
-    &:hover {
-      background-color: v.$secondary;
-      transform: scale(1.05); // Slight scaling for feedback
-    }
-  }
+.breadcrumb-last {
+  color: #555;
 }
