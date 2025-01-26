@@ -1,10 +1,10 @@
 import {
   Component,
   OnInit,
-  AfterViewInit,
   QueryList,
   ViewChildren,
   ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { MatCard } from '@angular/material/card';
@@ -36,11 +36,12 @@ import {
     MatMiniFabButton,
   ],
 })
-export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
-  @ViewChildren('carouselCard') cards!: QueryList<ElementRef>; // Reference to all cards in the DOM
+export class StrengthsCarouselComponent implements OnInit {
   visibleStrengths: any[] = [];
   currentTranslateX = 0;
   protected readonly faTrophy = faTrophy;
+  protected readonly faCaretRight = faCaretRight;
+  protected readonly faCaretLeft = faCaretLeft;
   strengths: { title: string; icon: IconDefinition; description: string }[] = [
     {
       title: 'Strategic<br>(#1 Top Strength)',
@@ -84,18 +85,6 @@ export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
     ];
   }
 
-  ngAfterViewInit() {
-    this.setEqualCardHeights(); // Set card heights after the view is initialized
-  }
-
-  private setEqualCardHeights(): void {
-    const cardElements = this.cards.toArray().map((card) => card.nativeElement);
-    const maxHeight = Math.max(
-      ...cardElements.map((card) => card.offsetHeight),
-    ); // Find the tallest card height
-    cardElements.forEach((card) => (card.style.height = `${maxHeight}px`)); // Apply the tallest height to all cards
-  }
-
   prevSlide() {
     if (this.currentTranslateX === 0) {
       // Preload at least two additional sets at the beginning for back scroll
@@ -107,7 +96,6 @@ export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
   }
 
   nextSlide() {
-    const maxTranslateX = this.getMaxTranslateX();
     const remainingSlots = this.getRemainingSlots();
 
     if (remainingSlots < 6) {
@@ -121,11 +109,6 @@ export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
     this.currentTranslateX += 100;
   }
 
-  getMaxTranslateX(): number {
-    // Calculate max translate based on visible strengths and slide size
-    return Math.ceil(this.visibleStrengths.length / 3) * 100;
-  }
-
   getRemainingSlots(): number {
     // Calculate how many slots are remaining before the visibleStrengths array runs out
     const totalVisibleSlots = Math.floor(this.currentTranslateX / 100) * 3 + 3;
@@ -136,7 +119,4 @@ export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
     const fullPath = `assets/files/${filePath}`;
     window.open(fullPath, '_blank');
   }
-
-  protected readonly faCaretRight = faCaretRight;
-  protected readonly faCaretLeft = faCaretLeft;
 }
