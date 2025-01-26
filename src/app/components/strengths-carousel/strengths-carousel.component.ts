@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  QueryList,
+  ViewChildren,
+  ElementRef,
+} from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { MatCard } from '@angular/material/card';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -20,7 +27,8 @@ import {
   styleUrls: ['./strengths-carousel.component.scss'],
   imports: [NgForOf, MatCard, FaIconComponent, MatIconButton, MatTooltip],
 })
-export class StrengthsCarouselComponent implements OnInit {
+export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
+  @ViewChildren('carouselCard') cards!: QueryList<ElementRef>; // Reference to all cards in the DOM
   visibleStrengths: any[] = [];
   currentTranslateX = 0;
   protected readonly faTrophy = faTrophy;
@@ -65,6 +73,18 @@ export class StrengthsCarouselComponent implements OnInit {
       ...this.strengths,
       ...this.strengths.slice(0, 6), // Preload enough items for at least two additional sets
     ];
+  }
+
+  ngAfterViewInit() {
+    this.setEqualCardHeights(); // Set card heights after the view is initialized
+  }
+
+  private setEqualCardHeights(): void {
+    const cardElements = this.cards.toArray().map((card) => card.nativeElement);
+    const maxHeight = Math.max(
+      ...cardElements.map((card) => card.offsetHeight),
+    ); // Find the tallest card height
+    cardElements.forEach((card) => (card.style.height = `${maxHeight}px`)); // Apply the tallest height to all cards
   }
 
   prevSlide() {

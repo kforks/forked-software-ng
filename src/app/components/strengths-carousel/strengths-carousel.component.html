@@ -14,7 +14,10 @@
       class="carousel-slide"
       [style.transform]="'translateX(-' + currentTranslateX + '%)'"
     >
-      <div class="carousel-content" *ngFor="let strength of visibleStrengths">
+      <div
+        class="carousel-slide-content"
+        *ngFor="let strength of visibleStrengths"
+      >
         <mat-card class="flex-column">
           <fa-icon [icon]="strength.icon" class="strength-icon"></fa-icon>
           <h2 [innerHTML]="strength.title"></h2>
