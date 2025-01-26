@@ -1,10 +1,9 @@
 <div class="carousel-title flex-column">
   <h1>Strengths That Drive Success</h1>
   <div class="carousel-description text-center">
-    Kaitlyn completed Gallup's CliftonStrengths assessment, a trusted resource
-    used by organizations worldwide to identify top talents. Backed by decades
-    of research, it provides lasting insights into how she excels in work,
-    collaboration, and problem-solving.
+    Kaitlyn completed Gallup's Clifton Strengths assessment,<br />
+    a trusted resource used by organizations worldwide.<br />
+    These are the five strengths where she scored highest.
   </div>
 </div>
 
@@ -17,12 +16,26 @@
     >
       <div class="carousel-content" *ngFor="let strength of visibleStrengths">
         <mat-card class="flex-column">
-          <mat-icon class="strength-icon">{{ strength.icon }}</mat-icon>
-          <h2>{{ strength.title }}</h2>
+          <fa-icon [icon]="strength.icon" class="strength-icon"></fa-icon>
+          <h2 [innerHTML]="strength.title"></h2>
           <p>{{ strength.description }}</p>
         </mat-card>
       </div>
     </div>
   </div>
   <button (click)="nextSlide()" class="nav-button">❯</button>
+</div>
+
+<div class="flex-center-row" style="align-items: center">
+  <h3>Read more about Kaitlyn's Strengths and how they interact here:</h3>
+  <div>
+    <button
+      class="margin-left-md"
+      mat-icon-button
+      [matTooltip]="'Top 5 PDF'"
+      (click)="openPdf('Forks-Kaitlyn-SF_TOP_5.pdf')"
+    >
+      <fa-icon [icon]="faTrophy"></fa-icon>
+    </button>
+  </div>
 </div>
