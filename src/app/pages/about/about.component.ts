@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { StrengthsCarouselComponent } from '../../components/strengths-carousel/strengths-carousel.component';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [StrengthsCarouselComponent],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+  styleUrl: './about.component.scss',
 })
 export class AboutComponent {}
