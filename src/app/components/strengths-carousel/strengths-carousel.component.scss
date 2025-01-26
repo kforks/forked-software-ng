@@ -7,10 +7,10 @@
   margin: 0 auto;
 
   .nav-button {
-    font-size: 2rem;
     cursor: pointer;
     user-select: none;
     transition: color 0.3s;
+    font-size: 2rem;
 
     &:hover {
       color: lightgrey;

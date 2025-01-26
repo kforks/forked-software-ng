@@ -8,7 +8,9 @@
 </div>
 
 <div class="carousel-container">
-  <button (click)="prevSlide()" class="nav-button">❮</button>
+  <button mat-mini-fab (click)="prevSlide()" class="nav-button">
+    <fa-icon [icon]="faCaretLeft"></fa-icon>
+  </button>
   <div class="carousel-wrapper">
     <div
       class="carousel-slide"
@@ -26,7 +28,9 @@
       </div>
     </div>
   </div>
-  <button (click)="nextSlide()" class="nav-button">❯</button>
+  <button mat-mini-fab (click)="nextSlide()" class="nav-button">
+    <fa-icon [icon]="faCaretRight"></fa-icon>
+  </button>
 </div>
 
 <div class="flex-center-row" style="align-items: center">

@@ -9,9 +9,11 @@ import {
 import { NgForOf } from '@angular/common';
 import { MatCard } from '@angular/material/card';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { MatIconButton } from '@angular/material/button';
+import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
+  faCaretLeft,
+  faCaretRight,
   faChess,
   faHandshake,
   faLaughBeam,
@@ -25,7 +27,14 @@ import {
   selector: 'app-strengths-carousel',
   templateUrl: './strengths-carousel.component.html',
   styleUrls: ['./strengths-carousel.component.scss'],
-  imports: [NgForOf, MatCard, FaIconComponent, MatIconButton, MatTooltip],
+  imports: [
+    NgForOf,
+    MatCard,
+    FaIconComponent,
+    MatIconButton,
+    MatTooltip,
+    MatMiniFabButton,
+  ],
 })
 export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
   @ViewChildren('carouselCard') cards!: QueryList<ElementRef>; // Reference to all cards in the DOM
@@ -127,4 +136,7 @@ export class StrengthsCarouselComponent implements OnInit, AfterViewInit {
     const fullPath = `assets/files/${filePath}`;
     window.open(fullPath, '_blank');
   }
+
+  protected readonly faCaretRight = faCaretRight;
+  protected readonly faCaretLeft = faCaretLeft;
 }
