@@ -20,10 +20,13 @@
         class="carousel-slide-content"
         *ngFor="let strength of visibleStrengths"
       >
-        <mat-card class="flex-column">
+        <mat-card
+          class="flex-column"
+          style="min-height: 100%; justify-content: start"
+        >
           <fa-icon [icon]="strength.icon" class="strength-icon"></fa-icon>
           <h2 [innerHTML]="strength.title"></h2>
-          <p>{{ strength.description }}</p>
+          <p class="margin-top-md">{{ strength.description }}</p>
         </mat-card>
       </div>
     </div>

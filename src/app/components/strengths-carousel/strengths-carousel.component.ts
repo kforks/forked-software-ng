@@ -53,25 +53,25 @@ export class StrengthsCarouselComponent implements OnInit {
       title: 'Winning others over<br>(#2)',
       icon: faHandshake,
       description:
-        'Also known as "WOO," this means Kaitlyn thrives in social environments, effortlessly connecting with new people and fostering meaningful conversations.',
+        'Kaitlyn effortlessly connects with new people and fosters meaningful conversations.',
     },
     {
       title: 'Positivity<br>(#3)',
       icon: faLaughBeam,
       description:
-        'With an optimistic outlook and a contagious energy, Kaitlyn uplifts those around her.',
+        'With relentless optimism and contagious energy, Kaitlyn uplifts those around her, keeping morale high.',
     },
     {
       title: 'Developer<br>(#4)',
       icon: faPersonChalkboard,
       description:
-        'Kaitlyn is deeply invested in helping others grow and reach their full potential.',
+        'Kaitlyn is deeply invested in helping others grow and reach their full potential, deriving satisfaction whole team success.',
     },
     {
       title: 'Empathy<br>(#5)',
       icon: faPeopleRoof,
       description:
-        'Kaitlyn intuitively senses the emotions of those around her, offering genuine understanding and support.',
+        'Kaitlyn senses the emotions of those around her, offering genuine understanding and support.',
     },
   ];
 
