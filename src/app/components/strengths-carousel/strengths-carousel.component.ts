@@ -1,16 +1,8 @@
-import {
-  Component,
-  OnInit,
-  QueryList,
-  ViewChildren,
-  ElementRef,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { NgForOf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatCard } from '@angular/material/card';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
-import { MatTooltip } from '@angular/material/tooltip';
 import {
   faCaretLeft,
   faCaretRight,
@@ -22,26 +14,23 @@ import {
   faTrophy,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-strengths-carousel',
   templateUrl: './strengths-carousel.component.html',
   styleUrls: ['./strengths-carousel.component.scss'],
-  imports: [
-    NgForOf,
-    MatCard,
-    FaIconComponent,
-    MatIconButton,
-    MatTooltip,
-    MatMiniFabButton,
-  ],
+  imports: [FaIconComponent, MatIconButton, MatCard, MatMiniFabButton, NgForOf],
 })
 export class StrengthsCarouselComponent implements OnInit {
   visibleStrengths: any[] = [];
   currentTranslateX = 0;
+  isMobile = false; // Flag for mobile view
+
   protected readonly faTrophy = faTrophy;
   protected readonly faCaretRight = faCaretRight;
   protected readonly faCaretLeft = faCaretLeft;
+
   strengths: { title: string; icon: IconDefinition; description: string }[] = [
     {
       title: 'Strategic<br>(#1 Top Strength)',
@@ -75,43 +64,64 @@ export class StrengthsCarouselComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {
-    // Initialize visibleStrengths with extra strengths for smooth scrolling
-    this.visibleStrengths = [
-      ...this.strengths,
-      ...this.strengths.slice(0, 6), // Preload enough items for at least two additional sets
-    ];
+    // Initialize breakpoint observer for responsive design
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isMobile = result.matches;
+        this.adjustCarousel();
+      });
+
+    this.visibleStrengths = [...this.strengths, ...this.strengths.slice(0, 6)];
+  }
+
+  adjustCarousel() {
+    // Adjust carousel behavior based on screen size
+    if (this.isMobile) {
+      this.visibleStrengths = this.strengths.slice(0, 1); // Show only one tile on mobile
+    } else {
+      this.visibleStrengths = [
+        ...this.strengths,
+        ...this.strengths.slice(0, 6),
+      ];
+    }
+    this.currentTranslateX = 0; // Reset translation
   }
 
   prevSlide() {
-    if (this.currentTranslateX === 0) {
-      // Preload at least two additional sets at the beginning for back scroll
+    if (this.currentTranslateX === 0 && !this.isMobile) {
       const additionalSet = [...this.strengths.slice(-6)];
       this.visibleStrengths = [...additionalSet, ...this.visibleStrengths];
-      this.currentTranslateX += 200; // Adjust to maintain the current slide position
+      this.currentTranslateX += this.getSlideWidth();
     }
-    this.currentTranslateX -= 100;
+    this.currentTranslateX -= this.getSlideWidth();
   }
 
   nextSlide() {
     const remainingSlots = this.getRemainingSlots();
-
-    if (remainingSlots < 6) {
-      // Preload at least 6 more items (2 slides) to fill the gaps
+    if (remainingSlots < (this.isMobile ? 1 : 6)) {
       const additionalSet = [...this.strengths, ...this.strengths];
       this.visibleStrengths = [
         ...this.visibleStrengths,
-        ...additionalSet.slice(0, 6),
+        ...additionalSet.slice(0, this.isMobile ? 1 : 6),
       ];
     }
-    this.currentTranslateX += 100;
+    this.currentTranslateX += this.getSlideWidth();
+  }
+
+  getSlideWidth(): number {
+    return this.isMobile ? 100 : 33.33;
   }
 
   getRemainingSlots(): number {
-    // Calculate how many slots are remaining before the visibleStrengths array runs out
-    const totalVisibleSlots = Math.floor(this.currentTranslateX / 100) * 3 + 3;
+    const slotsPerSlide = this.isMobile ? 1 : 3;
+    const totalVisibleSlots =
+      Math.floor(this.currentTranslateX / this.getSlideWidth()) *
+        slotsPerSlide +
+      slotsPerSlide;
     return this.visibleStrengths.length - totalVisibleSlots;
   }
 

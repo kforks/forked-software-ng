@@ -1,3 +1,15 @@
+.carousel-title {
+  font-size: 1rem;
+  padding: 8px;
+  max-width: 800px;
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+    .carousel-subtitle {
+      font-size: 0.75em;
+    }
+  }
+}
+
 .carousel-container {
   display: flex;
   align-items: center;
@@ -29,14 +41,29 @@
     .carousel-slide-content {
       display: flex;
       flex-direction: column;
-      flex: 0 0 33.33%; // Show 3 items
+      flex: 0 0 33.33%; // Show 3 items on desktop
       text-align: center;
       padding: 1rem;
       box-sizing: border-box;
 
+      @media screen and (max-width: 600px) {
+        flex: 0 0 100%; // Show 1 item on mobile
+      }
+
       .strength-icon {
         font-size: 3rem;
+        @media screen and (max-width: 600px) {
+          font-size: 2.5rem;
+        }
       }
     }
   }
+}
+
+.read-more {
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
