@@ -25,7 +25,7 @@ import { NgForOf } from '@angular/common';
 export class StrengthsCarouselComponent implements OnInit {
   visibleStrengths: any[] = [];
   currentTranslateX = 0;
-  isMobile = false; // Flag for mobile view
+  isMobile = false;
 
   protected readonly faTrophy = faTrophy;
   protected readonly faCaretRight = faCaretRight;
