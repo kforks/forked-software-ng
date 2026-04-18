@@ -36,7 +36,10 @@
 
   .carousel-slide {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+
+    &.fading .carousel-slide-content {
+      opacity: 0;
+    }
 
     .carousel-slide-content {
       display: flex;
@@ -45,6 +48,8 @@
       text-align: center;
       padding: 1rem;
       box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
 
       @media screen and (max-width: 600px) {
         flex: 0 0 100%; // Show 1 item on mobile

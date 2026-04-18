@@ -23,9 +23,9 @@ import { NgForOf } from '@angular/common';
   imports: [FaIconComponent, MatIconButton, MatCard, MatMiniFabButton, NgForOf],
 })
 export class StrengthsCarouselComponent implements OnInit {
-  visibleStrengths: any[] = [];
-  currentTranslateX = 0;
+  currentIndex = 0;
   isMobile = false;
+  isTransitioning = false;
 
   protected readonly faTrophy = faTrophy;
   protected readonly faCaretRight = faCaretRight;
@@ -54,7 +54,7 @@ export class StrengthsCarouselComponent implements OnInit {
       title: 'Developer<br>(#4)',
       icon: faPersonChalkboard,
       description:
-        'Kaitlyn is deeply invested in helping others grow and reach their full potential, deriving satisfaction whole team success.',
+        'Kaitlyn is deeply invested in helping others grow and reach their full potential, deriving satisfaction from whole team success.',
     },
     {
       title: 'Empathy<br>(#5)',
@@ -67,62 +67,51 @@ export class StrengthsCarouselComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {
-    // Initialize breakpoint observer for responsive design
     this.breakpointObserver
       .observe([Breakpoints.Handset])
       .subscribe((result) => {
         this.isMobile = result.matches;
-        this.adjustCarousel();
+        this.currentIndex = 0;
       });
-
-    this.visibleStrengths = [...this.strengths, ...this.strengths.slice(0, 6)];
   }
 
-  adjustCarousel() {
-    // Adjust carousel behavior based on screen size
-    if (this.isMobile) {
-      this.visibleStrengths = this.strengths.slice(0, 1); // Show only one tile on mobile
-    } else {
-      this.visibleStrengths = [
-        ...this.strengths,
-        ...this.strengths.slice(0, 6),
-      ];
+  get visibleStrengths() {
+    const count = this.isMobile ? 1 : 3;
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(
+        this.strengths[(this.currentIndex + i) % this.strengths.length],
+      );
     }
-    this.currentTranslateX = 0; // Reset translation
+    return result;
   }
 
   prevSlide() {
-    if (this.currentTranslateX === 0 && !this.isMobile) {
-      const additionalSet = [...this.strengths.slice(-6)];
-      this.visibleStrengths = [...additionalSet, ...this.visibleStrengths];
-      this.currentTranslateX += this.getSlideWidth();
-    }
-    this.currentTranslateX -= this.getSlideWidth();
+    if (this.isTransitioning) return;
+    this.slide(() => {
+      const step = this.isMobile ? 1 : 3;
+      this.currentIndex =
+        (this.currentIndex - step + this.strengths.length) %
+        this.strengths.length;
+    });
   }
 
   nextSlide() {
-    const remainingSlots = this.getRemainingSlots();
-    if (remainingSlots < (this.isMobile ? 1 : 6)) {
-      const additionalSet = [...this.strengths, ...this.strengths];
-      this.visibleStrengths = [
-        ...this.visibleStrengths,
-        ...additionalSet.slice(0, this.isMobile ? 1 : 6),
-      ];
-    }
-    this.currentTranslateX += this.getSlideWidth();
+    if (this.isTransitioning) return;
+    this.slide(() => {
+      const step = this.isMobile ? 1 : 3;
+      this.currentIndex = (this.currentIndex + step) % this.strengths.length;
+    });
   }
 
-  getSlideWidth(): number {
-    return this.isMobile ? 100 : 33.33;
-  }
-
-  getRemainingSlots(): number {
-    const slotsPerSlide = this.isMobile ? 1 : 3;
-    const totalVisibleSlots =
-      Math.floor(this.currentTranslateX / this.getSlideWidth()) *
-        slotsPerSlide +
-      slotsPerSlide;
-    return this.visibleStrengths.length - totalVisibleSlots;
+  private slide(updateIndex: () => void) {
+    this.isTransitioning = true;
+    setTimeout(() => {
+      updateIndex();
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 50);
+    }, 300);
   }
 
   openPdf(filePath: string): void {
