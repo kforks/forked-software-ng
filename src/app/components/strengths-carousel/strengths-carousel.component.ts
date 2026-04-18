@@ -14,18 +14,26 @@ import {
   faTrophy,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import { NgForOf } from '@angular/common';
+import { NgClass, NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-strengths-carousel',
   templateUrl: './strengths-carousel.component.html',
   styleUrls: ['./strengths-carousel.component.scss'],
-  imports: [FaIconComponent, MatIconButton, MatCard, MatMiniFabButton, NgForOf],
+  imports: [
+    FaIconComponent,
+    MatIconButton,
+    MatCard,
+    MatMiniFabButton,
+    NgForOf,
+    NgClass,
+  ],
 })
 export class StrengthsCarouselComponent implements OnInit {
   currentIndex = 0;
   isMobile = false;
   isTransitioning = false;
+  animationClass: string | null = null;
 
   protected readonly faTrophy = faTrophy;
   protected readonly faCaretRight = faCaretRight;
@@ -88,7 +96,7 @@ export class StrengthsCarouselComponent implements OnInit {
 
   prevSlide() {
     if (this.isTransitioning) return;
-    this.slide(() => {
+    this.slide('prev', () => {
       const step = this.isMobile ? 1 : 3;
       this.currentIndex =
         (this.currentIndex - step + this.strengths.length) %
@@ -98,19 +106,24 @@ export class StrengthsCarouselComponent implements OnInit {
 
   nextSlide() {
     if (this.isTransitioning) return;
-    this.slide(() => {
+    this.slide('next', () => {
       const step = this.isMobile ? 1 : 3;
       this.currentIndex = (this.currentIndex + step) % this.strengths.length;
     });
   }
 
-  private slide(updateIndex: () => void) {
+  private slide(direction: 'next' | 'prev', updateIndex: () => void) {
     this.isTransitioning = true;
+    this.animationClass =
+      direction === 'next' ? 'slide-out-left' : 'slide-out-right';
     setTimeout(() => {
       updateIndex();
+      this.animationClass =
+        direction === 'next' ? 'slide-in-right' : 'slide-in-left';
       setTimeout(() => {
+        this.animationClass = null;
         this.isTransitioning = false;
-      }, 50);
+      }, 300);
     }, 300);
   }
 

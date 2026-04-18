@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { ScreenSizeService } from '../../../services/screen-size.service';
 
 @Component({
   selector: 'app-home-hero',
   standalone: true,
-  imports: [NgOptimizedImage, MatButtonModule, NgIf],
+  imports: [NgOptimizedImage, MatButtonModule, NgIf, RouterLink],
   templateUrl: './home-hero.component.html',
   styleUrls: ['./home-hero.component.scss'],
 })
