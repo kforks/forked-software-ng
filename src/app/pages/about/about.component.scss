@@ -1,7 +1,19 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
 .strengths-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 }

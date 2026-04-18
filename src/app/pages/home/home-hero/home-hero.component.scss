@@ -1,3 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
 .hero-container {
   height: 85vh;
   width: 100vw;
@@ -40,12 +47,59 @@
 
 /* Mobile Styles */
 .hero-container-mobile {
+  flex: 1;
   width: 100%;
   text-align: center;
-  padding: 16px;
+  padding-top: 24px;
+  padding-right: 16px;
+  padding-left: 16px;
+  gap: 24px;
+  min-height: 0;
 }
+
+.hero-image-container-mobile {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text-mobile {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.hero-title-mobile {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-description-mobile {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
 .hero-image-mobile {
-  max-height: 650px;
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
+  height: auto;
   object-fit: contain;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.hero-ctas-mobile {
+  justify-content: center;
+  flex-wrap: wrap;
 }

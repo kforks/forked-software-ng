@@ -13,7 +13,7 @@
       <fa-icon [icon]="faCaretLeft"></fa-icon>
     </button>
     <div class="carousel-wrapper">
-      <div class="carousel-slide" [class.fading]="isTransitioning">
+      <div class="carousel-slide" [ngClass]="animationClass">
         <div
           class="carousel-slide-content"
           *ngFor="let strength of visibleStrengths"
