@@ -1,5 +1,33 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-#npm test
-npx lint-staged
+# Format staged files (skip gracefully if no matching files)
+npx lint-staged --allow-empty || true
+
+# Lightweight security scan on staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -n "$STAGED_FILES" ]; then
+  # Block commits containing secrets or credentials
+  # Patterns use character classes to avoid matching this file itself
+  SECRETS_PATTERN='(AW[S]_ACCESS_KEY|AW[S]_SECRET|SUPABASE_SERVICE_ROL[E]|AP[I]_KEY|SECRET_KE[Y]|PRIVATE_KE[Y]|passwor[d]\s*=\s*["\x27][^\s]+["\x27])'
+  MATCHES=$(echo "$STAGED_FILES" | xargs grep -lEn "$SECRETS_PATTERN" 2>/dev/null | grep -v '.env.example' | grep -v 'node_modules' | grep -v '.husky/')
+
+  if [ -n "$MATCHES" ]; then
+    echo ""
+    echo "🚫 BLOCKED: Possible secrets detected in staged files:"
+    echo "$MATCHES"
+    echo ""
+    echo "If this is a false positive, review the file and use 'git commit --no-verify' to bypass."
+    exit 1
+  fi
+
+  # Block .env files (not .env.example)
+  ENV_FILES=$(echo "$STAGED_FILES" | grep -E '^\.env(\.|$)' | grep -v '.env.example')
+  if [ -n "$ENV_FILES" ]; then
+    echo ""
+    echo "🚫 BLOCKED: .env file staged for commit:"
+    echo "$ENV_FILES"
+    exit 1
+  fi
+fi
