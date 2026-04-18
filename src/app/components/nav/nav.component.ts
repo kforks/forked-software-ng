@@ -104,13 +104,9 @@ export class NavComponent implements OnInit {
     const root = this.activatedRoute.root;
     const breadcrumbs: Array<{ label: string; url: string }> = [];
     let url = '';
-
     this.onHomePage = this.router.url === '/home' || this.router.url === '/';
 
-    // Always add the "Home" breadcrumb
     breadcrumbs.push({ label: 'Home', url: '/home' });
-
-    // Loop through child routes to build the breadcrumb trail
     root.children.forEach((route) => {
       const routeConfig = route.routeConfig;
       if (routeConfig && routeConfig.path) {

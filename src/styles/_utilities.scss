@@ -11,10 +11,6 @@
   display: none !important;
 }
 
-.visible {
-  display: block !important;
-}
-
 .mt-sm {
   margin-top: v.$spacing-sm;
 }
@@ -28,7 +24,6 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  padding: v.$spacing-xl;
   max-height: 90%;
 }
 

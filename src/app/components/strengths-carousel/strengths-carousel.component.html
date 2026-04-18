@@ -1,28 +1,49 @@
-<div class="carousel-title flex-column">
-  <h1>Strengths That Drive Success</h1>
-  <div class="carousel-description text-center">
-    Kaitlyn completed Gallup's CliftonStrengths assessment, a trusted resource
-    used by organizations worldwide to identify top talents. Backed by decades
-    of research, it provides lasting insights into how she excels in work,
-    collaboration, and problem-solving.
-  </div>
-</div>
-
-<div class="carousel-container">
-  <button (click)="prevSlide()" class="nav-button">❮</button>
-  <div class="carousel-wrapper">
-    <div
-      class="carousel-slide"
-      [style.transform]="'translateX(-' + currentTranslateX + '%)'"
-    >
-      <div class="carousel-content" *ngFor="let strength of visibleStrengths">
-        <mat-card class="flex-column">
-          <mat-icon class="strength-icon">{{ strength.icon }}</mat-icon>
-          <h2>{{ strength.title }}</h2>
-          <p>{{ strength.description }}</p>
-        </mat-card>
-      </div>
+<div class="flex-column">
+  <div class="carousel-title text-center">
+    <h2>Strengths That Drive Success</h2>
+    <div class="carousel-subtitle">
+      Kaitlyn completed Gallup's Clifton Strengths assessment, a trusted
+      resource used by organizations worldwide. These are the five strengths
+      where she scored highest.
     </div>
   </div>
-  <button (click)="nextSlide()" class="nav-button">❯</button>
+
+  <div class="carousel-container">
+    <button mat-mini-fab (click)="prevSlide()" class="nav-button">
+      <fa-icon [icon]="faCaretLeft"></fa-icon>
+    </button>
+    <div class="carousel-wrapper">
+      <div class="carousel-slide" [class.fading]="isTransitioning">
+        <div
+          class="carousel-slide-content"
+          *ngFor="let strength of visibleStrengths"
+        >
+          <mat-card
+            class="flex-column"
+            style="min-height: 100%; justify-content: start"
+          >
+            <fa-icon [icon]="strength.icon" class="strength-icon"></fa-icon>
+            <h2 [innerHTML]="strength.title"></h2>
+            <p class="margin-top-md">{{ strength.description }}</p>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <button mat-mini-fab (click)="nextSlide()" class="nav-button">
+      <fa-icon [icon]="faCaretRight"></fa-icon>
+    </button>
+  </div>
+
+  <div class="read-more flex-center-row" style="align-items: center">
+    <h3>
+      Read more about Kaitlyn's Strengths and how they interact here:
+      <button
+        mat-icon-button
+        class="margin-left-sm"
+        (click)="openPdf('Forks-Kaitlyn-SF_TOP_5.pdf')"
+      >
+        <fa-icon [icon]="faTrophy"></fa-icon>
+      </button>
+    </h3>
+  </div>
 </div>

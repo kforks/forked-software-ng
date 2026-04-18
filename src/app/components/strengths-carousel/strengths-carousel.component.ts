@@ -1,93 +1,121 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { NgForOf } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatCard } from '@angular/material/card';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import {
+  faCaretLeft,
+  faCaretRight,
+  faChess,
+  faHandshake,
+  faLaughBeam,
+  faPeopleRoof,
+  faPersonChalkboard,
+  faTrophy,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-strengths-carousel',
   templateUrl: './strengths-carousel.component.html',
   styleUrls: ['./strengths-carousel.component.scss'],
-  imports: [MatIcon, NgForOf, MatCard],
+  imports: [FaIconComponent, MatIconButton, MatCard, MatMiniFabButton, NgForOf],
 })
 export class StrengthsCarouselComponent implements OnInit {
-  strengths = [
+  currentIndex = 0;
+  isMobile = false;
+  isTransitioning = false;
+
+  protected readonly faTrophy = faTrophy;
+  protected readonly faCaretRight = faCaretRight;
+  protected readonly faCaretLeft = faCaretLeft;
+
+  strengths: { title: string; icon: IconDefinition; description: string }[] = [
     {
-      title: 'Strategic',
-      icon: 'map',
+      title: 'Strategic<br>(#1 Top Strength)',
+      icon: faChess,
       description:
         'A natural problem-solver, Kaitlyn excels at identifying patterns in complexity and charting the best path forward.',
     },
     {
-      title: 'Woo',
-      icon: 'group',
+      title: 'Winning others over<br>(#2)',
+      icon: faHandshake,
       description:
-        'Kaitlyn thrives in social environments, effortlessly connecting with new people and fostering meaningful conversations.',
+        'Kaitlyn effortlessly connects with new people and fosters meaningful conversations.',
     },
     {
-      title: 'Positivity',
-      icon: 'emoji_emotions',
+      title: 'Positivity<br>(#3)',
+      icon: faLaughBeam,
       description:
-        'With an optimistic outlook and a contagious energy, Kaitlyn uplifts those around her.',
+        'With relentless optimism and contagious energy, Kaitlyn uplifts those around her, keeping morale high.',
     },
     {
-      title: 'Developer',
-      icon: 'trending_up',
+      title: 'Developer<br>(#4)',
+      icon: faPersonChalkboard,
       description:
-        'Kaitlyn is deeply invested in helping others grow and reach their full potential.',
+        'Kaitlyn is deeply invested in helping others grow and reach their full potential, deriving satisfaction from whole team success.',
     },
     {
-      title: 'Empathy',
-      icon: 'favorite',
+      title: 'Empathy<br>(#5)',
+      icon: faPeopleRoof,
       description:
-        'Kaitlyn intuitively senses the emotions of those around her, offering genuine understanding and support.',
+        'Kaitlyn senses the emotions of those around her, offering genuine understanding and support.',
     },
   ];
 
-  visibleStrengths: any[] = [];
-  currentTranslateX = 0;
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {
-    // Initialize visibleStrengths with extra strengths for smooth scrolling
-    this.visibleStrengths = [
-      ...this.strengths,
-      ...this.strengths.slice(0, 6), // Preload enough items for at least two additional slides
-    ];
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isMobile = result.matches;
+        this.currentIndex = 0;
+      });
+  }
+
+  get visibleStrengths() {
+    const count = this.isMobile ? 1 : 3;
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(
+        this.strengths[(this.currentIndex + i) % this.strengths.length],
+      );
+    }
+    return result;
   }
 
   prevSlide() {
-    if (this.currentTranslateX === 0) {
-      // Preload at least two additional sets at the beginning if needed
-      const additionalSet = [...this.strengths.slice(-6)];
-      this.visibleStrengths = [...additionalSet, ...this.visibleStrengths];
-      this.currentTranslateX += 200; // Adjust to maintain the current slide position
-    }
-    this.currentTranslateX -= 100;
+    if (this.isTransitioning) return;
+    this.slide(() => {
+      const step = this.isMobile ? 1 : 3;
+      this.currentIndex =
+        (this.currentIndex - step + this.strengths.length) %
+        this.strengths.length;
+    });
   }
 
   nextSlide() {
-    const maxTranslateX = this.getMaxTranslateX();
-    const remainingSlots = this.getRemainingSlots();
-
-    if (remainingSlots < 6) {
-      // Preload at least 6 more items (2 slides) to fill the gaps
-      const additionalSet = [...this.strengths, ...this.strengths];
-      this.visibleStrengths = [
-        ...this.visibleStrengths,
-        ...additionalSet.slice(0, 6),
-      ];
-    }
-
-    this.currentTranslateX += 100;
+    if (this.isTransitioning) return;
+    this.slide(() => {
+      const step = this.isMobile ? 1 : 3;
+      this.currentIndex = (this.currentIndex + step) % this.strengths.length;
+    });
   }
 
-  getMaxTranslateX(): number {
-    // Calculate max translate based on visible strengths and slide size
-    return Math.ceil(this.visibleStrengths.length / 3) * 100;
+  private slide(updateIndex: () => void) {
+    this.isTransitioning = true;
+    setTimeout(() => {
+      updateIndex();
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 50);
+    }, 300);
   }
 
-  getRemainingSlots(): number {
-    // Calculate how many slots are remaining before the visibleStrengths array runs out
-    const totalVisibleSlots = Math.floor(this.currentTranslateX / 100) * 3 + 3;
-    return this.visibleStrengths.length - totalVisibleSlots;
+  openPdf(filePath: string): void {
+    const fullPath = `assets/files/${filePath}`;
+    window.open(fullPath, '_blank');
   }
 }

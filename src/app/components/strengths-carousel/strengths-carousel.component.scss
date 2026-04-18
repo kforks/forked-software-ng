@@ -1,3 +1,15 @@
+.carousel-title {
+  font-size: 1rem;
+  padding: 8px;
+  max-width: 800px;
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+    .carousel-subtitle {
+      font-size: 0.75em;
+    }
+  }
+}
+
 .carousel-container {
   display: flex;
   align-items: center;
@@ -7,12 +19,10 @@
   margin: 0 auto;
 
   .nav-button {
-    background: none;
-    border: none;
-    font-size: 2rem;
     cursor: pointer;
     user-select: none;
     transition: color 0.3s;
+    font-size: 2rem;
 
     &:hover {
       color: lightgrey;
@@ -26,27 +36,39 @@
 
   .carousel-slide {
     display: flex;
-    transition: transform 0.5s ease-in-out;
 
-    .carousel-content {
-      flex: 0 0 33.33%; // Show 3 items
+    &.fading .carousel-slide-content {
+      opacity: 0;
+    }
+
+    .carousel-slide-content {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 33.33%; // Show 3 items on desktop
       text-align: center;
       padding: 1rem;
       box-sizing: border-box;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+
+      @media screen and (max-width: 600px) {
+        flex: 0 0 100%; // Show 1 item on mobile
+      }
 
       .strength-icon {
         font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-        margin: 0.5rem 0;
-      }
-
-      p {
-        font-size: 1rem;
+        @media screen and (max-width: 600px) {
+          font-size: 2.5rem;
+        }
       }
     }
   }
+}
+
+.read-more {
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
