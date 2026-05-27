@@ -1,123 +1,71 @@
-<mat-toolbar
-  class="margin-bottom-md"
-  [ngClass]="{ 'margin-bottom-xs': isMobile }"
->
-  <mat-toolbar-row class="primary-nav">
-    <!-- Corner Logo-->
-    <div
-      class="margin-left-sm flex-row-start"
-      [ngClass]="{ 'margin-left-xs': isMobile }"
-    >
-      <img
-        style="vertical-align: middle"
-        ngSrc="../../../assets/wt-logo.svg"
-        priority
-        alt="Logo"
-        height="30"
-        width="30"
-        class="margin-right-sm"
-      />
-
-      <div>
-        <span *ngIf="onHomePage">
-          {{
-            isMobile
-              ? "Kaitlyn Forks"
-              : "Kaitlyn Forks - Full Stack Software Engineer"
-          }}
-        </span>
-        <ng-container *ngIf="!onHomePage">
-          <ng-container *ngTemplateOutlet="breadcrumbTemplate"></ng-container>
-        </ng-container>
-      </div>
-    </div>
-
-    <ng-container *ngIf="onHomePage && !isMobile">
-      <ng-container *ngTemplateOutlet="navlinks"></ng-container>
-    </ng-container>
-
-    <div class="padding-right-sm">
-      <!-- LinkedIn Button -->
-      <button
-        class="margin-left-md"
-        mat-icon-button
-        aria-label="linkedin"
-        (click)="openLinkedIn()"
-        [matTooltip]="'LinkedIn'"
-      >
-        <fa-icon [icon]="faLinkedin"></fa-icon>
-      </button>
-
-      <!-- Theme Button with Dropdown -->
-      <button
-        class="margin-left-md"
-        mat-icon-button
-        [matMenuTriggerFor]="themeMenu"
-        aria-label="Theme"
-        [matTooltip]="'Change Theme'"
-      >
-        <fa-icon [icon]="faPaintRoller"></fa-icon>
-      </button>
-
-      <mat-menu #themeMenu="matMenu" class="margin-right-sm">
-        <button
-          mat-menu-item
-          *ngFor="let theme of themes"
-          (click)="selectTheme(theme.class)"
-        >
-          {{ theme.name }}
-        </button>
-      </mat-menu>
-
-      <!-- Share Button -->
-      <button
-        class="margin-left-md"
-        mat-icon-button
-        aria-label="share"
-        (click)="copyUrlToClipboard()"
-        [matTooltip]="'Share'"
-      >
-        <fa-icon [icon]="faShare"></fa-icon>
-      </button>
-    </div>
-  </mat-toolbar-row>
-
-  <!-- Mobile Secondary Nav -->
-  <mat-toolbar-row *ngIf="isMobile" class="flex-center-row">
-    <ng-container *ngTemplateOutlet="navlinks"></ng-container>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<!-- Nav LinksTemplate -->
-<ng-template #navlinks>
-  <nav>
-    <button
-      class="margin-left-md"
-      *ngFor="let link of navLinks"
-      [routerLink]="link.url"
-      routerLinkActive="active"
-      [class.active]="link.url === activeLink"
-      [ngClass]="{ hidden: link.url === activeLink }"
-    >
-      {{ link.label }}
-    </button>
-  </nav>
-</ng-template>
-
-<!-- Breadcrumb Template -->
-<ng-template #breadcrumbTemplate>
-  <nav>
-    <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
-      <a
-        class="breadcrumb"
-        *ngIf="!last"
-        [routerLink]="breadcrumb.url"
-        routerLinkActive="active"
-      >
-        {{ breadcrumb.label }}
-      </a>
-      <span *ngIf="last" class="breadcrumb-last">{{ breadcrumb.label }}</span>
-      <span *ngIf="!last"> > </span>
+<nav class="scifi-nav">
+  <!-- Left: logo + system id -->
+  <a routerLink="/home" class="brand">
+    <img
+      ngSrc="assets/wt-logo.svg"
+      width="28"
+      height="28"
+      alt="Forked Software logo"
+      class="brand-logo"
+      priority
+    />
+    <span class="brand-text">
+      <span class="brand-name hot">FORKED.SOFTWARE</span>
+      <span class="brand-meta mono">TERMINAL v0.2 // {{ routeLabel() }}</span>
     </span>
-  </nav>
-</ng-template>
+  </a>
+
+  <!-- Center: nav links -->
+  <ul class="nav-links">
+    @for (link of navLinks; track link.url) {
+      <li>
+        @if (link.disabled) {
+          <span class="nav-link is-disabled mono"
+            >{{ link.label }} <span class="nav-tag">SOON</span></span
+          >
+        } @else {
+          <a
+            [routerLink]="link.url"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: link.url === '/home' }"
+            class="nav-link mono"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </li>
+    }
+  </ul>
+
+  <!-- Right: status + controls -->
+  <div class="nav-right">
+    <span class="status-readout mono">
+      <span class="status-dot" aria-hidden="true"></span>
+      ACCEPTING ENGAGEMENTS
+    </span>
+
+    <span class="timestamp mono" aria-label="Current UTC time">{{
+      timestamp
+    }}</span>
+
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="toggleTheme()"
+      aria-label="Toggle theme"
+      title="Toggle theme"
+    >
+      <fa-icon [icon]="faAdjust"></fa-icon>
+    </button>
+
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="openLinkedIn()"
+      aria-label="LinkedIn"
+      title="LinkedIn"
+    >
+      <fa-icon [icon]="faLinkedin"></fa-icon>
+    </button>
+  </div>
+</nav>

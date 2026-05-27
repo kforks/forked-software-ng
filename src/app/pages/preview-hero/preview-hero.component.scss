@@ -3,13 +3,11 @@
 :host {
   display: block;
   background: var(--space-black);
+  min-height: 100vh;
   color: var(--accent-color);
   font-family: var(--font-family-mono);
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
 
-  // CRT scanline (full page)
+  // CRT scanline
   &::before {
     content: "";
     position: fixed;
@@ -45,30 +43,9 @@
   margin: 0 auto;
   padding: 1rem 1.5rem 3rem;
   min-height: 100vh;
-  // Faint blueprint watermark across whole page
-  background-image: url("/assets/vectors/graphs-diagrams/graph-2-01.svg");
-  background-position: top right;
-  background-repeat: no-repeat;
-  background-size: 800px auto;
-  background-attachment: fixed;
 }
 
-.terminal::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("/assets/vectors/graphs-diagrams/graph-01-construction.svg");
-  background-position: -100px bottom;
-  background-repeat: no-repeat;
-  background-size: 600px auto;
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 0;
-  filter: invert(78%) sepia(34%) saturate(486%) hue-rotate(155deg)
-    brightness(95%);
-}
-
-// ─── Ghost overlays in margins ──────────────────────────────
+// ─── Ghost blueprint overlays ──────────────────────────────
 .ghost {
   position: absolute;
   pointer-events: none;
@@ -78,30 +55,85 @@
   z-index: 0;
 }
 .ghost-left {
-  top: 200px;
+  top: 240px;
   left: -120px;
   width: 280px;
   transform: rotate(-8deg);
 }
 .ghost-right {
-  top: 600px;
+  top: 700px;
   right: -160px;
   width: 360px;
   transform: rotate(12deg);
 }
-.ghost-mid {
-  top: 1100px;
-  left: 40px;
-  width: 200px;
-  transform: rotate(15deg);
-  opacity: 0.035;
+
+// ─── Top readout bar ───────────────────────────────────────
+.readout-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--space-line);
+  border-left: 3px solid var(--accent-hot);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+
+  .rb-label {
+    color: var(--accent-color);
+  }
+  .rb-label.dim,
+  .dim {
+    color: var(--readout-dim);
+  }
+  .hot {
+    color: var(--accent-hot);
+  }
+  .rb-sep {
+    color: var(--space-line);
+  }
+  .rb-spacer {
+    flex: 1;
+  }
+  .rb-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-cool);
+  }
+  .rb-back {
+    color: var(--accent-color);
+    margin-left: 0.5rem;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+  .rb-back:hover {
+    opacity: 1;
+    text-decoration: none;
+    color: var(--accent-hot);
+  }
 }
-.ghost-far {
-  top: 1500px;
-  right: 60px;
-  width: 240px;
-  transform: rotate(-20deg);
-  opacity: 0.04;
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cool);
+  box-shadow: 0 0 6px var(--accent-cool);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 // ─── Shared panel chrome ───────────────────────────────────
@@ -137,7 +169,7 @@
   margin-bottom: 1rem;
   border: 1px solid var(--space-line);
   border-top: 2px solid var(--accent-hot);
-  background: rgba(7, 17, 28, 0.85);
+  background: rgba(7, 17, 28, 0.6);
 }
 
 .access-head {
@@ -288,28 +320,12 @@
   margin-bottom: 1.25rem;
   border: 1px solid var(--space-line);
   border-top: 2px solid var(--accent-cool);
-  background: rgba(7, 17, 28, 0.85);
-}
-
-// HUD top-frame as background decoration
-.ih-hud-frame {
-  position: absolute;
-  top: -8px;
-  right: 14px;
-  width: 280px;
-  height: auto;
-  pointer-events: none;
-  opacity: 0.5;
-  filter: invert(78%) sepia(34%) saturate(486%) hue-rotate(155deg)
-    brightness(95%);
-  z-index: 1;
+  background: rgba(7, 17, 28, 0.65);
 }
 
 .ih-logo-cell,
 .ih-intro-cell,
 .ih-vitals-cell {
-  position: relative;
-  z-index: 2;
   padding: 1.25rem 1.25rem 1.1rem;
   display: flex;
   flex-direction: column;
@@ -497,7 +513,6 @@
   dd {
     color: var(--accent-color);
     margin: 0;
-    word-break: break-all;
   }
   dd.hot {
     color: var(--accent-hot);
@@ -511,41 +526,8 @@
   z-index: 2;
   border: 1px solid var(--space-line);
   border-top: 2px solid var(--accent-cool);
-  background: rgba(7, 17, 28, 0.7);
+  background: rgba(7, 17, 28, 0.5);
   margin-bottom: 1.25rem;
-}
-
-// Label vector banner
-.archive-banner {
-  position: relative;
-  padding: 0.4rem 0.85rem;
-  background: var(--space-black);
-  border-bottom: 1px solid var(--space-line);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  min-height: 36px;
-}
-.archive-label-svg {
-  position: absolute;
-  top: 50%;
-  left: 0.85rem;
-  transform: translateY(-50%);
-  height: 28px;
-  width: auto;
-  opacity: 0.75;
-  filter: invert(78%) sepia(34%) saturate(486%) hue-rotate(155deg)
-    brightness(95%);
-  pointer-events: none;
-}
-.archive-banner-text {
-  position: relative;
-  z-index: 2;
-  margin-left: 320px;
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
-  color: var(--accent-hot);
-  text-transform: uppercase;
 }
 
 .archive-head {
@@ -604,6 +586,7 @@
     }
   }
 
+  // Variant accents add visual rhythm across the grid
   &.variant-a {
     border-top: 2px solid var(--accent-cool);
   }
@@ -623,22 +606,7 @@
     height: 100%;
     background: var(--accent-hot);
     box-shadow: 0 0 12px var(--accent-hot);
-    z-index: 2;
   }
-}
-
-// HUD corner module on each project card
-.pc-hud-corner {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 32px;
-  height: auto;
-  opacity: 0.35;
-  filter: invert(78%) sepia(34%) saturate(486%) hue-rotate(155deg)
-    brightness(95%);
-  pointer-events: none;
-  z-index: 1;
 }
 
 .pc-glyph {
@@ -763,12 +731,12 @@
   }
 }
 
-// ─── REFERENCE FIGURES ─────────────────────────────────────
+// ─── REFERENCE FIGURES (slim) ──────────────────────────────
 .ref-strip {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: max-content repeat(3, 1fr) max-content;
+  grid-template-columns: max-content repeat(2, 1fr) max-content;
   gap: 1rem;
   align-items: center;
   padding: 0.65rem 1rem;
@@ -830,9 +798,6 @@
   .ih-vitals-cell .mugshot-wrap-sm {
     max-width: 110px;
   }
-  .archive-banner-text {
-    margin-left: 200px;
-  }
 }
 @media (max-width: 1100px) {
   .project-grid {
@@ -840,9 +805,6 @@
   }
   .ghost {
     display: none;
-  }
-  .ih-hud-frame {
-    width: 200px;
   }
 }
 @media (max-width: 800px) {
@@ -860,14 +822,6 @@
   .ih-vitals-cell {
     grid-template-columns: 1fr;
   }
-  .archive-banner-text {
-    margin-left: 0;
-    text-align: center;
-    width: 100%;
-  }
-  .archive-label-svg {
-    opacity: 0.25;
-  }
 }
 @media (max-width: 720px) {
   .access-grid {
@@ -879,11 +833,10 @@
   .project-grid {
     grid-template-columns: 1fr;
   }
-  .ref-strip {
-    grid-template-columns: 1fr 1fr;
-  }
-  .ref-strip .ref-header,
-  .ref-strip .ref-footer {
-    grid-column: 1 / -1;
+}
+@media (max-width: 640px) {
+  .readout-bar {
+    flex-wrap: wrap;
+    font-size: 0.6rem;
   }
 }

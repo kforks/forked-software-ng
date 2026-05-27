@@ -1,5 +1,22 @@
 <div class="terminal">
-  <!-- ─── BLUEPRINT GHOST OVERLAYS + WATERMARKS ─── -->
+  <!-- ─── TOP READOUT BAR ─── -->
+  <header class="readout-bar">
+    <span class="rb-label hot">FORKED.SOFTWARE</span>
+    <span class="rb-sep">//</span>
+    <span class="rb-label">TERMINAL v0.2</span>
+    <span class="rb-sep">//</span>
+    <span class="rb-label">SESSION 0042</span>
+    <span class="rb-spacer"></span>
+    <span class="rb-label dim">{{ now }}</span>
+    <span class="rb-sep">//</span>
+    <span class="rb-status">
+      <span class="status-dot" aria-hidden="true"></span>
+      ACCEPTING ENGAGEMENTS
+    </span>
+    <a routerLink="/home" class="rb-back">[ EXIT ]</a>
+  </header>
+
+  <!-- ─── BLUEPRINT GHOST OVERLAYS ─── -->
   <img
     class="ghost ghost-left"
     src="assets/vectors/graphs-diagrams/graph-01-construction.svg"
@@ -9,18 +26,6 @@
   <img
     class="ghost ghost-right"
     src="assets/vectors/schemes-graphs/scheme-120-orbital-spiral.svg"
-    aria-hidden="true"
-    alt=""
-  />
-  <img
-    class="ghost ghost-mid"
-    src="assets/vectors/graphs-diagrams/graph-2-20.svg"
-    aria-hidden="true"
-    alt=""
-  />
-  <img
-    class="ghost ghost-far"
-    src="assets/vectors/graphs-diagrams/graph-2-35.svg"
     aria-hidden="true"
     alt=""
   />
@@ -176,16 +181,8 @@
     </ng-template>
   </section>
 
-  <!-- ─── IDENTITY HERO ─── -->
+  <!-- ─── IDENTITY HERO (replaces solar system + agent profile) ─── -->
   <section class="identity-hero">
-    <!-- HUD top-frame decoration -->
-    <img
-      class="ih-hud-frame"
-      src="assets/vectors/hud/hud-30-top-frame.svg"
-      aria-hidden="true"
-      alt=""
-    />
-
     <!-- LOGO column -->
     <div class="ih-logo-cell">
       <header class="ih-cap mono">
@@ -262,18 +259,6 @@
 
   <!-- ─── PROJECT ARCHIVE ─── -->
   <section class="archive">
-    <!-- Label vector decoration as section banner -->
-    <div class="archive-banner" aria-hidden="true">
-      <img
-        src="assets/vectors/labels/label-50.svg"
-        alt=""
-        class="archive-label-svg"
-      />
-      <span class="archive-banner-text mono"
-        >PROJECT ARCHIVE · {{ missions.length }} ENTRIES · CLASSIFIED OPEN</span
-      >
-    </div>
-
     <header class="archive-head">
       <span class="ah-id hot">[ PROJECT ARCHIVE ]</span>
       <span class="ah-title"
@@ -291,14 +276,6 @@
           [class.variant-b]="i % 3 === 1"
           [class.variant-c]="i % 3 === 2"
         >
-          <!-- HUD corner module decoration -->
-          <img
-            class="pc-hud-corner"
-            src="assets/vectors/hud/hud-05-corner-module.svg"
-            aria-hidden="true"
-            alt=""
-          />
-
           <div class="pc-glyph" aria-hidden="true">
             @switch (m.id) {
               @case ("fennel") {
@@ -366,7 +343,7 @@
     </div>
   </section>
 
-  <!-- ─── BOTTOM: REFERENCE FIGURES ─── -->
+  <!-- ─── BOTTOM: REFERENCE FIGURES (slim) ─── -->
   <footer class="ref-strip">
     <span class="ref-header mono">REFERENCE FIGURES</span>
     <div class="ref-item">
@@ -384,14 +361,6 @@
         aria-hidden="true"
       />
       <span class="ref-cap mono">FIG-9.2 · VEC. ANALYSIS</span>
-    </div>
-    <div class="ref-item">
-      <img
-        src="assets/vectors/hud/hud-60-control-panels.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <span class="ref-cap mono">FIG-12.6 · CONTROL MODULE</span>
     </div>
     <span class="ref-footer mono">— END OF TRANSMISSION —</span>
   </footer>

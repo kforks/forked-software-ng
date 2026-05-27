@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183.16 59.64">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 1.68em;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: .5px;
+      }
+
+      .cls-3 {
+        font-size: 4.49px;
+      }
+
+      .cls-3, .cls-4 {
+        font-family: Roboto-Regular, Roboto;
+        font-variation-settings: 'wght' 400, 'wdth' 100;
+      }
+
+      .cls-4 {
+        fill: #eaeaea;
+        font-size: 20.84px;
+      }
+
+      .cls-5 {
+        letter-spacing: .01em;
+      }
+    </style>
+  </defs>
+  <g id="_Слой_1" data-name="Слой 1">
+    <g>
+      <path class="cls-2" d="M8.44.25h166.29c4.52,0,8.19,3.67,8.19,8.19v50.82H.25V8.44C.25,3.92,3.92.25,8.44.25Z"/>
+      <path d="M.25,34.05v25.21h182.67v-25.21H.25ZM93.22,54.29h-1.37v-16.22h1.37v16.22ZM97.68,54.29h-1.37v-16.22h1.37v16.22ZM100.43,54.29h-1.38v-16.22h1.38v16.22ZM104.89,54.29h-3.09v-16.22h3.09v16.22ZM109.35,54.29h-3.09v-16.22h3.09v16.22ZM113.81,54.29h-3.09v-16.22h3.09v16.22ZM116.55,54.29h-1.37v-16.22h1.37v16.22ZM119.3,54.29h-1.37v-16.22h1.37v16.22ZM122.04,54.29h-1.37v-16.22h1.37v16.22ZM128.22,54.29h-3.09v-16.22h3.09v16.22ZM130.97,54.29h-1.38v-16.22h1.38v16.22ZM137.14,54.29h-3.09v-16.22h3.09v16.22ZM139.89,54.29h-1.38v-16.22h1.38v16.22ZM144.35,54.29h-3.09v-16.22h3.09v16.22ZM147.09,54.29h-1.37v-16.22h1.37v16.22ZM162.21,40.56c-.26-.04-.54-.06-.81-.06-3.21,0-5.83,2.62-5.83,5.82s2.62,5.83,5.83,5.83c.27,0,.55-.02.81-.06v2.45c-.26.02-.54.04-.81.04-4.55,0-8.26-3.71-8.26-8.26s3.71-8.25,8.26-8.25c.27,0,.55.02.81.04v2.45ZM176.4,40.56c-.27-.04-.54-.06-.82-.06-2.78,0-5.11,1.96-5.69,4.57h4.77v2.52h-4.77c.58,2.6,2.91,4.56,5.69,4.56.28,0,.55-.02.82-.06v2.45c-.27.02-.54.04-.82.04-4.55,0-8.25-3.71-8.25-8.26s3.7-8.25,8.25-8.25c.28,0,.55.02.82.04v2.45Z"/>
+      <line class="cls-2" x1="86" y1=".25" x2="86" y2="34.94"/>
+      <rect class="cls-2" x="91.21" y="6.76" width="55.19" height="20.64"/>
+      <line class="cls-2" x1="91.21" y1="6.76" x2="146.4" y2="27.4"/>
+      <line class="cls-2" x1="146.4" y1="6.76" x2="91.21" y2="27.4"/>
+      <polyline class="cls-2" points="172.43 27.4 176.4 27.4 176.4 6.76 172.43 6.76"/>
+      <polyline class="cls-2" points="155.85 27.4 151.89 27.4 151.89 6.76 155.85 6.76"/>
+      <text class="cls-3" transform="translate(7.59 11.29)"><tspan class="cls-5"><tspan x="0" y="0" xml:space="preserve">DYSTROPHIN                    RAAVH74 </tspan></tspan><tspan class="cls-5" x="0" y="5.38">IRUSCU</tspan><tspan class="cls-1" x="15.65" y="5.38"> </tspan><tspan class="cls-5" x="24.28" y="5.38">(EXTENSOR)</tspan><tspan class="cls-1" x="50.13" y="5.38"> </tspan><tspan class="cls-5" x="58.76" y="5.38">DIGIT </tspan><tspan class="cls-5"><tspan x="0" y="10.77">OURUM </tspan></tspan><tspan class="cls-5"><tspan x="0" y="16.15" xml:space="preserve">ADVERSE EVENTS                        NA </tspan></tspan></text>
+      <text class="cls-4" transform="translate(4.22 54)"><tspan x="0" y="0">IMPACT</tspan></text>
+    </g>
+  </g>
+</svg>

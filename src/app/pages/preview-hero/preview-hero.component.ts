@@ -24,13 +24,13 @@ interface AccessPoint {
 }
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-preview-hero',
   standalone: true,
   imports: [NgOptimizedImage, NgTemplateOutlet, RouterLink],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './preview-hero.component.html',
+  styleUrls: ['./preview-hero.component.scss'],
 })
-export class HomeComponent {
+export class PreviewHeroComponent {
   readonly now = new Date().toISOString().replace('T', ' ').slice(0, 19) + 'Z';
 
   readonly missions: Mission[] = [
@@ -40,6 +40,7 @@ export class HomeComponent {
       name: 'FENNEL',
       status: 'ACTIVE',
       tech: ['NEXT.JS', 'PRISMA', 'POSTGRES', 'PI'],
+      blurb: 'Bookable cooking classes platform. Live engagement.',
       url: 'https://fennel.kitchen',
     },
     {
@@ -48,6 +49,7 @@ export class HomeComponent {
       name: 'TANK-STL',
       status: 'LIVE',
       tech: ['ANGULAR', 'PAGES'],
+      blurb: 'Local STL event hub. Cloudflare-hosted SPA.',
       url: 'https://tankstl.com',
     },
     {
@@ -56,6 +58,7 @@ export class HomeComponent {
       name: 'TANK-CAM',
       status: 'IN_DEV',
       tech: ['PI ZERO 2W', 'MEDIAMTX', 'RTSP'],
+      blurb: 'Live aquarium stream relay. Pi camera → HLS.',
     },
     {
       id: 'leaf-swap',
@@ -63,6 +66,7 @@ export class HomeComponent {
       name: 'LEAF-SWAP',
       status: 'PLANNED',
       tech: ['NEXT.JS', 'POSTGRES'],
+      blurb: 'STL plant-trade community. Scaffold pending.',
     },
     {
       id: 'forked-software',
@@ -70,6 +74,7 @@ export class HomeComponent {
       name: 'FORKED.SOFTWARE',
       status: 'ACTIVE',
       tech: ['ANGULAR 19', 'PAGES'],
+      blurb: 'This site. Home base + client demo hub.',
       url: 'https://forkedsoftware.com',
     },
   ];

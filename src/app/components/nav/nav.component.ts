@@ -1,140 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconButton } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FaIconComponent,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
-import { faShare, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { MatTooltip } from '@angular/material/tooltip';
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-  NgOptimizedImage,
-  NgTemplateOutlet,
-} from '@angular/common';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import { ThemeService } from '../../services/theming.service';
 import {
-  ActivatedRoute,
   NavigationEnd,
   Router,
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
 
+interface NavLink {
+  label: string;
+  url: string;
+  disabled?: boolean;
+}
+
 @Component({
   selector: 'app-nav',
   standalone: true,
   imports: [
-    MatIconModule,
-    MatToolbarModule,
-    MatIconButton,
     FaIconComponent,
     FontAwesomeModule,
-    MatTooltip,
     NgIf,
-    NgOptimizedImage,
-    MatMenuModule,
-    NgForOf,
     NgClass,
+    NgOptimizedImage,
     RouterLink,
     RouterLinkActive,
-    NgTemplateOutlet,
   ],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   protected readonly faLinkedin = faLinkedin;
-  protected readonly faShare = faShare;
-  protected readonly faPaintRoller = faPaintRoller;
-  navLinks: Array<{ label: string; url: string }> = [
-    { label: 'Portfolio', url: '/portfolio' },
-    { label: 'About', url: '/about' },
+  protected readonly faAdjust = faAdjust;
+
+  navLinks: NavLink[] = [
+    { label: 'HOME', url: '/home' },
+    { label: 'PROJECTS', url: '/portfolio' },
+    { label: 'ABOUT', url: '/about' },
+    { label: 'SERVICES', url: '/services', disabled: true },
   ];
-  themes: Array<{ name: string; class: string }> = [];
-  breadcrumbs: Array<{ label: string; url: string }> = [];
-  currentTheme: string;
-  isMobile: boolean = false;
-  onHomePage: boolean = true;
-  activeLink: string = '';
+
+  currentRoute = '/home';
+  timestamp = '';
+  private timer?: ReturnType<typeof setInterval>;
 
   constructor(
-    private themeService: ThemeService,
-    private readonly breakpointObserver: BreakpointObserver,
+    private readonly themeService: ThemeService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute,
   ) {
-    this.currentTheme = this.themeService.getActiveTheme();
-    this.breakpointObserver
-      .observe([Breakpoints.Small, Breakpoints.XSmall])
-      .subscribe({
-        next: (result) => (this.isMobile = result.matches),
-      });
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.activeLink = this.router.url;
-        this.updateBreadcrumbs();
+        this.currentRoute = this.router.url;
       }
     });
   }
 
   ngOnInit(): void {
-    this.updateThemeList();
-    this.updateBreadcrumbs();
+    this.updateTimestamp();
+    this.timer = setInterval(() => this.updateTimestamp(), 1000);
   }
 
-  selectTheme(themeClass: string): void {
-    this.themeService.setTheme(themeClass);
-    this.currentTheme = themeClass;
-    this.updateThemeList();
+  ngOnDestroy(): void {
+    if (this.timer) clearInterval(this.timer);
   }
 
-  private updateThemeList(): void {
-    this.themes = this.themeService.getAvailableThemes();
-  }
-
-  private updateBreadcrumbs(): void {
-    const root = this.activatedRoute.root;
-    const breadcrumbs: Array<{ label: string; url: string }> = [];
-    let url = '';
-    this.onHomePage = this.router.url === '/home' || this.router.url === '/';
-
-    breadcrumbs.push({ label: 'Home', url: '/home' });
-    root.children.forEach((route) => {
-      const routeConfig = route.routeConfig;
-      if (routeConfig && routeConfig.path) {
-        url += `/${routeConfig.path}`;
-        breadcrumbs.push({ label: this.capitalize(routeConfig.path), url });
-      }
-    });
-
-    this.breadcrumbs = breadcrumbs;
-  }
-
-  private capitalize(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  copyUrlToClipboard(): void {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(
-      () => {
-        alert('URL copied to clipboard!');
-      },
-      (err) => {
-        console.error('Failed to copy URL: ', err);
-      },
-    );
+  toggleTheme(): void {
+    const active = this.themeService.getActiveTheme();
+    const next = active === 'theme-dark' ? 'theme-light' : 'theme-dark';
+    this.themeService.setTheme(next);
   }
 
   openLinkedIn(): void {
     window.open('https://www.linkedin.com/in/kaitlyn-forks/', '_blank');
+  }
+
+  routeLabel(): string {
+    const r = this.currentRoute.replace(/^\//, '').split('?')[0].toUpperCase();
+    return r === '' ? 'HOME' : r;
+  }
+
+  private updateTimestamp(): void {
+    this.timestamp =
+      new Date().toISOString().replace('T', ' ').slice(0, 19) + 'Z';
   }
 }

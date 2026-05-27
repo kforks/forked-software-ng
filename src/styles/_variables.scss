@@ -9,9 +9,17 @@ $accent: #f4e9cd;
 $text-color: white;
 $background-color: #f9f9f9;
 
+// Phase 1 sci-fi extension — deep space + electric accents
+$space-black: #02060d;
+$space-deep: #081420;
+$space-line: #1a2a3a;
+$accent-neon: #5ef2c8;
+$accent-warning: #ff7a59;
+
 // Typography
 $font-family-base: "Cubano", "Arial", sans-serif;
 $font-family-heading: "Cubano", "Montserrat", sans-serif;
+$font-family-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
 
 $font-size-small: 0.875rem;
 $font-size-base: 1rem;

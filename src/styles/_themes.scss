@@ -16,6 +16,18 @@
   --accent-color: #f4e9cd;
   --text-color: #ffffff;
   --background-color: #9dbebb;
+
+  // Phase 1 sci-fi extension — muted on light so contrast holds
+  --space-black: #02060d;
+  --space-deep: #07111c;
+  --space-line: #1f3145;
+  --space-line-dim: #11202f;
+  --accent-cool: #2c7d99;
+  --accent-hot: #c4502f;
+  --accent-neon: #2c8f78;
+  --accent-warning: #c4502f;
+  --readout-dim: #4a6075;
+  --font-family-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
 }
 
 .theme-dark {
@@ -26,6 +38,18 @@
   --accent-color: #f4e9cd;
   --text-color: #f9f9f9;
   --background-color: #031926;
+
+  // Phase 1 sci-fi extension — cassette-futurism dashboard
+  --space-black: #02060d;
+  --space-deep: #07111c;
+  --space-line: #1f3145;
+  --space-line-dim: #11202f;
+  --accent-cool: #7fd0e8; // headers, system labels, wireframes
+  --accent-hot: #ff8a64; // status, action, highlights
+  --accent-neon: #5ef2c8; // legacy alias; still used by sphere preview
+  --accent-warning: #ff7a59;
+  --readout-dim: #5b7388; // muted mono text
+  --font-family-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
 }
 
 // Base styles
