@@ -1,85 +1,106 @@
 @use "./variables" as v;
 
-// Define shared CSS variables in :root using SCSS variables
+// Shared, theme-independent
 :root {
-  --font-family-base: #{v.$font-family-base}; // Interpolates the SCSS variable
-  --line-height: 1.5;
-  --letter-spacing: 1px;
+  --font-family-base: #{v.$font-family-base};
+  --font-family-heading: #{v.$font-family-heading};
+  --font-family-pixel: #{v.$font-family-pixel};
+  --font-family-mono: #{v.$font-family-mono};
+  --line-height: 1.6;
+  --letter-spacing: 0;
 }
 
-// Theme-specific variables
-.theme-light {
-  --primary-color: #77aca2;
-  --primary-light: #9dbebb;
-  --primary-dark: #468189;
-  --secondary-color: #031926;
-  --accent-color: #f4e9cd;
-  --text-color: #ffffff;
-  --background-color: #9dbebb;
+/* ─── "Retro Digital Age" palette ───────────────────────────────
+   Tokens prefixed --rt-* are the retro-OS source of truth (used by the
+   home shell + nav). The legacy semantic names (--background-color, etc.)
+   are remapped onto them so the not-yet-redesigned pages (about, footer)
+   recolor automatically instead of breaking.
+   Theme class lives on <body> (set in index.html + ThemeService); use
+   EXPLICIT var() in component styles — relying on inherited body color
+   resolves the wrong theme value (body-vs-descendant custom-prop split). */
 
-  // Phase 1 sci-fi extension — muted on light so contrast holds
-  --space-black: #02060d;
-  --space-deep: #07111c;
-  --space-line: #1f3145;
-  --space-line-dim: #11202f;
-  --accent-cool: #2c7d99;
-  --accent-hot: #c4502f;
-  --accent-neon: #2c8f78;
-  --accent-warning: #c4502f;
-  --readout-dim: #4a6075;
-  --font-family-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+.theme-light {
+  --rt-desktop: #e4d3b0; // warm tan desktop
+  --rt-window: #fbf5e9; // cream window fill
+  --rt-ink: #1c1a17; // line-art + text
+  --rt-ink-soft: #6e6353; // muted text
+  --rt-orange: #ee6c2b; // hero accent
+  --rt-orange-deep: #c8531b;
+  --rt-blue: #2d6cc0; // system accent
+  --rt-blue-soft: #cbddf4;
+  --rt-bevel-hi: #ffffff;
+  --rt-bevel-lo: #b6a381;
+  --rt-yellow: #f2c84b;
+  --rt-teal: #2ba39a;
+  --rt-purple: #7a5cc0;
+  --rt-red: #d8472b;
+
+  // legacy remap
+  --background-color: var(--rt-desktop);
+  --text-color: var(--rt-ink);
+  --primary-color: var(--rt-orange);
+  --primary-light: var(--rt-orange-deep);
+  --primary-dark: var(--rt-orange-deep);
+  --secondary-color: var(--rt-window);
+  --accent-color: var(--rt-blue);
+  --space-black: var(--rt-desktop);
+  --space-deep: var(--rt-window);
+  --space-line: var(--rt-ink);
+  --space-line-dim: var(--rt-bevel-lo);
+  --accent-cool: var(--rt-blue);
+  --accent-hot: var(--rt-orange);
+  --accent-neon: var(--rt-blue);
+  --accent-warning: var(--rt-red);
+  --readout-dim: var(--rt-ink-soft);
 }
 
 .theme-dark {
-  --primary-color: #77aca2;
-  --primary-light: #468189;
-  --primary-dark: #031926;
-  --secondary-color: #031926;
-  --accent-color: #f4e9cd;
-  --text-color: #f9f9f9;
-  --background-color: #031926;
+  // warm "dim" — a lighter taupe dark (not near-black); keeps the cozy warmth
+  --rt-desktop: #3f343a;
+  --rt-window: #4e414a;
+  --rt-ink: #f6efe3;
+  --rt-ink-soft: #c4b6b2;
+  --rt-orange: #ff8a4c;
+  --rt-orange-deep: #f0742f;
+  --rt-blue: #7cb6ff;
+  --rt-blue-soft: #5b4a55;
+  --rt-bevel-hi: #6b5a64;
+  --rt-bevel-lo: #2a2127;
+  --rt-yellow: #f2c84b;
+  --rt-teal: #3fcabd;
+  --rt-purple: #c2a8f5;
+  --rt-red: #ff7058;
 
-  // Phase 1 sci-fi extension — cassette-futurism dashboard
-  --space-black: #02060d;
-  --space-deep: #07111c;
-  --space-line: #1f3145;
-  --space-line-dim: #11202f;
-  --accent-cool: #7fd0e8; // headers, system labels, wireframes
-  --accent-hot: #ff8a64; // status, action, highlights
-  --accent-neon: #5ef2c8; // legacy alias; still used by sphere preview
-  --accent-warning: #ff7a59;
-  --readout-dim: #5b7388; // muted mono text
-  --font-family-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+  // legacy remap
+  --background-color: var(--rt-desktop);
+  --text-color: var(--rt-ink);
+  --primary-color: var(--rt-orange);
+  --primary-light: var(--rt-orange-deep);
+  --primary-dark: var(--rt-orange-deep);
+  --secondary-color: var(--rt-window);
+  --accent-color: var(--rt-blue);
+  --space-black: var(--rt-desktop);
+  --space-deep: var(--rt-window);
+  --space-line: var(--rt-ink);
+  --space-line-dim: var(--rt-bevel-lo);
+  --accent-cool: var(--rt-blue);
+  --accent-hot: var(--rt-orange);
+  --accent-neon: var(--rt-blue);
+  --accent-warning: var(--rt-red);
+  --readout-dim: var(--rt-ink-soft);
 }
 
-// Base styles
+// Base
 body {
-  font-family: var(--font-family-base), serif; // Uses the CSS variable
-  letter-spacing: var(--letter-spacing);
+  font-family: var(--font-family-base);
   line-height: var(--line-height);
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-header {
-  background-color: var(--primary-dark);
-  font-family: var(--font-family-base), serif;
   letter-spacing: var(--letter-spacing);
-  line-height: var(--line-height);
-}
-
-button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+  background-color: var(--rt-desktop);
+  color: var(--rt-ink);
+  // subtle desktop dot-grid
+  background-image: radial-gradient(var(--rt-bevel-lo) 1px, transparent 1px);
+  background-size: 22px 22px;
   transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-
-  &:hover {
-    background-color: var(--primary-light);
-  }
+    background-color 0.2s ease,
+    color 0.2s ease;
 }

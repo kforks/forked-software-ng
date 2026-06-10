@@ -1,5 +1,95 @@
-<div class="page-container">
-  <div class="strengths-container">
-    <app-strengths-carousel></app-strengths-carousel>
+<div class="rt-desktop">
+  <div class="rt-shell">
+    <app-desk-icons active="about"></app-desk-icons>
+
+    <article class="rt-win">
+      <header class="rt-titlebar">
+        <span class="rt-tb-name">about_me</span>
+        <span class="rt-tb-ctrls" aria-hidden="true"
+          ><i>–</i><i>□</i><i>×</i></span
+        >
+      </header>
+      <div class="rt-body">
+        <nav class="rt-crumbs">
+          <a routerLink="/home">◈ home</a><span>▸</span><span>about me</span>
+        </nav>
+        <h1 class="rt-h1">About Me</h1>
+
+        <div class="about-lead">
+          <figure class="about-photo">
+            <img src="assets/images/headshot.webp" alt="Kaitlyn Forks" />
+            <figcaption>K. FORKS</figcaption>
+          </figure>
+
+          <div class="about-right">
+            <div class="about-bio">
+              <p class="rt-prose">
+                I'm Kaitlyn — a software engineer and technology consultant in
+                St. Louis. I came to code the long way round: biologist first,
+                then a science teacher, and now I build small-shop production
+                systems end-to-end.
+              </p>
+              <p class="rt-prose">
+                I like the whole stack of a small product — the database, the
+                deploy, the Raspberry Pi humming in the corner. Cultivation, not
+                production.
+              </p>
+            </div>
+
+            <section class="strengths-block">
+              <h2 class="rt-h2 strengths-h">Strengths</h2>
+              <div class="strengths">
+                <button
+                  type="button"
+                  class="rt-btn rt-btn--plain str-nav"
+                  (click)="prevStrength()"
+                  aria-label="Previous"
+                >
+                  ◂
+                </button>
+                <div class="str-track">
+                  @for (s of visibleStrengths; track s.rank) {
+                    <article class="str-card">
+                      <span class="str-rank">#{{ s.rank }}</span>
+                      <h3 class="str-title">{{ s.title }}</h3>
+                      <p class="str-blurb">{{ s.blurb }}</p>
+                    </article>
+                  }
+                </div>
+                <button
+                  type="button"
+                  class="rt-btn rt-btn--plain str-nav"
+                  (click)="nextStrength()"
+                  aria-label="Next"
+                >
+                  ▸
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <h2 class="rt-h2">My path here</h2>
+        <ol class="timeline">
+          @for (m of timeline; track m.when + m.title) {
+            <li class="tl-item">
+              <span class="tl-node" aria-hidden="true"></span>
+              <article class="tl-card">
+                <header class="tl-bar">
+                  <span class="tl-when">{{ m.when }}</span>
+                </header>
+                <div class="tl-cardbody">
+                  <h3 class="tl-title">{{ m.title }}</h3>
+                  <p class="tl-place rt-mono">{{ m.place }}</p>
+                  <p class="tl-blurb">{{ m.blurb }}</p>
+                </div>
+              </article>
+            </li>
+          }
+        </ol>
+      </div>
+    </article>
   </div>
+
+  <app-taskbar tab="about_me"></app-taskbar>
 </div>

@@ -1,0 +1,376 @@
+/* ─────────────────────────────────────────────────────────────
+   Retro Digital Age — shared OS chrome (global).
+   Tokens come from _themes.scss (--rt-*). Used by home, portfolio,
+   about. Page-specific content styles live in each component.
+   ───────────────────────────────────────────────────────────── */
+
+/* desktop shell */
+.rt-desktop {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 46px; // taskbar
+}
+.rt-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 28px 64px;
+  min-height: calc(100vh - 46px);
+}
+
+/* page shell with the desktop icons down the left side */
+.rt-shell {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 28px 64px;
+  min-height: calc(100vh - 46px);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* shared desktop shortcut icons */
+.rt-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.rt-ico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 96px;
+  text-align: center;
+  text-decoration: none;
+
+  .rt-ico-glyph {
+    transition: transform 0.08s ease;
+  }
+  .rt-ico-glyph svg {
+    width: 46px;
+    height: 46px;
+    display: block;
+  }
+  // white logo framed as an orange app-icon tile with a black outline
+  .rt-ico-logo {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    background: var(--rt-orange);
+    border: 2px solid var(--rt-ink);
+    border-radius: 9px;
+  }
+  .rt-ico-logo img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+  }
+  .rt-ico-label {
+    font-family: var(--font-family-pixel);
+    font-size: 19px;
+    line-height: 1.05;
+    color: var(--rt-ink);
+    padding: 1px 5px;
+  }
+  &:hover .rt-ico-label,
+  &:focus-visible .rt-ico-label,
+  &.is-active .rt-ico-label {
+    background: var(--rt-blue);
+    color: #fff;
+    outline: none;
+  }
+  &:hover .rt-ico-glyph,
+  &:focus-visible .rt-ico-glyph {
+    transform: translate(2px, 2px);
+  }
+}
+
+/* breadcrumb — return to the desktop */
+.rt-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family-pixel);
+  font-size: 18px;
+  color: var(--rt-ink-soft);
+  margin: 0 0 16px;
+
+  a {
+    color: var(--rt-blue);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* windows */
+.rt-win {
+  background: var(--rt-window);
+  border: 2px solid var(--rt-ink);
+  border-radius: 8px;
+  box-shadow: 6px 7px 0 0 var(--rt-ink);
+  overflow: hidden;
+}
+.rt-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--rt-orange);
+  border-bottom: 2px solid var(--rt-ink);
+  padding: 5px 10px;
+
+  .rt-tb-name {
+    font-family: var(--font-family-pixel);
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--rt-ink);
+  }
+  .rt-tb-ctrls {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+    i {
+      width: 17px;
+      height: 17px;
+      display: grid;
+      place-items: center;
+      background: var(--rt-window);
+      border: 2px solid var(--rt-ink);
+      border-radius: 3px;
+      font-family: var(--font-family-pixel);
+      font-size: 13px;
+      font-style: normal;
+      line-height: 1;
+      color: var(--rt-ink);
+    }
+  }
+}
+.rt-body {
+  padding: 36px 42px;
+}
+
+/* headings + text */
+.rt-h1 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--rt-ink);
+  margin: 0 0 8px;
+}
+.rt-h2 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 34px);
+  line-height: 1.05;
+  color: var(--rt-ink);
+  margin: 0 0 14px;
+}
+.rt-kicker {
+  font-family: var(--font-family-pixel);
+  font-size: 21px;
+  letter-spacing: 0.06em;
+  color: var(--rt-blue);
+  margin: 0 0 8px;
+}
+.rt-prose {
+  font-family: var(--font-family-base);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--rt-ink);
+  max-width: 60ch;
+}
+.rt-mono {
+  font-family: var(--font-family-pixel);
+}
+
+/* buttons (beveled). Hover = press in a little, active = press all the way,
+   so anything clickable visibly reacts. Applies to home's .btn too. */
+.rt-btn,
+.btn {
+  display: inline-block;
+  font-family: var(--font-family-pixel);
+  font-size: 20px;
+  line-height: 1.2;
+  border: 2px solid var(--rt-ink);
+  border-radius: 6px;
+  padding: 6px 18px;
+  text-decoration: none;
+  box-shadow:
+    inset 2px 2px 0 var(--rt-bevel-hi),
+    inset -2px -2px 0 var(--rt-bevel-lo);
+  transition:
+    transform 0.07s ease,
+    box-shadow 0.07s ease;
+  &:hover {
+    transform: translate(1px, 1px);
+    box-shadow:
+      inset -1px -1px 0 var(--rt-bevel-hi),
+      inset 1px 1px 0 var(--rt-bevel-lo);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+      inset -2px -2px 0 var(--rt-bevel-hi),
+      inset 2px 2px 0 var(--rt-bevel-lo);
+  }
+}
+.rt-btn--orange {
+  background: var(--rt-orange);
+  color: var(--rt-ink);
+}
+.rt-btn--blue {
+  background: var(--rt-blue);
+  color: #fff;
+}
+.rt-btn--plain {
+  background: var(--rt-window);
+  color: var(--rt-ink);
+}
+
+/* small chip / tag */
+.rt-chip {
+  display: inline-block;
+  font-family: var(--font-family-pixel);
+  font-size: 15px;
+  line-height: 1;
+  padding: 4px 9px;
+  border: 2px solid var(--rt-ink);
+  border-radius: 5px;
+  background: var(--rt-blue-soft);
+  color: var(--rt-ink);
+}
+
+/* status pill */
+.rt-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-family-pixel);
+  font-size: 20px;
+  color: var(--rt-ink);
+  .rt-live-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--rt-orange);
+    border: 2px solid var(--rt-ink);
+  }
+}
+
+/* ─── taskbar ─── */
+.rt-taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background: var(--rt-window);
+  border-top: 2px solid var(--rt-ink);
+  z-index: 50;
+
+  .rt-start,
+  .rt-tb-btn {
+    font-family: var(--font-family-pixel);
+    font-size: 20px;
+    line-height: 1;
+    color: var(--rt-ink);
+    border: 2px solid var(--rt-ink);
+    border-radius: 6px;
+    padding: 3px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--rt-window);
+    box-shadow:
+      inset 2px 2px 0 var(--rt-bevel-hi),
+      inset -2px -2px 0 var(--rt-bevel-lo);
+  }
+  .rt-start {
+    background: var(--rt-orange);
+  }
+  .rt-tab {
+    font-family: var(--font-family-pixel);
+    font-size: 19px;
+    color: var(--rt-ink);
+    border: 2px solid var(--rt-ink);
+    border-radius: 5px;
+    padding: 2px 12px;
+    background: var(--rt-blue-soft);
+  }
+  .rt-spacer {
+    flex: 1;
+  }
+  .rt-clock {
+    font-family: var(--font-family-pixel);
+    font-size: 21px;
+    color: var(--rt-ink);
+    border: 2px solid var(--rt-ink);
+    border-radius: 5px;
+    padding: 2px 12px;
+    background: var(--rt-window);
+  }
+}
+
+/* taskbar buttons: same press-in feedback */
+.rt-taskbar {
+  .rt-start,
+  .rt-tb-btn {
+    transition:
+      transform 0.07s ease,
+      box-shadow 0.07s ease;
+    &:hover {
+      transform: translate(1px, 1px);
+      box-shadow:
+        inset -1px -1px 0 var(--rt-bevel-hi),
+        inset 1px 1px 0 var(--rt-bevel-lo);
+    }
+    &:active {
+      transform: translate(2px, 2px);
+    }
+  }
+}
+
+/* ─── chunky retro cursors (inline SVG, no asset needed) ───
+   default = white pixel arrow; clickables = orange pixel arrow. */
+body {
+  cursor:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%3E%3Cpath%20d='M4%202L4%2023L10%2017L14%2026L18%2024L14%2016L21%2016Z'%20fill='%23ffffff'%20stroke='%23000000'%20stroke-width='2.5'%20stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 2,
+    auto;
+}
+a,
+button,
+[role="button"],
+.rt-btn,
+.btn,
+.desk-ico,
+.opt,
+label,
+summary {
+  cursor:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%3E%3Cpath%20d='M4%202L4%2023L10%2017L14%2026L18%2024L14%2016L21%2016Z'%20fill='%23EE6C2B'%20stroke='%23000000'%20stroke-width='2.5'%20stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 2,
+    pointer;
+}
+
+@media (max-width: 720px) {
+  .rt-inner {
+    padding: 20px 14px 44px;
+  }
+  .rt-body {
+    padding: 24px 20px;
+  }
+  .rt-taskbar .rt-tab {
+    display: none;
+  }
+}

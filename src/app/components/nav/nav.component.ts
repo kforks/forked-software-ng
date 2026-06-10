@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faAdjust } from '@fortawesome/free-solid-svg-icons';
-import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { ThemeService } from '../../services/theming.service';
 import {
   NavigationEnd,
@@ -26,8 +26,6 @@ interface NavLink {
   imports: [
     FaIconComponent,
     FontAwesomeModule,
-    NgIf,
-    NgClass,
     NgOptimizedImage,
     RouterLink,
     RouterLinkActive,

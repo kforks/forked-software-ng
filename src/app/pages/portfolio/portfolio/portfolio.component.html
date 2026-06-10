@@ -1,13 +1,92 @@
-<div class="container">
-  <h1 class="flex-column">
-    <div style="font-size: xxx-large">
-      <fa-icon [icon]="faSkullCrossbones"></fa-icon>
-    </div>
-    <div>
-      <fa-icon [icon]="faExclamationTriangle"></fa-icon>
-      This page is under construction
-      <fa-icon [icon]="faExclamationTriangle"></fa-icon>
-    </div>
-  </h1>
-  <h2 class="flex-center-row">Check back for updates soon!</h2>
+<div class="rt-desktop">
+  <div class="rt-shell">
+    <app-desk-icons active="projects"></app-desk-icons>
+
+    <article class="rt-win">
+      <header class="rt-titlebar">
+        <span class="rt-tb-name">projects</span>
+        <span class="rt-tb-ctrls" aria-hidden="true"
+          ><i>–</i><i>□</i><i>×</i></span
+        >
+      </header>
+      <div class="rt-body">
+        <nav class="rt-crumbs">
+          <a routerLink="/home">◈ home</a><span>▸</span><span>projects</span>
+        </nav>
+        <h1 class="rt-h1">Projects</h1>
+        <p class="rt-prose">
+          Software I've built end-to-end — small-shop production systems, the
+          people who run them, and the hardware in between.
+        </p>
+
+        @for (cat of categories; track cat) {
+          <section class="proj-group">
+            <h2 class="rt-h2">{{ cat }}</h2>
+            @if (projectsIn(cat).length) {
+              <div class="proj-grid">
+                @for (p of projectsIn(cat); track p.name) {
+                  <article class="proj-card">
+                    @if (p.url) {
+                      <a
+                        class="proj-preview"
+                        [href]="p.url"
+                        target="_blank"
+                        rel="noreferrer"
+                        [attr.aria-label]="'Open ' + p.name"
+                      >
+                        @if (p.preview) {
+                          <img
+                            [src]="p.preview"
+                            [alt]="p.name + ' screenshot'"
+                          />
+                        } @else {
+                          <span class="proj-preview-ph rt-mono">▦ preview</span>
+                        }
+                      </a>
+                    } @else {
+                      <span class="proj-preview proj-preview--static">
+                        @if (p.preview) {
+                          <img
+                            [src]="p.preview"
+                            [alt]="p.name + ' screenshot'"
+                          />
+                        } @else {
+                          <span class="proj-preview-ph rt-mono">▦ preview</span>
+                        }
+                      </span>
+                    }
+                    <header class="proj-head">
+                      <h3 class="proj-name">{{ p.name }}</h3>
+                      <span [class]="'proj-status s-' + p.status.toLowerCase()"
+                        >● {{ p.status }}</span
+                      >
+                    </header>
+                    <p class="proj-tagline">{{ p.tagline }}</p>
+                    <ul class="proj-tech">
+                      @for (t of p.tech; track t) {
+                        <li class="rt-chip">{{ t }}</li>
+                      }
+                    </ul>
+                    @if (p.url) {
+                      <a
+                        class="rt-btn rt-btn--orange"
+                        [href]="p.url"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Open ↗</a
+                      >
+                    }
+                  </article>
+                }
+              </div>
+            } @else {
+              <p class="proj-empty rt-mono">— more coming soon —</p>
+            }
+          </section>
+        }
+      </div>
+    </article>
+  </div>
+
+  <app-taskbar tab="projects"></app-taskbar>
 </div>

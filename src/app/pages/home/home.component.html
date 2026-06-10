@@ -1,398 +1,108 @@
-<div class="terminal">
-  <!-- ─── BLUEPRINT GHOST OVERLAYS + WATERMARKS ─── -->
-  <img
-    class="ghost ghost-left"
-    src="assets/vectors/graphs-diagrams/graph-01-construction.svg"
-    aria-hidden="true"
-    alt=""
-  />
-  <img
-    class="ghost ghost-right"
-    src="assets/vectors/schemes-graphs/scheme-120-orbital-spiral.svg"
-    aria-hidden="true"
-    alt=""
-  />
-  <img
-    class="ghost ghost-mid"
-    src="assets/vectors/graphs-diagrams/graph-2-20.svg"
-    aria-hidden="true"
-    alt=""
-  />
-  <img
-    class="ghost ghost-far"
-    src="assets/vectors/graphs-diagrams/graph-2-35.svg"
-    aria-hidden="true"
-    alt=""
-  />
+<div class="desktop">
+  <div class="desk-inner">
+    <!-- ─── Desktop shortcut icons (shared) ─── -->
+    <app-desk-icons active="home"></app-desk-icons>
 
-  <!-- ─── ACCESS POINTS STRIP ─── -->
-  <section class="access-strip" aria-label="Quick access">
-    <header class="access-head">
-      <span class="ah-id hot">[ ACCESS POINTS ]</span>
-      <span class="ah-title">SELECT A TERMINAL FUNCTION</span>
-    </header>
+    <!-- ─── welcome window ─── -->
+    <section class="stage">
+      <article class="win win-welcome">
+        <header class="titlebar">
+          <span class="tb-name">welcome</span>
+          <span class="tb-ctrls" aria-hidden="true"
+            ><i>–</i><i>□</i><i>×</i></span
+          >
+        </header>
+        <div class="win-body welcome-grid">
+          <div class="welcome-text">
+            <p class="hello">Hi — I'm Kaitlyn 👋</p>
+            <h1 class="hero-name">Forked Software</h1>
+            <p class="hero-sub">
+              software engineer &amp; technology consultant · st. louis
+            </p>
+            <p class="hero-intro">
+              I build small-shop production systems end-to-end — and help the
+              people running them figure out what to build next.
+            </p>
 
-    <div class="access-grid">
-      @for (a of accessPoints; track a.id) {
-        <ng-container>
-          @if (a.disabled) {
-            <button
-              type="button"
-              class="access-card is-disabled"
-              [class.is-hot]="a.emphasis === 'hot'"
-              disabled
-            >
-              <ng-container
-                *ngTemplateOutlet="cardBody; context: { $implicit: a }"
-              ></ng-container>
-            </button>
-          } @else if (a.routerLink) {
-            <a
-              [routerLink]="a.routerLink"
-              class="access-card"
-              [class.is-hot]="a.emphasis === 'hot'"
-            >
-              <ng-container
-                *ngTemplateOutlet="cardBody; context: { $implicit: a }"
-              ></ng-container>
-            </a>
-          } @else if (a.href) {
-            <a
-              [href]="a.href"
-              class="access-card"
-              [class.is-hot]="a.emphasis === 'hot'"
-              [attr.download]="
-                a.id === 'resume' ? 'Kaitlyn_Forks_Resume.pdf' : null
-              "
-            >
-              <ng-container
-                *ngTemplateOutlet="cardBody; context: { $implicit: a }"
-              ></ng-container>
-            </a>
-          }
-        </ng-container>
-      }
-    </div>
+            <p class="ask">What brings you here today?</p>
+            <ul class="opts">
+              <li>
+                <a routerLink="/portfolio" class="opt">
+                  <span class="radio on" aria-hidden="true"></span> See my
+                  projects &amp; client work
+                </a>
+              </li>
+              <li>
+                <a href="mailto:kaitlynforks@gmail.com" class="opt">
+                  <span class="radio" aria-hidden="true"></span> Hire me for a
+                  build
+                </a>
+              </li>
+              <li>
+                <a routerLink="/about" class="opt">
+                  <span class="radio" aria-hidden="true"></span> Just browsing
+                  (respect)
+                </a>
+              </li>
+            </ul>
 
-    <ng-template #cardBody let-a>
-      <span class="card-icon" aria-hidden="true">
-        @switch (a.icon) {
-          @case ("download") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <rect x="10" y="4" width="20" height="18" />
-              <path d="M16 12 H24 M16 16 H24" stroke-width="1.5" />
-              <path
-                d="M20 24 V34 M14 28 L20 34 L26 28"
-                stroke-linecap="square"
-              />
-            </svg>
-          }
-          @case ("journey") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <circle cx="6" cy="30" r="3" fill="currentColor" />
-              <circle cx="18" cy="20" r="3" fill="currentColor" />
-              <circle cx="30" cy="12" r="3" fill="currentColor" />
-              <path d="M9 28 L15 22 M21 18 L27 14" stroke-dasharray="2 2" />
-              <path d="M6 36 H34" stroke-width="1" opacity="0.5" />
-            </svg>
-          }
-          @case ("services") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <rect x="6" y="6" width="12" height="12" />
-              <rect x="22" y="6" width="12" height="12" />
-              <rect x="6" y="22" width="12" height="12" />
-              <rect x="22" y="22" width="12" height="12" />
-              <path
-                d="M18 12 H22 M18 28 H22 M12 18 V22 M28 18 V22"
-                stroke-width="1.5"
-              />
-            </svg>
-          }
-          @case ("projects") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <path d="M20 6 L34 14 L34 28 L20 36 L6 28 L6 14 Z" />
-              <path
-                d="M20 6 V36 M6 14 L34 28 M6 28 L34 14"
-                stroke-width="1"
-                opacity="0.5"
-              />
-            </svg>
-          }
-          @case ("portal") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <rect x="8" y="18" width="24" height="16" />
-              <path d="M14 18 V12 a6 6 0 0 1 12 0 V18" />
-              <circle cx="20" cy="25" r="2" fill="currentColor" />
-              <path d="M20 27 V31" />
-            </svg>
-          }
-          @case ("mail") {
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <rect x="6" y="10" width="28" height="20" />
-              <path d="M6 12 L20 24 L34 12" />
-            </svg>
-          }
-        }
-      </span>
-      <span class="card-text">
-        <span class="card-label">{{ a.label }}</span>
-        <span class="card-caption mono">{{ a.caption }}</span>
-      </span>
-      @if (a.disabled) {
-        <span class="card-tag mono">SOON</span>
-      } @else {
-        <span class="card-tag mono">↗</span>
-      }
-    </ng-template>
-  </section>
-
-  <!-- ─── IDENTITY HERO ─── -->
-  <section class="identity-hero">
-    <!-- HUD top-frame decoration -->
-    <img
-      class="ih-hud-frame"
-      src="assets/vectors/hud/hud-30-top-frame.svg"
-      aria-hidden="true"
-      alt=""
-    />
-
-    <!-- LOGO column -->
-    <div class="ih-logo-cell">
-      <header class="ih-cap mono">
-        <span class="hot">[ MARK ]</span>
-        <span class="dim">EST. 2018</span>
-      </header>
-      <div class="logo-frame">
-        <img
-          src="assets/wt-logo.svg"
-          alt="Forked Software logomark"
-          class="ih-logo"
-        />
-        <span class="logo-bracket logo-bracket-tl"></span>
-        <span class="logo-bracket logo-bracket-tr"></span>
-        <span class="logo-bracket logo-bracket-bl"></span>
-        <span class="logo-bracket logo-bracket-br"></span>
-      </div>
-      <footer class="ih-cap mono">
-        <span class="dim">DESIGNATION</span>
-        <span>ENGR / CONS</span>
-      </footer>
-    </div>
-
-    <!-- INTRO column -->
-    <div class="ih-intro-cell">
-      <header class="ih-cap mono">
-        <span class="hot">[ IDENTIFY ]</span>
-        <span class="dim">OPERATOR PROFILE · 001</span>
-      </header>
-      <h1 class="ih-name">K. FORKS</h1>
-      <p class="ih-title mono">
-        <span class="hot">{{ "{" }} </span>Software Engineer<span class="dim">
-          · </span
-        >Technology Consultant<span class="hot"> {{ "}" }}</span>
-      </p>
-      <p class="ih-intro">
-        I build small-shop production systems and help the people running them
-        decide what to build next.
-      </p>
-      <p class="ih-framing mono">
-        // YOU ARE LOOKING AT: an operations terminal cataloguing my software
-        work and consulting practice. Use access points above to navigate.
-        Project archive below.
-      </p>
-    </div>
-
-    <!-- VITALS column -->
-    <div class="ih-vitals-cell">
-      <header class="ih-cap mono">
-        <span class="hot">[ VITALS ]</span>
-        <span class="dim">REAL-TIME</span>
-      </header>
-      <div class="mugshot-wrap-sm">
-        <img
-          class="mugshot"
-          ngSrc="assets/images/headshot.webp"
-          width="1137"
-          height="1707"
-          alt="Headshot of Kaitlyn Forks"
-          priority
-        />
-        <span class="mugshot-caption mono">AGENT KF · 009X3312</span>
-      </div>
-      <dl class="vital-stats mono">
-        <dt>STATUS</dt>
-        <dd class="hot">AVAILABLE</dd>
-        <dt>SECTOR</dt>
-        <dd>STL · 38.6N 90.1W</dd>
-        <dt>UPLINK</dt>
-        <dd>kaitlynforks&#64;gmail.com</dd>
-      </dl>
-    </div>
-  </section>
-
-  <!-- ─── PROJECT ARCHIVE ─── -->
-  <section class="archive">
-    <!-- Label vector decoration as section banner -->
-    <div class="archive-banner" aria-hidden="true">
-      <img
-        src="assets/vectors/labels/label-50.svg"
-        alt=""
-        class="archive-label-svg"
-      />
-      <span class="archive-banner-text mono"
-        >PROJECT ARCHIVE · {{ missions.length }} ENTRIES · CLASSIFIED OPEN</span
-      >
-    </div>
-
-    <header class="archive-head">
-      <span class="ah-id hot">[ PROJECT ARCHIVE ]</span>
-      <span class="ah-title"
-        >{{ missions.length }} ENTRIES · UPDATED {{ now.slice(0, 10) }}</span
-      >
-      <span class="ah-meta mono">SORT: RECENT · FILTER: ALL</span>
-    </header>
-
-    <div class="project-grid">
-      @for (m of missions; track m.id; let i = $index) {
-        <article
-          class="project-card"
-          [class.is-active]="statusColor(m.status) === 'hot'"
-          [class.variant-a]="i % 3 === 0"
-          [class.variant-b]="i % 3 === 1"
-          [class.variant-c]="i % 3 === 2"
-        >
-          <!-- HUD corner module decoration -->
-          <img
-            class="pc-hud-corner"
-            src="assets/vectors/hud/hud-05-corner-module.svg"
-            aria-hidden="true"
-            alt=""
-          />
-
-          <div class="pc-glyph" aria-hidden="true">
-            @switch (m.id) {
-              @case ("fennel") {
-                <img
-                  src="assets/vectors/schemes-graphs/scheme-50-polyhedron.svg"
-                  alt=""
-                />
-              }
-              @case ("tank-stl") {
-                <img
-                  src="assets/vectors/schemes-graphs/scheme-120-orbital-spiral.svg"
-                  alt=""
-                />
-              }
-              @case ("tank-cam") {
-                <img
-                  src="assets/vectors/graphs-diagrams/graph-01-construction.svg"
-                  alt=""
-                />
-              }
-              @case ("leaf-swap") {
-                <img src="assets/vectors/schemes-graphs/scheme-75.svg" alt="" />
-              }
-              @case ("forked-software") {
-                <img src="assets/vectors/schemes-graphs/scheme-90.svg" alt="" />
-              }
-            }
-          </div>
-
-          <header class="pc-head">
-            <span class="pc-code mono">{{ m.code }}</span>
-            <span
-              class="pc-status mono"
-              [class.hot]="statusColor(m.status) === 'hot'"
-            >
-              <span class="pc-dot" aria-hidden="true"></span>{{ m.status }}
-            </span>
-          </header>
-
-          <h3 class="pc-name">{{ m.name }}</h3>
-
-          <ul class="tech-chips">
-            @for (t of m.tech; track t) {
-              <li class="chip mono">{{ t }}</li>
-            }
-          </ul>
-
-          <div class="pc-actions">
-            @if (m.url) {
-              <a
-                [href]="m.url"
-                target="_blank"
-                rel="noopener"
-                class="pc-btn pc-btn-primary mono"
+            <div class="actions">
+              <a routerLink="/portfolio" class="btn btn-primary"
+                >View projects ▸</a
               >
-                [ OPEN ↗ ]
-              </a>
-            }
-            <button type="button" class="pc-btn pc-btn-ghost mono">
-              [ DETAILS ]
-            </button>
+              <a
+                href="assets/files/Resume2025.ForksKaitlyn.pdf"
+                download="Kaitlyn_Forks_Resume.pdf"
+                class="btn btn-blue"
+                >Résumé</a
+              >
+              <a href="mailto:kaitlynforks@gmail.com" class="btn btn-plain"
+                >Say hi</a
+              >
+            </div>
           </div>
-        </article>
-      }
-    </div>
-  </section>
+          <figure class="welcome-photo">
+            <img src="assets/images/headshot.webp" alt="Kaitlyn Forks" />
+          </figure>
+        </div>
+      </article>
 
-  <!-- ─── BOTTOM: REFERENCE FIGURES ─── -->
-  <footer class="ref-strip">
-    <span class="ref-header mono">REFERENCE FIGURES</span>
-    <div class="ref-item">
-      <img
-        src="assets/vectors/schemes-graphs/scheme-01-pulley-system.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <span class="ref-cap mono">FIG-1.4 · EQ. 7.3</span>
-    </div>
-    <div class="ref-item">
-      <img
-        src="assets/vectors/graphs-diagrams/graph-2-05.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <span class="ref-cap mono">FIG-9.2 · VEC. ANALYSIS</span>
-    </div>
-    <div class="ref-item">
-      <img
-        src="assets/vectors/hud/hud-60-control-panels.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <span class="ref-cap mono">FIG-12.6 · CONTROL MODULE</span>
-    </div>
-    <span class="ref-footer mono">— END OF TRANSMISSION —</span>
+      <!-- status dialog -->
+      <aside class="win win-dialog" aria-label="Status">
+        <header class="titlebar">
+          <span class="tb-name">status</span>
+          <span class="tb-ctrls" aria-hidden="true"><i>×</i></span>
+        </header>
+        <div class="win-body">
+          <span class="live"
+            ><span class="live-dot" aria-hidden="true"></span> Open for new
+            projects</span
+          >
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <!-- ─── taskbar ─── -->
+  <footer class="taskbar">
+    <button type="button" class="start">◈ forked</button>
+    <span class="task-tab">welcome</span>
+    <span class="taskbar-spacer"></span>
+    <button
+      type="button"
+      class="tb-btn"
+      (click)="toggleTheme()"
+      aria-label="Toggle light/dark"
+    >
+      ◐ theme
+    </button>
+    <a
+      class="tb-btn"
+      href="https://www.linkedin.com/in/kaitlyn-forks/"
+      target="_blank"
+      rel="noreferrer"
+      >in</a
+    >
+    <span class="clock">{{ clock }}</span>
   </footer>
 </div>

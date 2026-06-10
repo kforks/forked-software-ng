@@ -13,14 +13,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=VT323&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <script>
       // Retrieve the saved theme from localStorage or use a default theme
-      const savedTheme = localStorage.getItem("selectedTheme") || "theme-dark";
+      const savedTheme = localStorage.getItem("selectedTheme") || "theme-light";
       document.body.classList.add(savedTheme);
     </script>
     <app-root></app-root>

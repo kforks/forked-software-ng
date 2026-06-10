@@ -1,128 +1,38 @@
-import { Component } from '@angular/core';
-import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-interface Mission {
-  id: string;
-  code: string;
-  name: string;
-  status: 'ACTIVE' | 'IN_DEV' | 'PLANNED' | 'LIVE';
-  tech: string[];
-  blurb?: string;
-  url?: string;
-}
-
-interface AccessPoint {
-  id: string;
-  label: string;
-  caption: string;
-  href?: string;
-  routerLink?: string;
-  icon: 'download' | 'journey' | 'services' | 'projects' | 'portal' | 'mail';
-  emphasis?: 'hot';
-  disabled?: boolean;
-}
+import { ThemeService } from '../../services/theming.service';
+import { DeskIconsComponent } from '../../components/desk-icons/desk-icons.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgOptimizedImage, NgTemplateOutlet, RouterLink],
+  imports: [RouterLink, DeskIconsComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  readonly now = new Date().toISOString().replace('T', ' ').slice(0, 19) + 'Z';
+export class HomeComponent implements OnInit, OnDestroy {
+  clock = '';
+  private timer?: ReturnType<typeof setInterval>;
 
-  readonly missions: Mission[] = [
-    {
-      id: 'fennel',
-      code: 'OP-0042',
-      name: 'FENNEL',
-      status: 'ACTIVE',
-      tech: ['NEXT.JS', 'PRISMA', 'POSTGRES', 'PI'],
-      url: 'https://fennel.kitchen',
-    },
-    {
-      id: 'tank-stl',
-      code: 'OP-0038',
-      name: 'TANK-STL',
-      status: 'LIVE',
-      tech: ['ANGULAR', 'PAGES'],
-      url: 'https://tankstl.com',
-    },
-    {
-      id: 'tank-cam',
-      code: 'OP-0044',
-      name: 'TANK-CAM',
-      status: 'IN_DEV',
-      tech: ['PI ZERO 2W', 'MEDIAMTX', 'RTSP'],
-    },
-    {
-      id: 'leaf-swap',
-      code: 'OP-0045',
-      name: 'LEAF-SWAP',
-      status: 'PLANNED',
-      tech: ['NEXT.JS', 'POSTGRES'],
-    },
-    {
-      id: 'forked-software',
-      code: 'OP-0001',
-      name: 'FORKED.SOFTWARE',
-      status: 'ACTIVE',
-      tech: ['ANGULAR 19', 'PAGES'],
-      url: 'https://forkedsoftware.com',
-    },
-  ];
+  constructor(private readonly theme: ThemeService) {}
 
-  readonly accessPoints: AccessPoint[] = [
-    {
-      id: 'resume',
-      label: 'GET RESUME',
-      caption: 'PDF · UPDATED 2025',
-      href: 'assets/files/Resume2025.ForksKaitlyn.pdf',
-      icon: 'download',
-      emphasis: 'hot',
-    },
-    {
-      id: 'about',
-      label: 'MY JOURNEY',
-      caption: 'CAREER ARC · DOSSIER',
-      routerLink: '/about',
-      icon: 'journey',
-    },
-    {
-      id: 'services',
-      label: 'WHAT I OFFER',
-      caption: 'CONSULTING · SERVICES',
-      routerLink: '/services',
-      icon: 'services',
-      disabled: true,
-    },
-    {
-      id: 'projects',
-      label: 'PROJECTS',
-      caption: 'CASE STUDIES · DEMOS',
-      routerLink: '/portfolio',
-      icon: 'projects',
-    },
-    {
-      id: 'portal',
-      label: 'CLIENT PORTAL',
-      caption: 'ACTIVE ENGAGEMENT ACCESS',
-      icon: 'portal',
-      disabled: true,
-    },
-    {
-      id: 'mail',
-      label: 'OPEN COMMS',
-      caption: 'DIRECT LINE · EMAIL',
-      href: 'mailto:kaitlynforks@gmail.com',
-      icon: 'mail',
-      emphasis: 'hot',
-    },
-  ];
+  ngOnInit(): void {
+    this.tick();
+    this.timer = setInterval(() => this.tick(), 1000);
+  }
 
-  statusColor(status: Mission['status']): string {
-    return status === 'ACTIVE' || status === 'LIVE' ? 'hot' : 'cool';
+  ngOnDestroy(): void {
+    if (this.timer) clearInterval(this.timer);
+  }
+
+  toggleTheme(): void {
+    const active = this.theme.getActiveTheme();
+    this.theme.setTheme(active === 'theme-dark' ? 'theme-light' : 'theme-dark');
+  }
+
+  private tick(): void {
+    const d = new Date();
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    this.clock = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 }

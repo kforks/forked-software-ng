@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private activeTheme = 'theme-dark'; // Default theme
+  private activeTheme = 'theme-light'; // Default theme (orange-forward)
 
   // Define available themes
   private themes = [
