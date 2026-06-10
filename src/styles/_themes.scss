@@ -54,42 +54,6 @@
   --readout-dim: var(--rt-ink-soft);
 }
 
-.theme-dark {
-  // warm "dim" — a lighter taupe dark (not near-black); keeps the cozy warmth
-  --rt-desktop: #3f343a;
-  --rt-window: #4e414a;
-  --rt-ink: #f6efe3;
-  --rt-ink-soft: #c4b6b2;
-  --rt-orange: #ff8a4c;
-  --rt-orange-deep: #f0742f;
-  --rt-blue: #7cb6ff;
-  --rt-blue-soft: #5b4a55;
-  --rt-bevel-hi: #6b5a64;
-  --rt-bevel-lo: #2a2127;
-  --rt-yellow: #f2c84b;
-  --rt-teal: #3fcabd;
-  --rt-purple: #c2a8f5;
-  --rt-red: #ff7058;
-
-  // legacy remap
-  --background-color: var(--rt-desktop);
-  --text-color: var(--rt-ink);
-  --primary-color: var(--rt-orange);
-  --primary-light: var(--rt-orange-deep);
-  --primary-dark: var(--rt-orange-deep);
-  --secondary-color: var(--rt-window);
-  --accent-color: var(--rt-blue);
-  --space-black: var(--rt-desktop);
-  --space-deep: var(--rt-window);
-  --space-line: var(--rt-ink);
-  --space-line-dim: var(--rt-bevel-lo);
-  --accent-cool: var(--rt-blue);
-  --accent-hot: var(--rt-orange);
-  --accent-neon: var(--rt-blue);
-  --accent-warning: var(--rt-red);
-  --readout-dim: var(--rt-ink-soft);
-}
-
 // Base
 body {
   font-family: var(--font-family-base);

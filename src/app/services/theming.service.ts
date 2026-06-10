@@ -2,18 +2,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private activeTheme = 'theme-light'; // Default theme (orange-forward)
+  private activeTheme = 'theme-light'; // light-only
 
-  // Define available themes
-  private themes = [
-    { name: 'Light Mode', class: 'theme-light' },
-    { name: 'Dark Mode', class: 'theme-dark' },
-  ];
+  // Define available themes (dark mode retired)
+  private themes = [{ name: 'Light Mode', class: 'theme-light' }];
 
   constructor() {
-    const savedTheme =
-      localStorage.getItem('selectedTheme') || this.activeTheme;
-    this.setTheme(savedTheme);
+    this.setTheme('theme-light');
   }
 
   setTheme(themeClass: string): void {

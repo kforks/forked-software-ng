@@ -84,25 +84,5 @@
   </div>
 
   <!-- ─── taskbar ─── -->
-  <footer class="taskbar">
-    <button type="button" class="start">◈ forked</button>
-    <span class="task-tab">welcome</span>
-    <span class="taskbar-spacer"></span>
-    <button
-      type="button"
-      class="tb-btn"
-      (click)="toggleTheme()"
-      aria-label="Toggle light/dark"
-    >
-      ◐ theme
-    </button>
-    <a
-      class="tb-btn"
-      href="https://www.linkedin.com/in/kaitlyn-forks/"
-      target="_blank"
-      rel="noreferrer"
-      >in</a
-    >
-    <span class="clock">{{ clock }}</span>
-  </footer>
+  <app-taskbar tab="welcome"></app-taskbar>
 </div>

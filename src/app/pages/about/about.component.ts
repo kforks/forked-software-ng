@@ -59,7 +59,7 @@ export class AboutComponent {
       title: 'Published biologist',
       place: 'peer-reviewed research',
       blurb:
-        'Co-authored frog-disease research. The weird, wonderful root of the whole journey.',
+        'Co-authored frog-disease research with the USGS — and where I first learned to code, building hierarchical population models in Stella and R. The weird, wonderful root of it all.',
     },
   ];
 

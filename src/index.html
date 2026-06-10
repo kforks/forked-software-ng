@@ -19,9 +19,9 @@
   </head>
   <body>
     <script>
-      // Retrieve the saved theme from localStorage or use a default theme
-      const savedTheme = localStorage.getItem("selectedTheme") || "theme-light";
-      document.body.classList.add(savedTheme);
+      // Light-only now — force it (ignore any previously saved dark preference).
+      localStorage.setItem("selectedTheme", "theme-light");
+      document.body.classList.add("theme-light");
     </script>
     <app-root></app-root>
   </body>

@@ -46,24 +46,26 @@ export class PortfolioComponent {
       status: 'Building',
       category: 'Just for fun',
     },
-    {
-      name: 'Leaf Swap',
-      tagline:
-        'A neighborhood plant-swap marketplace for local growers to trade cuttings and clippings.',
-      tech: ['Next.js', 'Postgres'],
-      status: 'Planned',
-      category: 'Just for fun',
-    },
     // ── Past clients ──
     {
       name: 'Fennel',
       tagline:
-        'Reservation + back-of-house operations platform for a chef-run supper club — built and self-hosted end to end.',
+        'Booking + operations platform for a small-business cooking studio running culinary classes — built and self-hosted end to end.',
       tech: ['Next.js', 'Prisma', 'Postgres', 'Raspberry Pi'],
       status: 'Live',
       category: 'Past clients',
       url: 'https://fennel.forkedsoftware.com',
       preview: 'assets/previews/fennel.png',
+    },
+    {
+      name: 'Spite House Studios',
+      tagline:
+        'Initial build for the indie game studio behind "I Would Kill Hitler."',
+      tech: [],
+      status: 'Live',
+      category: 'Past clients',
+      url: 'https://spitehousestudios.com/',
+      preview: 'assets/previews/spite-house.png',
     },
     {
       name: 'Two Beer Cinema Club',
@@ -72,14 +74,16 @@ export class PortfolioComponent {
       tech: ['Vite', 'React', 'GitHub Pages'],
       status: 'Live',
       category: 'Past clients',
+      preview: 'assets/previews/2bcc.png',
     },
     {
       name: 'Precision Learning Partners',
-      tagline:
-        'Website for an education / tutoring consultancy. (TODO: confirm the details with me.)',
-      tech: ['TODO'],
+      tagline: 'Website for a learning & tutoring consultancy.',
+      tech: [],
       status: 'Live',
       category: 'Past clients',
+      url: 'https://www.precisionlearningpartners.com',
+      preview: 'assets/previews/precision-learning.png',
     },
     // ── Day job ── (placeholders — Kaitlyn will add proud work projects later)
   ];

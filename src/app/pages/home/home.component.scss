@@ -140,12 +140,10 @@
 }
 .hero-sub {
   font-family: var(--font-family-pixel);
-  font-size: 23px;
+  font-size: 20px;
   color: var(--rt-orange-deep);
   margin: 0 0 18px;
-}
-:host-context(.theme-dark) .hero-sub {
-  color: var(--rt-orange);
+  white-space: nowrap; // keep it on one line
 }
 .hero-intro {
   font-family: var(--font-family-base);
@@ -381,6 +379,10 @@
   .welcome-grid {
     grid-template-columns: 1fr;
     padding: 0;
+  }
+  .hero-sub {
+    white-space: normal;
+    font-size: 18px;
   }
   .welcome-text {
     padding: 24px 20px;
