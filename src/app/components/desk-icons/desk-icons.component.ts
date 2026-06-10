@@ -152,7 +152,7 @@ export class DeskIconsComponent {
     { id: 'about', label: 'About Me', icon: 'about', routerLink: '/about' },
     {
       id: 'resume',
-      label: 'Résumé',
+      label: 'Resume',
       icon: 'resume',
       href: 'assets/files/Resume2025.ForksKaitlyn.pdf',
       download: 'Kaitlyn_Forks_Resume.pdf',

@@ -32,7 +32,7 @@ export class PortfolioComponent {
       name: 'Tank STL',
       tagline:
         'My maker-studio site — events, a build journal, and a 24/7 live aquarium cam, all on a self-hosted stack.',
-      tech: ['Angular', 'Cloudflare Pages'],
+      tech: ['React', 'Vite', 'Tailwind', 'Cloudflare'],
       status: 'Live',
       category: 'Just for fun',
       url: 'https://tankstl.com',
@@ -43,6 +43,14 @@ export class PortfolioComponent {
       tagline:
         'A 24/7 livestream of my planted aquarium, relayed from Raspberry Pi cameras to the web.',
       tech: ['Pi Zero 2 W', 'MediaMTX', 'RTSP'],
+      status: 'Building',
+      category: 'Just for fun',
+    },
+    {
+      name: 'Throughline Productivity',
+      tagline:
+        'A voice-first iOS app for capturing tasks and staying on top of your week. Currently in beta.',
+      tech: ['Swift', 'SwiftUI', 'iOS'],
       status: 'Building',
       category: 'Just for fun',
     },
@@ -60,7 +68,7 @@ export class PortfolioComponent {
     {
       name: 'Spite House Studios',
       tagline:
-        'Initial build for the indie game studio behind "I Would Kill Hitler."',
+        'Initial build for the indie game studio behind "I Would Kill Hitler" — the game that raised big on Kickstarter.',
       tech: [],
       status: 'Live',
       category: 'Past clients',

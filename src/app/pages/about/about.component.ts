@@ -35,7 +35,7 @@ export class AboutComponent {
         'Building small-shop production systems end-to-end, and helping the people who run them decide what to build next.',
     },
     {
-      when: '2021 →',
+      when: '2021',
       title: 'Admin → Junior Software Engineer',
       place: 'Varsity Tutors',
       blurb:

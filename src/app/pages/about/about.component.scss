@@ -77,6 +77,7 @@
   background: var(--rt-window);
   padding: 13px 15px;
   box-shadow: 3px 4px 0 0 var(--rt-ink);
+  min-height: 196px; // keep all cards level (Woo is the tallest) so they don't jump on rotate
 }
 .str-rank {
   width: fit-content;
