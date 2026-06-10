@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>forkedsoftware.com — Retro Digital Age kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=VT323&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --desktop: #e4d3b0;
+        --window: #fbf5e9;
+        --ink: #1c1a17;
+        --ink-soft: #6e6353;
+        --orange: #ee6c2b;
+        --orange-deep: #c8531b;
+        --blue: #2d6cc0;
+        --blue-soft: #cbddf4;
+        --bevel-hi: #ffffff;
+        --bevel-lo: #b6a381;
+        --yellow: #f2c84b;
+        --teal: #2ba39a;
+        --purple: #7a5cc0;
+        --red: #d8472b;
+        --disp: "Space Grotesk", system-ui, sans-serif;
+        --px: "VT323", monospace;
+        --body: "Inter", system-ui, sans-serif;
+      }
+      html.dark {
+        --desktop: #0e1b2e;
+        --window: #18293f;
+        --ink: #eaf1f8;
+        --ink-soft: #8fa3bd;
+        --orange: #ff7a3d;
+        --orange-deep: #e8632a;
+        --blue: #6ba6ee;
+        --blue-soft: #22344f;
+        --bevel-hi: #2e456a;
+        --bevel-lo: #091322;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--body);
+        color: var(--ink);
+        background: var(--desktop);
+        background-image: radial-gradient(var(--bevel-lo) 1px, transparent 1px);
+        background-size: 22px 22px;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .px {
+        font-family: var(--px);
+      }
+      .desk {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 26px 24px 90px;
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 24px;
+      }
+
+      /* desktop icons column */
+      .icons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+      .ico {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        width: 80px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .ico svg {
+        width: 46px;
+        height: 46px;
+      }
+      .ico span {
+        font-family: var(--px);
+        font-size: 18px;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .ico:hover span {
+        background: var(--blue);
+        color: #fff;
+      }
+
+      /* window chrome */
+      .win {
+        background: var(--window);
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        box-shadow: 6px 7px 0 0 var(--ink);
+        overflow: hidden;
+      }
+      .titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--orange);
+        border-bottom: 2px solid var(--ink);
+        padding: 5px 8px;
+      }
+      .titlebar .t {
+        font-family: var(--px);
+        font-size: 21px;
+        color: var(--ink);
+        letter-spacing: 0.02em;
+      }
+      .ctrls {
+        margin-left: auto;
+        display: flex;
+        gap: 5px;
+      }
+      .ctrls i {
+        width: 16px;
+        height: 16px;
+        display: grid;
+        place-items: center;
+        background: var(--window);
+        border: 2px solid var(--ink);
+        border-radius: 3px;
+        font-family: var(--px);
+        font-size: 13px;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .body {
+        padding: 26px 28px;
+      }
+
+      h1 {
+        font-family: var(--disp);
+        font-weight: 700;
+        font-size: 46px;
+        line-height: 1;
+        margin: 0 0 4px;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+      }
+      .sub {
+        font-family: var(--px);
+        font-size: 21px;
+        color: var(--orange-deep);
+        margin: 0 0 16px;
+      }
+      html.dark .sub {
+        color: var(--orange);
+      }
+      p {
+        max-width: 54ch;
+        line-height: 1.6;
+      }
+      .muted {
+        color: var(--ink-soft);
+      }
+
+      /* radio list (Friday-Wizard style) */
+      .ask {
+        font-family: var(--disp);
+        font-weight: 500;
+        margin: 18px 0 8px;
+      }
+      .opt {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 0;
+        font-size: 15px;
+        border-bottom: 1px dotted var(--bevel-lo);
+      }
+      .radio {
+        width: 15px;
+        height: 15px;
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .radio.on::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      /* buttons w/ bevel */
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 22px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        font-family: var(--px);
+        font-size: 20px;
+        border: 2px solid var(--ink);
+        border-radius: 6px;
+        padding: 6px 16px;
+        cursor: pointer;
+        box-shadow:
+          inset 2px 2px 0 var(--bevel-hi),
+          inset -2px -2px 0 var(--bevel-lo);
+      }
+      .btn:active {
+        box-shadow:
+          inset -2px -2px 0 var(--bevel-hi),
+          inset 2px 2px 0 var(--bevel-lo);
+      }
+      .btn-primary {
+        background: var(--orange);
+        color: var(--ink);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-plain {
+        background: var(--window);
+        color: var(--ink);
+      }
+
+      /* overlapping dialog */
+      .stage {
+        position: relative;
+      }
+      .dialog {
+        position: absolute;
+        right: 8px;
+        bottom: -26px;
+        width: 230px;
+        z-index: 3;
+      }
+      .dialog .body {
+        padding: 14px 16px;
+      }
+      .live {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--px);
+        font-size: 19px;
+      }
+      .live .d {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--orange);
+        border: 2px solid var(--ink);
+      }
+
+      /* reference strip */
+      .ref {
+        grid-column: 1 / -1;
+        margin-top: 30px;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .sw {
+        border: 2px solid var(--ink);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--window);
+      }
+      .sw .c {
+        height: 42px;
+        border-bottom: 2px solid var(--ink);
+      }
+      .sw .m {
+        padding: 5px 8px;
+      }
+      .sw .n {
+        font-family: var(--px);
+        font-size: 17px;
+        line-height: 1;
+      }
+      .sw .h {
+        font-family: var(--px);
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+
+      /* taskbar */
+      .taskbar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 42px;
+        background: var(--window);
+        border-top: 2px solid var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 12px;
+        z-index: 10;
+      }
+      .start {
+        font-family: var(--px);
+        font-size: 20px;
+        background: var(--orange);
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 6px;
+        padding: 2px 12px;
+        cursor: pointer;
+        box-shadow:
+          inset 2px 2px 0 var(--bevel-hi),
+          inset -2px -2px 0 var(--bevel-lo);
+      }
+      .tab {
+        font-family: var(--px);
+        font-size: 18px;
+        border: 2px solid var(--ink);
+        border-radius: 5px;
+        padding: 1px 10px;
+        background: var(--blue-soft);
+        color: var(--ink);
+      }
+      .clock {
+        margin-left: auto;
+        font-family: var(--px);
+        font-size: 20px;
+        border: 2px solid var(--ink);
+        border-radius: 5px;
+        padding: 1px 10px;
+        background: var(--window);
+      }
+      .toggle {
+        font-family: var(--px);
+        font-size: 18px;
+        background: var(--window);
+        border: 2px solid var(--ink);
+        border-radius: 5px;
+        padding: 1px 10px;
+        cursor: pointer;
+      }
+      .sec-label {
+        font-family: var(--px);
+        font-size: 20px;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="desk">
+      <!-- desktop icons -->
+      <div class="icons">
+        <div class="ico">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="var(--ink)"
+            stroke-width="2.5"
+          >
+            <rect
+              x="6"
+              y="8"
+              width="36"
+              height="26"
+              rx="3"
+              fill="var(--blue)"
+            />
+            <rect x="12" y="13" width="24" height="13" fill="var(--window)" />
+            <path d="M18 40h12M24 34v6" /></svg
+          ><span>My PC</span>
+        </div>
+        <div class="ico">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="var(--ink)"
+            stroke-width="2.5"
+          >
+            <path d="M6 14h12l4 5h20v21H6z" fill="var(--yellow)" /></svg
+          ><span>Projects</span>
+        </div>
+        <div class="ico">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="var(--ink)"
+            stroke-width="2.5"
+          >
+            <rect
+              x="8"
+              y="8"
+              width="32"
+              height="32"
+              rx="2"
+              fill="var(--teal)"
+            />
+            <rect x="14" y="8" width="14" height="11" fill="var(--window)" />
+            <rect
+              x="14"
+              y="26"
+              width="20"
+              height="11"
+              fill="var(--window)"
+            /></svg
+          ><span>Résumé</span>
+        </div>
+        <div class="ico">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="var(--ink)"
+            stroke-width="2.5"
+          >
+            <rect
+              x="6"
+              y="11"
+              width="36"
+              height="26"
+              rx="2"
+              fill="var(--orange)"
+            />
+            <path d="M7 13l17 13 17-13" fill="none" /></svg
+          ><span>Contact</span>
+        </div>
+      </div>
+
+      <!-- main window -->
+      <div class="stage">
+        <div class="win">
+          <div class="titlebar">
+            <span class="t">C:\\forked\\welcome.exe</span>
+            <span class="ctrls"><i>_</i><i>□</i><i>×</i></span>
+          </div>
+          <div class="body">
+            <h1>Forked Software</h1>
+            <p class="sub">
+              &gt; K. Forks — software engineer · technology consultant_
+            </p>
+            <p>
+              I build small-shop production systems end-to-end — and help the
+              people running them decide what to build next. Pick a task to get
+              started:
+            </p>
+            <p class="ask">What brings you here today?</p>
+            <div class="opt">
+              <span class="radio on"></span> See projects &amp; client work
+            </div>
+            <div class="opt">
+              <span class="radio"></span> Hire me for a build
+            </div>
+            <div class="opt">
+              <span class="radio"></span> Just browsing (respect)
+            </div>
+            <div class="row">
+              <button class="btn btn-primary">ENTER ▸</button>
+              <button class="btn btn-blue">Get résumé</button>
+              <button class="btn btn-plain">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- overlapping dialog -->
+        <div class="win dialog">
+          <div class="titlebar">
+            <span class="t">status.exe</span><span class="ctrls"><i>×</i></span>
+          </div>
+          <div class="body">
+            <div class="live">
+              <span class="d"></span> Accepting engagements
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- reference strip -->
+      <div class="ref">
+        <div class="sec-label">
+          ▦ palette.bmp — orange hero · blue system accent · light + dark
+        </div>
+        <div class="swatches" id="sw"></div>
+      </div>
+    </div>
+
+    <!-- taskbar -->
+    <div class="taskbar">
+      <button class="start">◈ forked</button>
+      <span class="tab">welcome.exe</span>
+      <button class="toggle" id="toggle">◐ theme</button>
+      <span class="clock" id="clock">12:00</span>
+    </div>
+
+    <script>
+      const t = [
+        ["desktop", "#E4D3B0"],
+        ["window", "#FBF5E9"],
+        ["ink", "#1C1A17"],
+        ["ink-soft", "#6E6353"],
+        ["orange", "#EE6C2B"],
+        ["orange-deep", "#C8531B"],
+        ["blue", "#2D6CC0"],
+        ["blue-soft", "#CBDDF4"],
+        ["yellow", "#F2C84B"],
+        ["teal", "#2BA39A"],
+        ["purple", "#7A5CC0"],
+        ["red", "#D8472B"],
+      ];
+      document.getElementById("sw").innerHTML = t
+        .map(
+          ([n, h]) => `
+    <div class="sw"><div class="c" style="background:${h}"></div>
+      <div class="m"><div class="n">${n}</div><div class="h">${h}</div></div></div>`,
+        )
+        .join("");
+      document.getElementById("toggle").onclick = () =>
+        document.documentElement.classList.toggle("dark");
+      if (location.hash === "#dark")
+        document.documentElement.classList.add("dark");
+    </script>
+  </body>
+</html>
