@@ -104,105 +104,249 @@
   margin: 0;
 }
 
-/* ─── windy alternating-card timeline (present at top → past below) ─── */
-.timeline {
-  list-style: none;
-  margin: 18px 0 0;
-  padding: 0;
-  position: relative;
+/* ─── "My Path" — a functional retro file explorer ─── */
+.fx-lead {
+  margin: 0 0 16px;
 }
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 50%;
-  width: 3px;
-  background: var(--rt-ink);
-  transform: translateX(-50%);
-}
-.tl-item {
-  position: relative;
-  width: 50%;
-  padding-bottom: 30px;
-  box-sizing: border-box;
-}
-.tl-item:nth-child(odd) {
-  left: 0;
-  padding-right: 42px;
-  display: flex;
-  justify-content: flex-end;
-}
-.tl-item:nth-child(even) {
-  left: 50%;
-  padding-left: 42px;
-}
-.tl-node {
-  position: absolute;
-  top: 16px;
-  width: 16px;
-  height: 16px;
-  background: var(--rt-orange);
-  border: 2px solid var(--rt-ink);
-  border-radius: 3px;
-  box-shadow: inset 1px 1px 0 var(--rt-bevel-hi);
-}
-.tl-item:nth-child(odd) .tl-node {
-  right: -8px;
-}
-.tl-item:nth-child(even) .tl-node {
-  left: -8px;
-}
-.tl-card {
-  max-width: 340px;
+.fx {
   background: var(--rt-window);
   border: 2px solid var(--rt-ink);
   border-radius: 8px;
-  box-shadow: 3px 4px 0 0 var(--rt-ink);
+  box-shadow: 4px 5px 0 0 var(--rt-ink);
   overflow: hidden;
-  transition: transform 0.14s ease;
 }
-.tl-item:nth-child(odd) .tl-card {
-  transform: rotate(-1.3deg);
-}
-.tl-item:nth-child(even) .tl-card {
-  transform: rotate(1.3deg);
-}
-.tl-card:hover {
-  transform: rotate(0);
-}
-.tl-bar {
+.fx-bar {
+  display: flex;
+  align-items: center;
   background: var(--rt-orange);
   border-bottom: 2px solid var(--rt-ink);
-  padding: 3px 12px;
+  padding: 5px 10px;
 }
-.tl-when {
+.fx-bar-name {
   font-family: var(--font-family-pixel);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--rt-ink);
 }
-.tl-cardbody {
-  padding: 12px 16px;
+.fx-bar-ctrls {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+  i {
+    width: 17px;
+    height: 17px;
+    display: grid;
+    place-items: center;
+    background: var(--rt-window);
+    border: 2px solid var(--rt-ink);
+    border-radius: 3px;
+    font-family: var(--font-family-pixel);
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1;
+    color: var(--rt-ink);
+  }
 }
-.tl-title {
+.fx-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+/* left column: the directory tree */
+.fx-tree {
+  border-right: 2px solid var(--rt-ink);
+  padding: 12px 10px;
+}
+.fx-root {
+  font-family: var(--font-family-pixel);
+  font-size: 17px;
+  color: var(--rt-ink-soft);
+  margin: 0 0 8px;
+}
+.fx-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.fx-file {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 9px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--rt-ink);
+  transition: background 0.08s ease;
+  &:hover {
+    background: var(--rt-blue-soft);
+  }
+  &.is-sel {
+    background: var(--rt-blue);
+    border-color: var(--rt-ink);
+    color: #fff;
+  }
+}
+.fx-ico {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: block;
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+.fx-ico--lg {
+  width: 30px;
+  height: 30px;
+}
+.fx-fname {
+  font-family: var(--font-family-pixel);
+  font-size: 18px;
+  line-height: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fx-fwhen {
+  margin-left: auto;
+  font-family: var(--font-family-pixel);
+  font-size: 14px;
+  color: var(--rt-ink-soft);
+}
+.fx-file.is-sel .fx-fwhen {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* right column: the detail / "open file" pane */
+.fx-detail {
+  padding: 20px 24px 24px;
+  min-width: 0;
+}
+.fx-dhead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 2px dotted var(--rt-bevel-lo);
+}
+.fx-dname {
+  font-family: var(--font-family-pixel);
+  font-size: 22px;
+  color: var(--rt-ink);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fx-badge {
+  margin-left: auto;
+  flex: none;
+  font-family: var(--font-family-pixel);
+  font-size: 15px;
+  color: var(--rt-ink);
+  background: var(--rt-orange);
+  border: 2px solid var(--rt-ink);
+  border-radius: 5px;
+  padding: 1px 8px;
+}
+.fx-why {
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--rt-ink);
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+.fx-why-label {
+  font-family: var(--font-family-pixel);
+  font-size: 15px;
+  color: var(--rt-blue);
+  margin-right: 6px;
+}
+.fx-open {
+  font-family: var(--font-family-pixel);
+}
+/* card hugs the photo's real dimensions — no letterbox, no background colour,
+   image shown with full integrity; the retro border/rounding/shadow stays. */
+.fx-photo {
+  display: inline-block;
+  margin: 0 0 16px;
+  max-width: min(340px, 100%);
+  border: 2px solid var(--rt-ink);
+  border-radius: 8px;
+  box-shadow: 3px 4px 0 0 var(--rt-ink);
+  overflow: hidden; // clip the image to the rounded corners
+  font-size: 0; // kill the inline-block baseline gap under the image
+  img {
+    display: block;
+    width: 100%;
+    height: auto; // natural aspect ratio — nothing letterboxed
+  }
+}
+
+/* ── smooth content swaps ── */
+.fx-pane {
+  animation: fx-fade 0.24s ease both;
+}
+.fx-reveal {
+  animation: fx-reveal 0.28s ease both;
+}
+@keyframes fx-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fx-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-pane,
+  .fx-reveal {
+    animation: none;
+  }
+}
+.fx-title {
   font-family: var(--font-family-heading);
   font-weight: 700;
-  font-size: 19px;
+  font-size: 22px;
   color: var(--rt-ink);
   margin: 0;
 }
-.tl-place {
+.fx-place {
   font-family: var(--font-family-pixel);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--rt-orange-deep);
-  margin: 2px 0 0;
+  margin: 3px 0 0;
 }
-.tl-blurb {
+.fx-blurb {
   font-family: var(--font-family-base);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--rt-ink);
-  margin: 6px 0 0;
+  margin: 8px 0 0;
+  max-width: 60ch;
 }
 
 @media (max-width: 720px) {
@@ -215,26 +359,18 @@
   .str-track {
     grid-template-columns: 1fr;
   }
-  .timeline::before {
-    left: 9px;
+  /* explorer stacks: tree on top, detail below */
+  .fx-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .tl-item,
-  .tl-item:nth-child(odd),
-  .tl-item:nth-child(even) {
-    width: 100%;
-    left: 0;
-    padding: 0 0 24px 34px;
-    justify-content: flex-start;
+  .fx-tree {
+    border-right: none;
+    border-bottom: 2px solid var(--rt-ink);
   }
-  .tl-item:nth-child(odd) .tl-node,
-  .tl-item:nth-child(even) .tl-node {
-    left: 1px;
-    right: auto;
+  .fx-detail {
+    padding: 18px 18px 22px;
   }
-  .tl-card,
-  .tl-item:nth-child(odd) .tl-card,
-  .tl-item:nth-child(even) .tl-card {
-    transform: rotate(0);
+  .fx-photo {
     max-width: none;
   }
 }

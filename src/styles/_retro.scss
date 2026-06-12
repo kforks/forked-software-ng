@@ -367,6 +367,23 @@ summary {
   .rt-inner {
     padding: 20px 14px 44px;
   }
+  /* collapse the desktop-icon sidebar into a wrapping row above the window.
+     minmax(0,…) + min-width:0 lets the window shrink below its content's
+     intrinsic width instead of blowing out the viewport. */
+  .rt-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px 14px 44px;
+  }
+  .rt-win {
+    min-width: 0;
+  }
+  .rt-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 18px;
+  }
   .rt-body {
     padding: 24px 20px;
   }

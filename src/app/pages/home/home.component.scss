@@ -358,9 +358,14 @@
 /* ─── responsive ─── */
 @media (max-width: 720px) {
   .desk-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 18px;
     padding: 20px 14px 44px;
+  }
+  /* let the window + its stage shrink to the column instead of overflowing */
+  .stage,
+  .win {
+    min-width: 0;
   }
   .desk-icons {
     flex-direction: row;
@@ -377,7 +382,7 @@
     margin-top: 38px;
   }
   .welcome-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 0;
   }
   .hero-sub {

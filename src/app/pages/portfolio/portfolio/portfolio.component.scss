@@ -123,3 +123,14 @@ a.proj-preview:hover {
   object-fit: cover;
   display: block;
 }
+
+/* phones: one column. minmax(0,…) + min-width:0 keeps a wide preview/card
+   from forcing the grid (and the window) past the viewport edge. */
+@media (max-width: 520px) {
+  .proj-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .proj-card {
+    min-width: 0;
+  }
+}

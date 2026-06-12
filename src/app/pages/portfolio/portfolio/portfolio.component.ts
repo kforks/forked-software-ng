@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { DeskIconsComponent } from '../../../components/desk-icons/desk-icons.component';
 import { TaskbarComponent } from '../../../components/taskbar/taskbar.component';
 
-type Category = 'Just for fun' | 'Past clients' | 'Day job';
+type Category = 'Just for fun' | 'Past clients';
 
 interface Project {
   name: string;
@@ -23,8 +23,8 @@ interface Project {
   styleUrl: './portfolio.component.scss',
 })
 export class PortfolioComponent {
-  // order: fun on top, clients in the middle, day job at the bottom
-  readonly categories: Category[] = ['Just for fun', 'Past clients', 'Day job'];
+  // order: fun on top, clients below
+  readonly categories: Category[] = ['Just for fun', 'Past clients'];
 
   readonly projects: Project[] = [
     // ── Just for fun ──
@@ -53,6 +53,8 @@ export class PortfolioComponent {
       tech: ['Swift', 'SwiftUI', 'iOS'],
       status: 'Building',
       category: 'Just for fun',
+      url: 'https://throughlineproductivity.com/',
+      preview: 'assets/previews/throughline.png',
     },
     // ── Past clients ──
     {
@@ -84,16 +86,6 @@ export class PortfolioComponent {
       category: 'Past clients',
       preview: 'assets/previews/2bcc.png',
     },
-    {
-      name: 'Precision Learning Partners',
-      tagline: 'Website for a learning & tutoring consultancy.',
-      tech: [],
-      status: 'Live',
-      category: 'Past clients',
-      url: 'https://www.precisionlearningpartners.com',
-      preview: 'assets/previews/precision-learning.png',
-    },
-    // ── Day job ── (placeholders — Kaitlyn will add proud work projects later)
   ];
 
   projectsIn(category: Category): Project[] {

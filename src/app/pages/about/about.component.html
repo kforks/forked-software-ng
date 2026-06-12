@@ -70,23 +70,197 @@
         </div>
 
         <h2 class="rt-h2">My path here</h2>
-        <ol class="timeline">
-          @for (m of timeline; track m.when + m.title) {
-            <li class="tl-item">
-              <span class="tl-node" aria-hidden="true"></span>
-              <article class="tl-card">
-                <header class="tl-bar">
-                  <span class="tl-when">{{ m.when }}</span>
-                </header>
-                <div class="tl-cardbody">
-                  <h3 class="tl-title">{{ m.title }}</h3>
-                  <p class="tl-place rt-mono">{{ m.place }}</p>
-                  <p class="tl-blurb">{{ m.blurb }}</p>
+        <p class="rt-prose fx-lead">
+          A little file explorer of how I got here. Open a file to see why it
+          matters — then the photo and the full story.
+        </p>
+
+        <!-- ─── My Path: a functional retro file explorer ─── -->
+        <div class="fx">
+          <header class="fx-bar">
+            <span class="fx-bar-name">my_path</span>
+            <span class="fx-bar-ctrls" aria-hidden="true"
+              ><i>–</i><i>□</i><i>×</i></span
+            >
+          </header>
+
+          <div class="fx-grid">
+            <nav class="fx-tree" aria-label="My path — files">
+              <p class="fx-root">▾ 🗀 my-path/</p>
+              <ul class="fx-list">
+                @for (m of timeline; track m.file; let i = $index) {
+                  <li>
+                    <button
+                      type="button"
+                      class="fx-file"
+                      [class.is-sel]="selected === i"
+                      [attr.aria-pressed]="selected === i"
+                      (click)="selectFile(i)"
+                    >
+                      <span class="fx-ico" aria-hidden="true">
+                        <ng-container
+                          *ngTemplateOutlet="
+                            fileIcon;
+                            context: { $implicit: m.icon }
+                          "
+                        ></ng-container>
+                      </span>
+                      <span class="fx-fname">{{ m.file }}</span>
+                      <span class="fx-fwhen">{{ m.when }}</span>
+                    </button>
+                  </li>
+                }
+              </ul>
+            </nav>
+
+            <section class="fx-detail" aria-live="polite">
+              <!-- re-created on file switch (track c.file) so each swap fades in -->
+              @for (c of [current]; track c.file) {
+                <div class="fx-pane">
+                  <header class="fx-dhead">
+                    <span class="fx-ico fx-ico--lg" aria-hidden="true">
+                      <ng-container
+                        *ngTemplateOutlet="
+                          fileIcon;
+                          context: { $implicit: c.icon }
+                        "
+                      ></ng-container>
+                    </span>
+                    <span class="fx-dname">{{ c.file }}</span>
+                    <span class="fx-badge">{{ c.when }}</span>
+                  </header>
+
+                  <p class="fx-why">
+                    <span class="fx-why-label">// why it matters</span>
+                    {{ c.why }}
+                  </p>
+
+                  @if (!opened) {
+                    <button
+                      type="button"
+                      class="rt-btn rt-btn--orange fx-open"
+                      (click)="openFile()"
+                    >
+                      Open {{ c.file }} ▸
+                    </button>
+                  } @else {
+                    <figure class="fx-photo fx-reveal">
+                      <img [src]="c.photo" [alt]="c.alt" />
+                    </figure>
+                    <div class="fx-info fx-reveal">
+                      <h3 class="fx-title">{{ c.title }}</h3>
+                      <p class="fx-place rt-mono">{{ c.place }}</p>
+                      <p class="fx-blurb">{{ c.blurb }}</p>
+                    </div>
+                  }
                 </div>
-              </article>
-            </li>
+              }
+            </section>
+          </div>
+        </div>
+
+        <!-- line-art file icons (brand vocabulary) -->
+        <ng-template #fileIcon let-icon>
+          @switch (icon) {
+            @case ("app") {
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="16"
+                  rx="2"
+                  fill="var(--rt-window)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="2"
+                />
+                <path d="M3 9h18" stroke="var(--rt-ink)" stroke-width="2" />
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="5"
+                  rx="2"
+                  fill="var(--rt-orange)"
+                />
+                <path d="M3 9h18" stroke="var(--rt-ink)" stroke-width="2" />
+              </svg>
+            }
+            @case ("floppy") {
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 4h13l3 3v13H4z"
+                  fill="var(--rt-blue)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="2"
+                />
+                <rect
+                  x="8"
+                  y="4"
+                  width="7"
+                  height="6"
+                  fill="var(--rt-window)"
+                />
+                <rect
+                  x="7"
+                  y="13"
+                  width="10"
+                  height="7"
+                  fill="var(--rt-window)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="1.5"
+                />
+              </svg>
+            }
+            @case ("disk") {
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  fill="var(--rt-teal)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2.5"
+                  fill="var(--rt-window)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="1.5"
+                />
+              </svg>
+            }
+            @case ("folder") {
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M3 6h6l2 2h10v11H3z"
+                  fill="var(--rt-yellow)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            }
+            @case ("bio") {
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 19C5 10 11 4 19 5c1 8-5 14-14 14z"
+                  fill="var(--rt-teal)"
+                  stroke="var(--rt-ink)"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8 16c4-3 6-5 8-8"
+                  stroke="var(--rt-ink)"
+                  stroke-width="1.5"
+                />
+              </svg>
+            }
           }
-        </ol>
+        </ng-template>
       </div>
     </article>
   </div>
