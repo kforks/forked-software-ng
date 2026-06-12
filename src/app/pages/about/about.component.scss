@@ -231,6 +231,9 @@
 .fx-detail {
   padding: 20px 24px 24px;
   min-width: 0;
+  /* reserve the height of the tallest "open file" so switching files never
+     shrinks the window and forces a re-scroll (measured max ≈ 741px). */
+  min-height: 750px;
 }
 .fx-dhead {
   display: flex;
@@ -369,6 +372,7 @@
   }
   .fx-detail {
     padding: 18px 18px 22px;
+    min-height: 0; // on mobile you scroll anyway — don't reserve a tall gap
   }
   .fx-photo {
     max-width: none;
